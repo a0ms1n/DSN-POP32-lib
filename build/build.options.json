@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "",
+  "builtInToolsFolders": "",
+  "compiler.optimization_flags": "",
+  "customBuildProperties": "",
+  "fqbn": "INEX_STM32:stm32:POP32:upload_method=hidMethod",
+  "hardwareFolders": "/home/a0ms1n/.arduino15/packages",
+  "otherLibrariesFolders": "/home/a0ms1n/Documents/Arduino/libraries",
+  "runtime.ide.version": "10607",
+  "sketchLocation": "/home/a0ms1n/Hidden Desktop/Robots/DSN-POP32-lib/src/local_test"
+}

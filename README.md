@@ -20,8 +20,8 @@ Primarily intended for:
 - Servo abstraction
 - PID control for rotation
 - PID control for line-following robots
-- Fancy OLED input/output
-- Concurrency support
+- Fast I/O
+- Task Scheduler
 
 ## Hardware Compatibility
 
