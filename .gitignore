@@ -1,3 +1,5 @@
 .vscode/
+.build/
+build/
 src/local_test/
 src/utils/debug_function.h
