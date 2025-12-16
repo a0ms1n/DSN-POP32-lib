@@ -1,6 +1,6 @@
 #pragma once
-#include <utils/Core.hpp>
-#include <NewIO/ascii-font/ascii-font.hpp>
+#include "../utils/Core.hpp"
+#include "ascii-font/ascii-font.hpp"
 
 #define W 128
 #define H 64
