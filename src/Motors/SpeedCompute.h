@@ -1,4 +1,5 @@
 #pragma once
+#include "../utils/Core.hpp"
 
 /// @brief Class for computing speed values with acceleration.
 ///        You can use .current_speed to assign to motor speed.
