@@ -1,31 +1,31 @@
 #pragma once
 #include "IMU.h"
 
-extern IMU imu;
+IMU imu;
 
 /// @brief Set yaw to zero.
-void IMU::ZeroYaw(){
+inline void IMU::ZeroYaw(){
     Serial1.write(0XA5);Serial1.write(0X55);
 }
 
 /// @brief Set pitch and roll to zero.
 /// @warning Need to stay level when calling this function.
-void IMU::ZeroPitch(){
+inline void IMU::ZeroPitch(){
     Serial1.write(0XA5);Serial1.write(0X54);
 }
 
 /// @brief Toggle IMU auto mode.
-void IMU::ToggleAutoMode(){
+inline void IMU::ToggleAutoMode(){
     Serial1.write(0XA5);Serial1.write(0X52);
 }
 
 /// @brief Toggle IMU query mode.
-void IMU::ToggleQueryMode(){
+inline void IMU::ToggleQueryMode(){
     Serial1.write(0XA5);Serial1.write(0X51);
 }
 
 /// @brief Start IMU, blocking function, start with AutoMode.
-void IMU::Start(){
+inline void IMU::Start(){
     Serial1.begin(115200);
     ToggleAutoMode();
     ZeroYaw();
@@ -69,6 +69,6 @@ bool IMU::Update(){
     return false;
 }
 
-void IMU::UpdateTimeoutMS(const int64_t &ms){
+inline void IMU::UpdateTimeoutMS(const int64_t &ms){
     this->TimeoutFlag.set(ms);
 }

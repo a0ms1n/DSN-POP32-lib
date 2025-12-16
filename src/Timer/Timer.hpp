@@ -1,18 +1,21 @@
 #pragma once
 #include "Timer.h"
 
-void FlagTimer::set(){
+inline void FlagTimer::set(){
+    this->current_timepoint = millis();
     this->next_timepoint = millis() + this->interval;
 }
 
-void FlagTimer::set(const int64_t &ms){
+inline void FlagTimer::set(const uint64_t &ms){
     this->interval = ms;
+    this->current_timepoint = millis();
     this->next_timepoint = millis() + this->interval;
 }
 
-bool FlagTimer::check(){
+inline bool FlagTimer::check(){
     if(millis() >= this->next_timepoint){
-        this->next_timepoint += this->interval;
+        this->next_timepoint = millis() + this->interval;
+        this->current_timepoint = millis();
         return true;
     }
     return false;

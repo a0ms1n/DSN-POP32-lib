@@ -22,26 +22,21 @@ class MotorPair {
         }
         
         /// @brief Set speed of both motor groups to `left_speed` and `right_speed`
-        void update();
+        inline void update();
 
         /// @brief Assign value to `left_speed` and `right_speed`
-        void set(const int16_t &left_speed, const int16_t &right_speed);
+        inline void set(const int16_t &left_speed, const int16_t &right_speed);
 
         /// @brief Assign value & set speed of both motor groups to `left_speed` and `right_speed`.
-        void run(const int16_t &left_speed, const int16_t &right_speed);
+        inline void run(const int16_t &left_speed, const int16_t &right_speed);
 
         /// @brief Stop both motor groups.
-        void stop();
+        inline void stop();
 
         /// @brief Set reverse state for motors in both groups.
-        void setReverse(const bool (&left_reverse)[N], const bool (&right_reverse)[N]){
-            for (size_t i = 0; i < N; ++i) {
-                leftReverse[i] = left_reverse[i];
-                rightReverse[i] = right_reverse[i];
-            }
-        }
+        void setReverse(const bool (&left_reverse)[N], const bool (&right_reverse)[N]);
 };
 
 /// @brief Set power in the range [-255,255] to a motor.
-inline void motor255(const int8_t ch, const int16_t pow);
+void motor255(const int8_t ch, const int16_t pow);
 

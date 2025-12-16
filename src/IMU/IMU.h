@@ -8,12 +8,12 @@ class IMU{
         FlagTimer TimeoutFlag;
         uint8_t rxBuf[8];
 
-        void ZeroYaw();
-        void ZeroPitch();
-        void ToggleQueryMode();
-        void ToggleAutoMode();
-        void Start();
+        inline void ZeroYaw();
+        inline void ZeroPitch();
+        inline void ToggleQueryMode();
+        inline void ToggleAutoMode();
+        inline void Start();
         void AutoZero(const double_t &);
         bool Update();
-        void UpdateTimeoutMS(const int64_t &ms);
+        inline void UpdateTimeoutMS(const int64_t &ms);
 };

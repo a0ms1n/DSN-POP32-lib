@@ -11,12 +11,12 @@ class SpeedCompute{
         SpeedCompute(double_t){};
 
         /// @brief Update raw_speed, and rounded to current_speed.
-        void update();
+        inline void update();
 
         /// @brief Set current_speed, raw_speed and target_speed to speed.
-        void set(const int16_t &);
+        inline void set(const int16_t &);
 
         /// @brief set target_speed.
-        void set_acc(const int16_t &);
+        inline void set_acc(const int16_t &);
         
 };
