@@ -10,6 +10,7 @@ template<size_t N=2>
 class MotorPair {
     public:
         std::array<int8_t, N> leftGroup, rightGroup;
+        std::array<bool, N> leftReverse, rightReverse;
         int16_t left_speed=0, right_speed=0;
         int16_t max_speed=255;
         
@@ -31,8 +32,16 @@ class MotorPair {
 
         /// @brief Stop both motor groups.
         inline void stop();
+
+        /// @brief Set reverse state for motors in both groups.
+        inline void setReverse(const bool (&left_reverse)[N], const bool (&right_reverse)[N]){
+            for (size_t i = 0; i < N; ++i) {
+                leftReverse[i] = left_reverse[i];
+                rightReverse[i] = right_reverse[i];
+            }
+        }
 };
 
 /// @brief Set power in the range [-255,255] to a motor.
-inline void motor255(const int8_t, const int16_t);
+inline void motor255(const int8_t ch, const int16_t pow);
 

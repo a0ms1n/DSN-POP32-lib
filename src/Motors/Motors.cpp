@@ -2,22 +2,38 @@
 
 template <size_t N>
 inline void MotorPair<N>::update(){
-    
+
+    #ifdef __DISABLE_REVERSE
+    for(size_t i=0;i<N;i++){
+        motor255(leftGroup[i],left_speed);
+        motor255(rightGroup[i],right_speed);
+    }
+    #else
+    for(size_t i=0;i<N;i++){
+        motor255(leftGroup[i],left_speed*(leftReverse[i]?-1:1));
+        motor255(rightGroup[i],right_speed*(rightReverse[i]?-1:1));
+    }
+    #endif
 }
 
 template <size_t N>
 inline void MotorPair<N>::set(const int16_t &left_speed, const int16_t &right_speed){
-    
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
 }
 
 template <size_t N>
 inline void MotorPair<N>::run(const int16_t &left_speed, const int16_t &right_speed){
-    
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    update();
 }
 
 template <size_t N>
 inline void MotorPair<N>::stop(){
-    
+    this->left_speed = 0;
+    this->right_speed = 0;
+    update();
 }
 
 inline void motor255(const int8_t ch, const int16_t pow){
