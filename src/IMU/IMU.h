@@ -1,5 +1,5 @@
 #pragma once
-#include "../Timer/Timer.h"
+#include "../Timer/Timer.hpp"
 
 class IMU{
     public:
