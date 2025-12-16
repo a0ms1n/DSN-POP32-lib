@@ -1,0 +1,38 @@
+#pragma once
+#include "../utils/Core.hpp"
+#include <array>
+
+/**
+ * @brief Control speed of two motor groups, using left_speed/right_speed for each motor in the same group.
+ * @example MotorPair<1>({1},{2}).
+ */
+template<size_t N=2>
+class MotorPair {
+    public:
+        std::array<int8_t, N> leftGroup, rightGroup;
+        int16_t left_speed=0, right_speed=0;
+        int16_t max_speed=255;
+        
+        MotorPair(const int8_t (&left_pins)[N], const int8_t (&right_pins)[N]) : leftGroup(), rightGroup() {
+            for (size_t i = 0; i < N; ++i) {
+                leftGroup[i] = left_pins[i];
+                rightGroup[i] = right_pins[i];
+            }
+        }
+        
+        /// @brief Set speed of both motor groups to `left_speed` and `right_speed`
+        inline void update();
+
+        /// @brief Assign value to `left_speed` and `right_speed`
+        inline void set(const int16_t &left_speed, const int16_t &right_speed);
+
+        /// @brief Assign value & set speed of both motor groups to `left_speed` and `right_speed`.
+        inline void run(const int16_t &left_speed, const int16_t &right_speed);
+
+        /// @brief Stop both motor groups.
+        inline void stop();
+};
+
+/// @brief Set power in the range [-255,255] to a motor.
+inline void motor255(const int8_t, const int16_t);
+
