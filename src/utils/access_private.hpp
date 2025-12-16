@@ -1,3 +1,4 @@
+#pragma once
 /*
 Use to access private member in class.
 */

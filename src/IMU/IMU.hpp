@@ -1,28 +1,31 @@
+#pragma once
 #include "IMU.h"
 
+extern IMU imu;
+
 /// @brief Set yaw to zero.
-inline void IMU::ZeroYaw(){
+void IMU::ZeroYaw(){
     Serial1.write(0XA5);Serial1.write(0X55);
 }
 
 /// @brief Set pitch and roll to zero.
 /// @warning Need to stay level when calling this function.
-inline void IMU::ZeroPitch(){
+void IMU::ZeroPitch(){
     Serial1.write(0XA5);Serial1.write(0X54);
 }
 
 /// @brief Toggle IMU auto mode.
-inline void IMU::ToggleAutoMode(){
+void IMU::ToggleAutoMode(){
     Serial1.write(0XA5);Serial1.write(0X52);
 }
 
 /// @brief Toggle IMU query mode.
-inline void IMU::ToggleQueryMode(){
+void IMU::ToggleQueryMode(){
     Serial1.write(0XA5);Serial1.write(0X51);
 }
 
 /// @brief Start IMU, blocking function, start with AutoMode.
-inline void IMU::Start(){
+void IMU::Start(){
     Serial1.begin(115200);
     ToggleAutoMode();
     ZeroYaw();
@@ -30,7 +33,7 @@ inline void IMU::Start(){
 }
 
 /// @brief Auto zero yaw with given precision (in degrees). 
-inline void IMU::AutoZero(const double_t &precision = 0.02f){
+void IMU::AutoZero(const double_t &precision = 0.02f){
     ZeroYaw();
     TimeoutFlag.set();
     while(true){
@@ -43,7 +46,7 @@ inline void IMU::AutoZero(const double_t &precision = 0.02f){
 }
 
 
-inline bool IMU::Update(){
+bool IMU::Update(){
     static int8_t idx = 0;
     TimeoutFlag.set();
     while (Serial1.available()){
@@ -66,6 +69,6 @@ inline bool IMU::Update(){
     return false;
 }
 
-inline void IMU::UpdateTimeoutMS(const int64_t &ms){
+void IMU::UpdateTimeoutMS(const int64_t &ms){
     this->TimeoutFlag.set(ms);
 }

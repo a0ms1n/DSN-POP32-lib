@@ -1,14 +1,13 @@
 #pragma once
-#include <POP32.h>
 
 /// @brief Fast absolute value functions for int8_t.
-inline int8_t  fast_abs8(int8_t  x) { int8_t  m = x >> 7;  return (x ^ m) - m; }
+int8_t  fast_abs8(int8_t  x) { int8_t  m = x >> 7;  return (x ^ m) - m; }
 /// @brief Fast absolute value functions for int16_t.
-inline int16_t fast_abs16(int16_t x) { int16_t m = x >> 15; return (x ^ m) - m; }
+int16_t fast_abs16(int16_t x) { int16_t m = x >> 15; return (x ^ m) - m; }
 /// @brief Fast absolute value functions for int32_t.
-inline int32_t fast_abs32(int32_t x) { int32_t m = x >> 31; return (x ^ m) - m; }
+int32_t fast_abs32(int32_t x) { int32_t m = x >> 31; return (x ^ m) - m; }
 /// @brief Fast absolute value functions for int64_t.
-inline int64_t fast_abs64(int64_t x) { int64_t m = x >> 63; return (x ^ m) - m; }
+int64_t fast_abs64(int64_t x) { int64_t m = x >> 63; return (x ^ m) - m; }
 
 /// @brief Clamp `val` to the range [-max, max]
 #define _ABSCLAMP(val,max) ((val) > (max) ? (max) : ((val) < -(max) ? -(max) : (val)))

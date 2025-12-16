@@ -12,10 +12,4 @@
 
 
 
-
-
-
-// //
-
-
 #define DSN_POP32_SELFCONFIG

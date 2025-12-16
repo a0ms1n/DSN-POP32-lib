@@ -1,14 +1,10 @@
 #pragma once
 
-// Include the Arduino POP32 library ONCE at the top level
-// This prevents multiple definition errors from external library functions
 #include "Config.h"
-#include <POP32.h>
-
-// Then include all DSN-POP32 components
-#include "Motors/Motors.h"
-#include "PIDCore/PIDCore.h"
-#include "LightSensors/LightSensors.h"
-#include "DriveController/DriveController.h"
-#include "IMU/IMU.h"
+#include "utils/Core.hpp"
+#include "Motors/Motors.hpp"
+#include "PIDCore/PIDCore.hpp"
+#include "LightSensors/LightSensors.hpp"
+#include "DriveController/DriveController.hpp"
+#include "IMU/IMU.hpp"
 //#include "NewIO/NewIO.h"

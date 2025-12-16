@@ -1,7 +1,8 @@
+#pragma once
 #include "Motors.h"
 
 template <size_t N>
-inline void MotorPair<N>::update(){
+void MotorPair<N>::update(){
 
     #ifdef __DISABLE_REVERSE
     for(size_t i=0;i<N;i++){
@@ -17,26 +18,26 @@ inline void MotorPair<N>::update(){
 }
 
 template <size_t N>
-inline void MotorPair<N>::set(const int16_t &left_speed, const int16_t &right_speed){
+void MotorPair<N>::set(const int16_t &left_speed, const int16_t &right_speed){
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
 }
 
 template <size_t N>
-inline void MotorPair<N>::run(const int16_t &left_speed, const int16_t &right_speed){
+void MotorPair<N>::run(const int16_t &left_speed, const int16_t &right_speed){
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
     update();
 }
 
 template <size_t N>
-inline void MotorPair<N>::stop(){
+void MotorPair<N>::stop(){
     this->left_speed = 0;
     this->right_speed = 0;
     update();
 }
 
-inline void motor255(const int8_t ch, const int16_t pow){
+void motor255(const int8_t ch, const int16_t pow){
     if(pow>=-255 && pow<=255){
         __motorLastpow = pow*100/255;
         int16_t p = pow;

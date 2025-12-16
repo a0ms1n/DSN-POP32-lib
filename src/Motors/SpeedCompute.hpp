@@ -1,3 +1,4 @@
+#pragma once
 #include "SpeedCompute.h"
 
 void SpeedCompute::update(){
