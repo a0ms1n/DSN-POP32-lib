@@ -1,23 +1,5 @@
 #pragma once
 #include <draw/draw.hpp>
-#include <vector>
-
-template <typename T>
-T lerp(T a, T b, T t) {
-    return a + t * (b - a);
-}
-
-struct Button {
-    String label;
-    void (*callback)();
-
-    int x;
-    int y;
-    int margin = 10;
-
-    int w = 0;
-    int h = 0;
-};
 
 struct Menu {
     std::vector<Button> buttons;

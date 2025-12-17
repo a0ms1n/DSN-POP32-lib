@@ -20,3 +20,8 @@ inline bool FlagTimer::check(){
     }
     return false;
 }
+
+inline uint64_t FlagTimer::gap(){
+    uint64_t last_timepoint = current_timepoint;
+    return (current_timepoint=millis() - last_timepoint);
+}

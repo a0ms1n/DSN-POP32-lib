@@ -22,4 +22,7 @@ class FlagTimer{
         /// @brief check if current_time is past next_timepoint, and reset next_timepoint if true.
         inline bool check();
 
+        /// @brief return interval between now() and current_timee.
+        inline uint64_t gap();
+
 };
