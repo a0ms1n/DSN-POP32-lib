@@ -21,6 +21,8 @@ class VerticalMenu{
     public:
     std::vector<Button> buttons;
 
+    VerticalMenu(const std::vector<Button> &x):buttons(x){}
+
     /// @brief Show menu
     /// @warning This will blocking other function.
     void show();

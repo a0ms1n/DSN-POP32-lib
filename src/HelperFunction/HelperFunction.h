@@ -6,3 +6,5 @@
 #include "../FastOled/FastOled.hpp"
 
 void POP32_INIT();
+void CallbackPlaceHolder();
+void IMUTest();

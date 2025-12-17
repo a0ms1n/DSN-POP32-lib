@@ -1,3 +1,4 @@
+#pragma once
 #include "FastOled.h"
 
 void FAST_OLED::OLED_DMA_Init() {
@@ -130,14 +131,14 @@ void FAST_OLED::drawChar(int x, int y, char c, uint8_t color) {
     }
 }
 
-void FAST_OLED::text(int x, int y,uint8_t color , const char* s) {
+void FAST_OLED::dtext(int x, int y,uint8_t color , const char* s) {
     while (*s) {
         drawChar(x, y, *s++, color);
         x += 6;
     }
 }
 
-void FAST_OLED::textf(int x, int y, uint8_t color, const char* fmt, ...) {
+void FAST_OLED::text(int x, int y, uint8_t color, const char* fmt, ...) {
     char buffer[64];
 
     va_list args;
@@ -145,7 +146,7 @@ void FAST_OLED::textf(int x, int y, uint8_t color, const char* fmt, ...) {
     vsnprintf(buffer, sizeof(buffer), fmt, args);
     va_end(args);
 
-    text(x, y, color, buffer);
+    dtext(x, y, color, buffer);
 }
 
 void FAST_OLED::getTextSizef(int &outW, int &outH, const char* fmt, ...) {

@@ -31,8 +31,8 @@ class FAST_OLED{
     void drawRect(int x, int y, int w, int h, uint8_t color);
     void drawLine(int x0, int y0, int x1, int y1, uint8_t color);
     void drawChar(int x, int y, char c, uint8_t color);
-    void text(int x, int y, uint8_t color, const char* s);
-    void textf(int x, int y, uint8_t color, const char* fmt, ...);
+    void dtext(int x, int y, uint8_t color, const char* s);
+    void text(int x, int y, uint8_t color, const char* fmt, ...);
     void getTextSizef(int &outW, int &outH, const char* fmt, ...);
     void drawGrid(int spacing, int offsetX, int offsetY, uint8_t color);
     void drawChecker(int tileSize, int offsetX, int offsetY, uint8_t color1, uint8_t color2);

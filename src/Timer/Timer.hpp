@@ -1,4 +1,5 @@
 #pragma once
+#include "../FastOled/FastOled.hpp"
 #include "Timer.h"
 
 inline void FlagTimer::set(){
@@ -22,6 +23,7 @@ inline bool FlagTimer::check(){
 }
 
 inline uint64_t FlagTimer::gap(){
-    uint64_t last_timepoint = current_timepoint;
-    return (current_timepoint=millis() - last_timepoint);
+    uint64_t last_timepoint = this->current_timepoint;
+    this->current_timepoint = millis();
+    return ((int64_t)current_timepoint - (int64_t)last_timepoint);
 }
