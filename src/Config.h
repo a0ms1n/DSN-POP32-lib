@@ -5,8 +5,6 @@
     @warning To prevent errors DO NOT CHANGE any variable name.     
 */
 
-// CONFIG MACROS //
-
 /// @brief Disable motor reverse speed configuration.
 //#define __DISABLE_REVERSE 
 

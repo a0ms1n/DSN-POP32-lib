@@ -8,3 +8,5 @@
 #include "DriveController/DriveController.hpp"
 #include "IMU/IMU.hpp"
 #include "FastOled/FastOled.hpp"
+#include "Widget/Widget.hpp"
+#include "HelperFunction/HelperFunction.hpp"
