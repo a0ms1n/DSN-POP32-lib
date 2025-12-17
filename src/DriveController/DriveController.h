@@ -13,13 +13,13 @@ class DriveController{
         MotorPair<N> *motors = nullptr;
         bool (*CurrentUpdate)() = nullptr;
 
-        #ifndef __DISABLE_IMU
-        IMU *drive_imu = &imu;
-        #endif 
+        IMU *drive_imu = nullptr;
         
         PIDCore *drive_pid;
         double_t drive_setpoint = 0.0f;
         double_t drive_current = 0.0f;
+
+        DriveController(MotorPair<N> &,IMU&,PIDCore&);
 
         /// @brief Base speed for driving.
         int16_t base_speed = 100;

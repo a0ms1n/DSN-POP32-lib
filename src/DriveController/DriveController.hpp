@@ -2,7 +2,12 @@
 #include "DriveController.h"
 
 template <size_t N>
-inline void DriveController<N>::Init(MotorPair<N> &motors_ptr){
+inline DriveController<N>::DriveController(MotorPair<N> &motors,IMU &imu,PIDCore &pid)
+:motors(&motors),drive_imu(&imu),drive_pid(&pid){}
+
+template <size_t N>
+inline void DriveController<N>::Init(MotorPair<N> &motors_ptr)
+{
     motors = &motors_ptr;
 }
 

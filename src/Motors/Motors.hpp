@@ -31,6 +31,19 @@ inline void MotorPair<N>::run(const int16_t &left_speed, const int16_t &right_sp
 }
 
 template <size_t N>
+inline void MotorPair<N>::run_dir(int16_t speed,const int16_t angular_vel,double_t direction){
+    direction = constrain(direction,-1.0,1.0);
+    speed = abs(speed);
+
+    this->left_speed = speed - (angular_vel*direction);
+    this->right_speed = speed + (angular_vel*direction);
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    update();
+
+}
+
+template <size_t N>
 inline void MotorPair<N>::stop(){
     this->left_speed = 0;
     this->right_speed = 0;

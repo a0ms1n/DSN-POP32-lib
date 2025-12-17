@@ -33,9 +33,14 @@ class PIDCore{
         uint64_t dt_ms=1;
 
         double_t outMin=-255.0f,outMax=255.0f;
+        
+        /// @brief Ignore iTerm if error is less than... (set to -1 to turn off)
+        double_t IErrorTreshold = 0;
 
         /// @brief PID output value.
         double_t output=0;
+
+        PIDCore(const PIDGains &,const double_t&,const double_t&);
 
         /// @brief Update PID controller, to current setpoint.
         bool Compute();

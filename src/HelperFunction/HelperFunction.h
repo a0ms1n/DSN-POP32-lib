@@ -4,6 +4,7 @@
 #include "../DriveController/DriveController.hpp"
 #include "../utils/Core.hpp"
 #include "../FastOled/FastOled.hpp"
+#include "../GlobalObject.h"
 
 void POP32_INIT();
 void CallbackPlaceHolder();

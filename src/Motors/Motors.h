@@ -30,6 +30,9 @@ class MotorPair {
         /// @brief Assign value & set speed of both motor groups to `left_speed` and `right_speed`.
         inline void run(const int16_t &left_speed, const int16_t &right_speed);
 
+        /// @brief Assign value & set normalized speed by direction [-1,1] (Left-Right)
+        inline void run_dir(int16_t speed,const int16_t angular_vel,double_t direction);
+
         /// @brief Stop both motor groups.
         inline void stop();
 

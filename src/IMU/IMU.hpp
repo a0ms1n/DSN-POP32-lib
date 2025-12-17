@@ -1,8 +1,6 @@
 #pragma once
 #include "IMU.h"
 
-IMU imu;
-
 /// @brief Set yaw to zero.
 /// @warning delay for 120 ms, and ALWAYS use .Toggle before.
 inline void IMU::ZeroYaw(){
