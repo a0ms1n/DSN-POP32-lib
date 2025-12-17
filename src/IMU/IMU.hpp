@@ -33,7 +33,21 @@ inline void IMU::Start(){
 }
 
 /// @brief Auto zero yaw with given precision (in degrees). 
-void IMU::AutoZero(const double_t &precision = 0.02f){
+void IMU::AutoZero(const double_t &_precision){
+    precision = _precision;
+    ZeroYaw();
+    TimeoutFlag.set();
+    while(true){
+        if(Update() && abs(currentYaw)<=precision)break;
+        if(TimeoutFlag.check()){
+            ZeroYaw();
+            break;
+        }
+    }
+}
+
+/// @brief Auto zero yaw with given precision (in degrees). 
+void IMU::AutoZero(){
     ZeroYaw();
     TimeoutFlag.set();
     while(true){

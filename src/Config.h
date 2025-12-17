@@ -7,8 +7,11 @@
 
 // CONFIG MACROS //
 
-/// @brief Disable motor reverse speed function to save memory.
+/// @brief Disable motor reverse speed configuration.
 //#define __DISABLE_REVERSE 
+
+/// @brief Disable IMU functions.
+//#define __DISABLE_IMU
 
 
 

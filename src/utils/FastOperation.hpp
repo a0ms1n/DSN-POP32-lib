@@ -14,3 +14,5 @@ int64_t fast_abs64(int64_t x) { int64_t m = x >> 63; return (x ^ m) - m; }
 
 /// @brief Clamp `val` to the range [min, max]
 #define _CLAMP(val,min,max) ((val) > (max) ? (max) : ((val) < (min) ? (min) : (val)))
+
+#define _ANGULAR_MINDIFF(a,b)

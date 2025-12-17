@@ -8,21 +8,49 @@
 
 /// @brief Attach to MotorPair, to control robot drive, can only do ONE drive mode at a time.
 template<size_t N=2>
-class DriverController{
+class DriveController{
     public:
         MotorPair<N> *motors = nullptr;
-        void (*CurrentUpdate)() = nullptr;
+        bool (*CurrentUpdate)() = nullptr;
 
-        int16_t base_speed = 100;
-        int16_t max_speed = 200;
-        int16_t min_speed = 10;
+        #ifndef __DISABLE_IMU
+        IMU *drive_imu = &imu;
+        #endif 
         
+        PIDCore *drive_pid;
+        double_t drive_setpoint = 0.0f;
+        double_t drive_current = 0.0f;
+
+        /// @brief Base speed for driving.
+        int16_t base_speed = 100;
+
+        /// @brief Maximum speed for driving.
+        int16_t max_speed = 200;
+        
+        /// @brief Initialize DriveController with MotorPair.
+        /// @warning Make sure that motors_ptr is valid during the whole lifetime of DriveController.
+        void Init(MotorPair<N> &motors_ptr);
+
         /// @brief Call this function periodically to update.
-        void Update();
+        bool Update();
 
         /// @brief Terminate all driving.
         void Stop();
 
-        void Rotate()
-        
+        /// @brief  Start routine of straight driving.
+        /// @param pid : PID controller reference for straight driving.
+        void StraightDrive(PIDCore &pid);
+
+        /// @brief Set a custom drive function, the function will be periodically called with Update().
+        /// @warning Make sure that the function pointer is valid during the whole DriveController lifetime.
+        /// @param updateFunc : Function to call, make sure it returns bool (false -> stop, true -> continue)
+        void CustomDrive(bool (*updateRoutine)());
+
+        /// @brief Set base speed and max speed for driving.
+        void SetSpeed(const int16_t &base_speed, const int16_t &max_speed);
+    
+    private:
+        bool StraightDriveRoutine();
 };
+
+
