@@ -36,7 +36,5 @@ class LEDSensorPair{
  
     inline int32_t readRaw();
     inline int32_t read();
-    inline double_t get_direction();
-
 
 };

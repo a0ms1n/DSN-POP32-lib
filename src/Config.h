@@ -30,15 +30,6 @@ constexpr int8_t __MOTOR_PINS[__MOTOR_PAIRS][2] = {
 };
 #endif
 
-/* Sensors */
-
-/// @brief Choose which is Low/High value (White or Black);
-#define __SENSOR_WB_VALUE WHITE_BLACK // White < Black
-//#define __SENSOR_WB_VALUE BLACK_WHITE // Black < White
-
-
-
-
 // Features Configuration //
 
 /// @brief Disable motor reverse speed configuration.

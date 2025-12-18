@@ -63,7 +63,3 @@ inline int32_t LEDSensorPair::read(){
     return (left->read() + right->read())/2;
 }
 
-inline double_t LEDSensorPair::get_direction()
-{
-    return double_t();
-}
