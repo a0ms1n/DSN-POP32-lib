@@ -9,3 +9,5 @@
 void POP32_INIT();
 void CallbackPlaceHolder();
 void IMUTest();
+void SensorTest();
+void MotorTest();

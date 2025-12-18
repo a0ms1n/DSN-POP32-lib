@@ -20,6 +20,17 @@ inline void LEDSensor::calibrate(){
     #endif
 }
 
+inline void LEDSensor::reset(){
+    #if __SENSOR_WB_VALUE == WHITE_BLACK
+    whiteValue = INT32_MAX;
+    blackValue = INT32_MIN;
+    #elif #elif __SENSOR_WB_VALUE == BLACK_WHITE
+    blackValue = INT32_MAX;
+    whiteValue = INT32_MIN;
+    #endif
+
+}
+
 inline int32_t LEDSensor::readRaw()
 {
     cValue = analog(channel); 
@@ -37,29 +48,47 @@ inline int32_t LEDSensor::read(){
     return cValue;
 }
 
-LEDSensorPair::LEDSensorPair(LEDSensor &left, LEDSensor &right)
-:left(&left),right(&right){}
-
-inline void LEDSensorPair::set_white(){
-    left->set_white();
-    right->set_white();
+template <size_t N>
+inline LEDSensorGroup<N>::LEDSensorGroup(std::array<LEDSensor*, N> sensors_ptr){
+    for(uint8_t i=0;i<N;i++)sensors[i] = sensors_ptr[i];
 }
 
-inline void LEDSensorPair::set_black(){
-    left->set_black();
-    right->set_black();
+template <size_t N>
+inline void LEDSensorGroup<N>::set_white(){
+    for(uint8_t i=0;i<N;i++)sensors[i]->set_white();
 }
 
-inline void LEDSensorPair::calibrate(){
-    left->calibrate();
-    right->calibrate();
+template <size_t N>
+inline void LEDSensorGroup<N>::set_black(){
+    for(uint8_t i=0;i<N;i++)sensors[i]->set_black();
 }
 
-inline int32_t LEDSensorPair::readRaw(){
-    return (left->readRaw() + right->readRaw())/2;
+template <size_t N>
+inline void LEDSensorGroup<N>::calibrate(){
+    for(uint8_t i=0;i<N;i++)sensors[i]->calibrate();
 }
 
-inline int32_t LEDSensorPair::read(){
-    return (left->read() + right->read())/2;
+template <size_t N>
+inline void LEDSensorGroup<N>::reset(){
+    for(uint8_t i=0;i<N;i++)sensors[i]->reset();
 }
 
+template <size_t N>
+inline void LEDSensorGroup<N>::readRaw(){
+    for(uint8_t i=0;i<N;i++)sensors[i]->readRaw();
+}
+
+template <size_t N>
+inline void LEDSensorGroup<N>::read(){
+    for(uint8_t i=0;i<N;i++)sensors[i]->read();
+}
+
+template <size_t N>
+inline int32_t &LEDSensorGroup<N>::get(uint8_t index){
+    return this->sensors[index]->cValue;
+}
+
+template <size_t N>
+inline int32_t& LEDSensorGroup<N>::getObj(uint8_t index){
+    return this->sensors[index];
+}

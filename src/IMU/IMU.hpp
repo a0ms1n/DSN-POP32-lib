@@ -16,6 +16,18 @@ inline void IMU::ZeroYaw(){
 inline void IMU::Reset(){
     ZeroYaw();
     ToggleAutoMode();
+    cYaw = 0;
+    pvYaw = 0;
+    dYaw = 0;
+    delay(20);
+}
+
+inline void IMU::ResetWaitZero(double_t precision){
+    Reset();
+    while(!Update());
+    do{
+        Update();
+    }while(!(pvYaw >= -precision && pvYaw <= precision));
 }
 
 /// @brief Toggle IMU auto mode.
@@ -44,34 +56,6 @@ inline void IMU::Start(){
     
 }
 
-/// @brief Auto zero yaw with given precision (in degrees). 
-void IMU::AutoZero(const double_t &_precision){
-    precision = _precision;
-    ZeroYaw();
-    TimeoutFlag.set();
-    while(true){
-        if(Update() && abs(cYaw)<=precision)break;
-        if(TimeoutFlag.check()){
-            ZeroYaw();
-            break;
-        }
-    }
-}
-
-/// @brief Auto zero yaw with given precision (in degrees). 
-void IMU::AutoZero(){
-    ZeroYaw();
-    TimeoutFlag.set();
-    while(true){
-        if(Update() && abs(cYaw)<=precision)break;
-        if(TimeoutFlag.check()){
-            ZeroYaw();
-            break;
-        }
-    }
-}
-
-
 bool IMU::Update(){
     static int8_t idx = 0;
     TimeoutFlag.set();
@@ -82,10 +66,12 @@ bool IMU::Update(){
             if (idx == 8) {
                 idx = 0;
                 if (rxBuf[7] == 0x55) {
+                    pvYaw = cYaw;
                     cYaw = (int16_t)(rxBuf[1] << 8 | rxBuf[2]) / 100.0f;
                     cPitch = (int16_t)(rxBuf[3] << 8 | rxBuf[4]) / 100.0f;
                     cRoll = (int16_t)(rxBuf[5] << 8 | rxBuf[6]) / 100.0f;
                     status = true;
+                    dYaw = angularMinDiff(cYaw,pvYaw);
                     return true;
                 }
         }

@@ -19,7 +19,7 @@ class DriveController{
         double_t drive_setpoint = 0.0f;
         double_t drive_current = 0.0f;
 
-        DriveController(MotorPair<N> &,IMU&,PIDCore&);
+        DriveController(MotorPair<N> *,IMU*,PIDCore*);
 
         /// @brief Base speed for driving.
         int16_t base_speed = 100;
@@ -41,6 +41,8 @@ class DriveController{
         /// @param pid : PID controller reference for straight driving.
         void StraightDrive(PIDCore &pid);
 
+        void RotateDrive(PIDCore &pid);
+
         /// @brief Set a custom drive function, the function will be periodically called with Update().
         /// @warning Make sure that the function pointer is valid during the whole DriveController lifetime.
         /// @param updateFunc : Function to call, make sure it returns bool (false -> stop, true -> continue)
@@ -51,6 +53,7 @@ class DriveController{
     
     private:
         bool StraightDriveRoutine();
+        bool RotateDriveRoutine();
 };
 
 

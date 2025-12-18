@@ -16,6 +16,7 @@ class LEDSensor {
     inline void set_white();
     inline void set_black();
     inline void calibrate();
+    inline void reset();
 
     /// @brief return RawValue from sensor 
     inline int32_t readRaw();
@@ -25,16 +26,25 @@ class LEDSensor {
 };
 
 
-class LEDSensorPair{
+/// @brief Class for update multiple sensors. 
+template<size_t N>
+class LEDSensorGroup{
     public:
-    LEDSensor *left,*right;
-    LEDSensorPair(LEDSensor &left,LEDSensor &right);
+    LEDSensor *sensors[N];
+
+    LEDSensorGroup(std::array<LEDSensor*,N>sensors_ptr);
 
     inline void set_white();
     inline void set_black();
     inline void calibrate();
- 
-    inline int32_t readRaw();
-    inline int32_t read();
+    inline void reset();
 
+    inline void readRaw();  
+    inline void read();
+
+    /// @brief Get value from specific sensor (by index).
+    inline int32_t& get(uint8_t);
+    inline int32_t& getObj(uint8_t);
 };
+
+

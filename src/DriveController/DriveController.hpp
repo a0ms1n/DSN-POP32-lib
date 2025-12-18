@@ -2,8 +2,8 @@
 #include "DriveController.h"
 
 template <size_t N>
-inline DriveController<N>::DriveController(MotorPair<N> &motors,IMU &imu,PIDCore &pid)
-:motors(&motors),drive_imu(&imu),drive_pid(&pid){}
+inline DriveController<N>::DriveController(MotorPair<N> *motors,IMU *imu,PIDCore *pid)
+:motors(motors),drive_imu(imu),drive_pid(pid){}
 
 template <size_t N>
 inline void DriveController<N>::Init(MotorPair<N> &motors_ptr)
@@ -35,7 +35,15 @@ inline void DriveController<N>::StraightDrive(PIDCore &pid){
     drive_pid = &pid;
     drive_pid->Init(drive_setpoint,drive_current);
     drive_pid->Start();
-    drive_imu->AutoZero();
+    drive_imu->Reset();
+}
+
+template <size_t N>
+inline void DriveController<N>::RotateDrive(PIDCore &pid){
+    drive_pid = RotateDriveRoutine;
+    drive_pid->Init(drive_setpoint,drive_current);
+    drive_pid->Start();
+    drive_imu->Reset();
 }
 
 template <size_t N>
@@ -52,6 +60,15 @@ inline void DriveController<N>::SetSpeed(const int16_t &base_speed, const int16_
 template <size_t N>
 inline bool DriveController<N>::StraightDriveRoutine(){
     drive_imu->Update();
+
+
+    return false;
+}
+
+template <size_t N>
+inline bool DriveController<N>::RotateDriveRoutine(){
+    drive_imu->Update();
+    
 
     return false;
 }

@@ -4,6 +4,8 @@
 class IMU{
     public:
         double_t cYaw=0,cPitch=0,cRoll=0;
+        double_t pvYaw=0;
+        double_t dYaw = 0;
         bool status = false;
         FlagTimer TimeoutFlag;
         uint8_t rxBuf[8];
@@ -11,11 +13,10 @@ class IMU{
 
         inline void ZeroYaw();
         inline void Reset();
+        inline void ResetWaitZero(double_t precision);
         inline void ToggleQueryMode();
         inline void ToggleAutoMode();
         inline void Start();
-        void AutoZero(const double_t &);
-        void AutoZero();
         bool Update();
         inline void UpdateTimeoutMS(const int64_t &ms);
 };
