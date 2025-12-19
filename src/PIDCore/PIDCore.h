@@ -10,12 +10,14 @@ struct PIDGains{
 class PIDCore{
     public:
 
+        enum class errorMode : uint8_t {errorLinear,errorSquare,errorAbsolute,errorSqaureAbsolute};
         enum class pMode : uint8_t {pOnError, pOnMeas, pOnErrorMeas};     // proportional mode
         enum class dMode : uint8_t {dOnError, dOnMeas};                   // derivative mode
         enum class iAwMode : uint8_t {iAwCondition, iAwClamp, iAwOff};    // integral anti-windup mode
         pMode pmode = pMode::pOnError;
         dMode dmode = dMode::dOnMeas;
         iAwMode iawmode = iAwMode::iAwClamp;
+        errorMode errormode = errorMode::errorLinear;
 
         PIDGains gains;
         double_t error=0,prev_error=0,last_input=0,output_sum=0;
@@ -67,6 +69,9 @@ class PIDCore{
 
         void SetAntiWindupMode(iAwMode iAwMode);
         void SetAntiWindupMode(uint8_t IawMode);
+
+        void SetErrorMode(errorMode errorMode);
+        void SetErrorMode(uint8_t ErrorMode);
         
 
 };

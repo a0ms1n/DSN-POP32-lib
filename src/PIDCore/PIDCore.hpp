@@ -8,8 +8,24 @@ bool PIDCore::Compute()
 {
     if(dtTimer.check()){
         double_t _input = *current;
-        double_t dInput = _input - last_input;    
-        error = *setpoint - _input;
+        double_t dInput = _input - last_input;  
+        switch(errormode){
+            case errorMode::errorLinear:
+                error = *setpoint - _input;
+                break;
+            case errorMode::errorAbsolute:
+                error = abs(*setpoint - _input);
+                break;
+            case errorMode::errorSquare:
+                error = *setpoint - _input;
+                error = (error<0)?(error)*(-error):error*error;
+                break;
+            case errorMode::errorSqaureAbsolute:
+                error = *setpoint - _input;
+                error = error*error;
+                break;
+        }  
+        
         
         double_t dError = error - prev_error;
         double_t peTerm = gains.Kp * error;
@@ -110,4 +126,12 @@ inline void PIDCore::SetAntiWindupMode(iAwMode iAwMode){
 
 inline void PIDCore::SetAntiWindupMode(uint8_t IawMode){
     this->iawmode = (iAwMode)IawMode;
+}
+
+inline void PIDCore::SetErrorMode(errorMode errorMode){
+    this->errormode = errorMode;
+}
+
+inline void PIDCore::SetErrorMode(uint8_t ErrorMode){
+    this->errormode = (errorMode)ErrorMode;
 }
