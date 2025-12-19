@@ -10,14 +10,17 @@
 template<size_t N=2>
 class DriveController{
     public:
-        MotorPair<N> *motors = nullptr;
-        bool (*CurrentUpdate)() = nullptr;
+        using PrivateUpdateFunc = bool (DriveController<N>::*)();
+        MotorPair<N> *drive_motors = nullptr;
+        bool (*userCurrentUpdate)() = nullptr;
+        PrivateUpdateFunc CurrentUpdate = nullptr;
 
         IMU *drive_imu = nullptr;
         
         PIDCore *drive_pid;
         double_t drive_setpoint = 0.0f;
         double_t drive_current = 0.0f;
+        double_t drive_val[5];
 
         DriveController(MotorPair<N> *,IMU*,PIDCore*);
 
@@ -41,17 +44,17 @@ class DriveController{
         /// @param pid : PID controller reference for straight driving.
         void StraightDrive(PIDCore &pid);
 
-        void RotateDrive(PIDCore &pid);
+        void RotateDrive(double_t angle,PIDCore &pid,double_t direction);
 
         /// @brief Set a custom drive function, the function will be periodically called with Update().
         /// @warning Make sure that the function pointer is valid during the whole DriveController lifetime.
-        /// @param updateFunc : Function to call, make sure it returns bool (false -> stop, true -> continue)
+        /// @param updateFunc : Function to call, make sure it returns bool (false -> continue, true -> stop)
         void CustomDrive(bool (*updateRoutine)());
 
         /// @brief Set base speed and max speed for driving.
         void SetSpeed(const int16_t &base_speed, const int16_t &max_speed);
     
-    private:
+    //private:
         bool StraightDriveRoutine();
         bool RotateDriveRoutine();
 };

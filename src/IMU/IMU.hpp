@@ -30,6 +30,17 @@ inline void IMU::ResetWaitZero(double_t precision){
     }while(!(pvYaw >= -precision && pvYaw <= precision));
 }
 
+inline void IMU::ResetWaitZero(){
+    Reset();
+    while(!Update());
+    do{
+        Update();
+        oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
+        oledf.show();
+        oledf.clear();
+    }while(!(cYaw >= -precision && cYaw <= precision));
+}
+
 /// @brief Toggle IMU auto mode.
 /// @warning delay for 60 ms.
 inline void IMU::ToggleAutoMode(){

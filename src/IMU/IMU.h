@@ -9,11 +9,12 @@ class IMU{
         bool status = false;
         FlagTimer TimeoutFlag;
         uint8_t rxBuf[8];
-        double_t precision = 0.1f;
+        double_t precision = 0.5f;
 
         inline void ZeroYaw();
         inline void Reset();
         inline void ResetWaitZero(double_t precision);
+        inline void ResetWaitZero();
         inline void ToggleQueryMode();
         inline void ToggleAutoMode();
         inline void Start();

@@ -24,9 +24,26 @@ inline void MotorPair<N>::set(const int16_t &left_speed, const int16_t &right_sp
 }
 
 template <size_t N>
+inline void MotorPair<N>::set_minclamp(const int16_t &left_speed, const int16_t &right_speed){
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    this->left_speed = _MINCLAMP(this->left_speed,this->min_speed);
+    this->right_speed = _MINCLAMP(this->right_speed,this->min_speed);
+}
+
+template <size_t N>
 inline void MotorPair<N>::run(const int16_t &left_speed, const int16_t &right_speed){
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    update();
+}
+
+template <size_t N>
+inline void MotorPair<N>::run_minclamp(const int16_t &left_speed, const int16_t &right_speed){
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    this->left_speed = _MINCLAMP(this->left_speed,this->min_speed);
+    this->right_speed = _MINCLAMP(this->right_speed,this->min_speed);
     update();
 }
 
@@ -44,6 +61,19 @@ inline void MotorPair<N>::run_dir(int16_t speed,const int16_t angular_vel,double
 }
 
 template <size_t N>
+inline void MotorPair<N>::run_dir_minclamp(int16_t speed, const int16_t angular_vel, double_t direction){
+    direction = constrain(direction,-1.0,1.0);
+    speed = abs(speed);
+    this->left_speed = speed - (angular_vel*direction);
+    this->right_speed = speed + (angular_vel*direction);
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    this->left_speed = _MINCLAMP(this->left_speed,this->min_speed);
+    this->right_speed = _MINCLAMP(this->right_speed,this->min_speed);
+    update();
+}
+
+template <size_t N>
 inline void MotorPair<N>::stop(){
     this->left_speed = 0;
     this->right_speed = 0;
@@ -52,11 +82,17 @@ inline void MotorPair<N>::stop(){
 
 template <size_t N>
 inline void MotorPair<N>::setReverse(const bool (&left_reverse)[N], const bool (&right_reverse)[N]){
-            for (size_t i = 0; i < N; ++i) {
-                leftReverse[i] = left_reverse[i];
-                rightReverse[i] = right_reverse[i];
-            }
-        }
+    for (size_t i = 0; i < N; ++i) {
+        leftReverse[i] = left_reverse[i];
+        rightReverse[i] = right_reverse[i];
+    }
+}
+
+template <size_t N>
+inline void MotorPair<N>::setSpeedRange(const int16_t &max_speed, const int16_t &min_speed=0){
+    this->max_speed = max_speed;
+    this->min_speed = min_speed;
+}
 
 void motor255(const int8_t ch, const int16_t pow){
     if(pow>=-255 && pow<=255){
