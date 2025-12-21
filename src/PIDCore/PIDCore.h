@@ -1,9 +1,9 @@
 #pragma once
 #include "../Timer/Timer.hpp"
 
-/// @brief PID gains (Kp, Ki, Kd).
+/// @brief PID gains (Kp, Ki, Kd, errorNormalizer).
 struct PIDGains{
-    double_t Kp=0,Ki=0,Kd=0;
+    double_t Kp=0,Ki=0,Kd=0,Knorm=1;
 };
 
 /// @brief PID Controller class.

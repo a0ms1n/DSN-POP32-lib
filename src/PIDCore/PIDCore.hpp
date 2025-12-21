@@ -11,17 +11,17 @@ bool PIDCore::Compute()
         double_t dInput = _input - last_input;  
         switch(errormode){
             case errorMode::errorLinear:
-                error = *setpoint - _input;
+                error = (*setpoint - _input)*gains.Knorm;
                 break;
             case errorMode::errorAbsolute:
-                error = abs(*setpoint - _input);
+                error = abs((*setpoint - _input)*gains.Knorm);
                 break;
             case errorMode::errorSquare:
-                error = *setpoint - _input;
+                error = (*setpoint - _input)*gains.Knorm;
                 error = (error<0)?(error)*(-error):error*error;
                 break;
             case errorMode::errorSqaureAbsolute:
-                error = *setpoint - _input;
+                error = (*setpoint - _input)*gains.Knorm;
                 error = error*error;
                 break;
         }  
