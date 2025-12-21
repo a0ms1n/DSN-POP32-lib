@@ -9,6 +9,12 @@
 
 // Robot Properties //
 
+/// @brief Define this when using IMU
+//#define _enable_IMU
+
+/// @brief Define this when using PSX
+#define _enable_PSX
+
 /* MOTOR */
 
 /// @brief Type of robot moving part (Legs/Wheels).
@@ -53,7 +59,14 @@ constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
 /// @brief Enable Maze Robot Menu/Function. (IMU Tester, 4-wheels motor tester, align tester, ...)
 #define __ENABLE_MAZE_ROBOT_HELPER1
 
-// MACROS //
+/* PSX */
+#define _PSX_DAT 0
+#define _PSX_CMD 1
+#define _PSX_SEL 2
+#define _PSX_CLK 3
+#define _PSX_Delay 10
+
+// MACROS *DO NOT EDIT* //
 
 #define __LEFT_ROTATE 1
 #define __RIGHT_ROTATE -1

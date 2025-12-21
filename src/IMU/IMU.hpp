@@ -1,4 +1,6 @@
 #pragma once
+
+#ifdef _enable_IMU
 #include "IMU.h"
 
 /// @brief Set yaw to zero.
@@ -95,3 +97,5 @@ bool IMU::Update(){
 inline void IMU::UpdateTimeoutMS(const int64_t &ms){
     this->TimeoutFlag.set(ms);
 }
+
+#endif

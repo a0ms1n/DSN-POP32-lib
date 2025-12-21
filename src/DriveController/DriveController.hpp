@@ -1,9 +1,15 @@
 #pragma once
 #include "DriveController.h"
 
+#ifdef _enable_IMU
 template <size_t N>
 inline DriveController<N>::DriveController(MotorPair<N> *motors,IMU *imu,PIDCore *pid)
 :drive_motors(motors),drive_imu(imu),drive_pid(pid){}
+#else
+template <size_t N>
+inline DriveController<N>::DriveController(MotorPair<N> *motors,PIDCore *pid)
+:drive_motors(motors),drive_pid(pid){}
+#endif
 
 template <size_t N>
 inline void DriveController<N>::Init(MotorPair<N> &motors_ptr)
@@ -44,6 +50,8 @@ inline void DriveController<N>::Stop(){
     userCurrentUpdate = nullptr;
 }
 
+#ifdef _enable_IMU
+
 template <size_t N>
 inline void DriveController<N>::StraightDrive(PIDCore &pid){
     CurrentUpdate = &StraightDriveRoutine;
@@ -65,6 +73,8 @@ inline void DriveController<N>::RotateDrive(double_t angle,PIDCore &pid,double_t
     drive_val[0] = direction;
 }
 
+#endif
+
 template <size_t N>
 inline void DriveController<N>::CustomDrive(bool (*updateRoutine)()){
     userCurrentUpdate = updateRoutine;
@@ -75,6 +85,8 @@ inline void DriveController<N>::SetSpeed(const int16_t &base_speed, const int16_
     this->base_speed = base_speed;
     this->max_speed = max_speed;
 }
+
+#ifdef _enable_IMU
 
 template <size_t N>
 inline bool DriveController<N>::StraightDriveRoutine(){
@@ -97,3 +109,5 @@ inline bool DriveController<N>::RotateDriveRoutine(){
     drive_motors->run_dir_minclamp(0,out,drive_val[0]);
     return true;
 }
+
+#endif
