@@ -71,12 +71,19 @@ constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
 #endif
 
 /* Servo */
+#ifdef _enable_Servo
 #define __SERVO_NUM 3
+constexpr int16_t servo[__SERVO_NUM][2] = {
+    {1,0}, //PIN , Initial Degrees.
+    {1,0},
+    {1,0},
+}
+#endif
 
 
-// MACROS *DO NOT EDIT* //
+// MACROS //
 
-#define __LEFT_ROTATE 1
-#define __RIGHT_ROTATE -1
+#define __LEFT_ROTATE (1)
+#define __RIGHT_ROTATE (-__LEFT_ROTATE)
 
 #endif

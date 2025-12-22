@@ -10,4 +10,5 @@
 #include "FastOled/FastOled.hpp"
 #include "Widget/Widget.hpp"
 #include "HelperFunction/HelperFunction.hpp"
+#include "ServoContoller/ServoController.hpp"
 #include "GlobalObject.h"

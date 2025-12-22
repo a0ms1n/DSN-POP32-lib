@@ -30,7 +30,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+#ifdef _enable_PSX
+
 #include "PsxLib.h"
+
 
 Psx::Psx() { };	// Class Psx
 
@@ -133,3 +137,4 @@ inline bool Psx::buttonNewState(unsigned int button) {
   return (((_last_buttons ^ _dataOut) & button) > 0);
 }
 
+#endif

@@ -23,6 +23,6 @@ class FlagTimer{
         inline bool check();
 
         /// @brief return interval between now() and current_timee.
-        inline uint64_t gap();
+        inline uint64_t gap(const bool no_reset=false);
 
 };

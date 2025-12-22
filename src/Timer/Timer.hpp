@@ -22,7 +22,8 @@ inline bool FlagTimer::check(){
     return false;
 }
 
-inline uint64_t FlagTimer::gap(){
+inline uint64_t FlagTimer::gap(const bool no_reset=false){
+    if(!no_reset)return millis() - this->current_timepoint;
     uint64_t last_timepoint = this->current_timepoint;
     this->current_timepoint = millis();
     return ((int64_t)current_timepoint - (int64_t)last_timepoint);

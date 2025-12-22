@@ -3,4 +3,4 @@
 build/
 src/_local_test/
 src/utils/debug_function.h
-_local_examples/
+src/_local_examples/

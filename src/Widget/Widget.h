@@ -1,10 +1,7 @@
 #pragma once
 #include "../FastOled/FastOled.hpp";
-
+#include "../utils/FastOperation.hpp"
 #include <vector>
-
-template <typename T>
-T lerp(T a, T b, T t) {return a + t * (b - a);}
 
 struct Button {
     String label;
