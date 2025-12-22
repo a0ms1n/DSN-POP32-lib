@@ -1,10 +1,10 @@
 #pragma once
+#include "Config.h"
 #include "IMU/IMU.hpp" 
 #include "DriveController/DriveController.hpp"
 #include "Motors/Motors.hpp"
 #include "PIDCore/PIDCore.hpp"
-#include "PsxController/PsxController.hpp"
-#include "Config.h"
+#include "PsxController/PsxLib.hpp"
 
 #ifdef _enable_IMU
 IMU imu;
