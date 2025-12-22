@@ -40,6 +40,8 @@ constexpr int8_t __MOTOR_PINS[__MOTOR_PAIRS][2] = {
 };
 #endif
 
+#define __AUTO_CONSTRAIN_ON_UPDATE
+
 /* Sensors */
 
 /// @brief Choose which is Low/High value (White or Black);
@@ -61,10 +63,10 @@ constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
 
 /* PSX */
 #ifdef _enable_PSX
-#define _PSX_DAT 0
-#define _PSX_CMD 1
-#define _PSX_SEL 2
-#define _PSX_CLK 3
+#define _PSX_DAT PA0
+#define _PSX_CMD PA1
+#define _PSX_SEL PA2
+#define _PSX_CLK PA3
 #define _PSX_Delay 10
 #endif
 

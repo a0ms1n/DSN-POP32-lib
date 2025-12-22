@@ -73,10 +73,10 @@
 #define PSB_PAD_DOWN    0x0040
 #define PSB_PAD_LEFT    0x0080
 
-#define PSB_LSTIK_LEFT 	0x0010
-#define PSB_LSTIK_DOWN  0x0020
-#define PSB_LSTIK_RIGHT 0x0040
-#define PSB_LSTIK_UP    0x0080
+#define PSB_LSTIK_LEFT 	0x0080
+#define PSB_LSTIK_DOWN  0x0040
+#define PSB_LSTIK_RIGHT 0x0020
+#define PSB_LSTIK_UP    0x0010
 
 // Right Keys Pad and Stiks
 #define PSB_TRIANGLE    0x1000
@@ -84,10 +84,10 @@
 #define PSB_CROSS       0x4000
 #define PSB_SQUARE      0x8000
 
-#define PSB_RSTIK_LEFT 	0x1000
-#define PSB_RSTIK_DOWN  0x2000
-#define PSB_RSTIK_RIGHT 0x4000
-#define PSB_RSTIK_UP    0x8000
+#define PSB_RSTIK_LEFT 	0x8000
+#define PSB_RSTIK_DOWN  0x4000
+#define PSB_RSTIK_RIGHT 0x2000
+#define PSB_RSTIK_UP    0x1000
 
 class Psx {
 	public:
@@ -104,9 +104,9 @@ class Psx {
 
 		unsigned int read();		// Returns the status of the button presses in an unsignd int.
 									// The value returned corresponds to each key as defined above.
-		bool newButtonState();		// Giuseppe: will be true if any button was pressed
-		bool buttonNewState(unsigned int);	// Giuseppe: will be true if button changed state
-		bool button(unsigned int);	// Giuseppe: will be TRUE if button is being pressed
+		inline bool newButtonState();		// Giuseppe: will be true if any button was pressed
+		inline bool buttonNewState(unsigned int);	// Giuseppe: will be true if button changed state
+		inline bool button(unsigned int);	// Giuseppe: will be TRUE if button is being pressed
 		byte AnRx=127;
 		byte AnRy=127;
 		

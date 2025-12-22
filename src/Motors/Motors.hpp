@@ -4,6 +4,11 @@
 template <size_t N>
 inline void MotorPair<N>::update(){
 
+    #ifdef __AUTO_CONSTRAIN_ON_UPDATE
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #endif
+
     #ifdef __DISABLE_REVERSE
     for(size_t i=0;i<N;i++){
         motor255(leftGroup[i],left_speed);

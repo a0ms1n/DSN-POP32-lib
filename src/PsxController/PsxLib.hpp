@@ -121,15 +121,15 @@ unsigned int Psx::read() {
 	return _dataOut;
 }
 
-bool Psx::button(unsigned int button) {
+inline bool Psx::button(unsigned int button) {
   return ((_dataOut & button) > 0);
 }
 
-bool Psx::newButtonState() {
+inline bool Psx::newButtonState() {
   return ((_last_buttons ^ _dataOut) > 0);
 }
 
-bool Psx::buttonNewState(unsigned int button) {
+inline bool Psx::buttonNewState(unsigned int button) {
   return (((_last_buttons ^ _dataOut) & button) > 0);
 }
 

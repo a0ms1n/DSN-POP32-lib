@@ -15,8 +15,10 @@ class DriveController{
         bool (*userCurrentUpdate)() = nullptr;
         PrivateUpdateFunc CurrentUpdate = nullptr;
 
+        #ifdef _enable_IMU
         IMU *drive_imu = nullptr;
-        
+        #endif
+
         PIDCore *drive_pid;
         double_t drive_setpoint = 0.0f;
         double_t drive_current = 0.0f;

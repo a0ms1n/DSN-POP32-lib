@@ -24,5 +24,5 @@ DriveController<__MOTOR_PAIRS> drive_motors(&motors,&PIDDrive);
 #endif
 
 #ifdef _enable_PSX
-Psx psx(_PSX_CLK,_PSX_CMD,_PSX_CMD,_PSX_DAT,_PSX_Delay);
+Psx psx(_PSX_DAT,_PSX_CMD,_PSX_SEL,_PSX_CLK,_PSX_Delay);
 #endif
