@@ -5,34 +5,22 @@
 
 
 void ServoController::Update(){
-    if(ftimer.check()){
-        cDeg = targetDeg;
-        servo(CH,(int16_t)cDeg);
-        return;
-    }
-    cDeg = deltaDeg*ftimer.gap(false);
-    servo(CH,(int16_t)cDeg);
+    cDeg = constrain(cDeg,outMin,outMax);
+    servo(CH,cDeg);
 }
 
-inline void ServoController::set(int16_t degrees, int32_t time_ms){
-    ftimer.set();
-    targetDeg = degrees;
-    deltaDeg = (targetDeg - (int16_t)cDeg)/(double_t)time_ms;
-}
 
 inline void ServoController::set(int16_t degrees){
+    degrees = constrain(degrees,outMin,outMax);
     servo(CH,degrees);
-}
-
-inline void ServoController::setInit(int32_t time_ms){
-    ftimer.set();
-    cDeg = initDeg;
-    targetDeg = initDeg;
-    deltaDeg = (targetDeg - cDeg)/(double_t)time_ms;
 }
 
 inline void ServoController::setInit(){
     servo(CH,initDeg);
+}
+
+inline void ServoController::free(){
+    servo(CH,-1);
 }
 
 #endif
