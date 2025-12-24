@@ -3,18 +3,20 @@
 
 
 // เข้าไปเเก้/ดู PIN ใน Config.h
-#include <DSN-POP32.h>
+#include "Config.h"
+#include "../../DSN-POP32.h"
 
 void Run();
 
-ServoController Grabber(2,50,0,65); // Pin Servo องศา เริ่มต้นตัวจับ
-ServoController Lifter(1,120,0,180);
+ServoController Grabber(6,50,0,65); // Pin Servo องศา เริ่มต้นตัวจับ
+ServoController Lifter(5,10,0,180);
 
 void setup(){
     motors.setReverse({0,0},{1,1}); // ต่อ Servo ฝั่งขวาสลับกัน
     beep();
     POP32_INIT();
     BasicMenu.buttons[0].callback = Run;
+    motors.setSpeedRange(230,0);
     Grabber.setInit();
     Lifter.setInit();
     delay(1000);
@@ -29,10 +31,11 @@ void loop(){
 // เริ่มการควบคุมด้วยจอย
 void Run(){
     beep();
-    int32_t current_base_speed = 60;
+    int32_t current_base_speed = 90;
     int32_t current_grab_angle = Grabber.cDeg;
     int32_t current_lift_angle = Lifter.cDeg;
-    FlagTimer grabberDelay(20);
+    FlagTimer grabberDelay(5);
+    FlagTimer lifterDelay(8);
 
     while(!SW_B()){
         Grabber.Update();
@@ -41,17 +44,20 @@ void Run(){
         int32_t val = psx.read();
 
         // L1 -> ลดความเร็ว
-        if(psx.button(PSB_L1) && psx.buttonNewState(PSB_L1))current_base_speed = constrain(current_base_speed - 10,0,255);
+        if(psx.button(PSB_L1) && psx.buttonNewState(PSB_L1))current_base_speed = constrain(current_base_speed - 10,90,215);
 
         // R1 -> เพิ่มความเร็ว
-        if(psx.button(PSB_R1) && psx.buttonNewState(PSB_R1))current_base_speed = constrain(current_base_speed + 10,0,255);
+        if(psx.button(PSB_R1) && psx.buttonNewState(PSB_R1))current_base_speed = constrain(current_base_speed + 10,90,215);
+
+        if(psx.button(PSB_L2) && psx.buttonNewState(PSB_L2))current_base_speed = 90;
+        if(psx.button(PSB_R2) && psx.buttonNewState(PSB_R2))current_base_speed = 215;
 
         // R ขวา - กาง
-        if(psx.button(PSB_RSTIK_RIGHT) && grabberDelay.check())Grabber.cDeg--;
-        if(psx.button(PSB_RSTIK_LEFT) && grabberDelay.check())Grabber.cDeg++;
+        if(psx.button(PSB_RSTIK_RIGHT) && grabberDelay.check())Grabber.cDeg++;
+        if(psx.button(PSB_RSTIK_LEFT) && grabberDelay.check())Grabber.cDeg--;
 
-        if(psx.button(PSB_RSTIK_UP) && grabberDelay.check())Lifter.cDeg--;
-        if(psx.button(PSB_RSTIK_DOWN) && grabberDelay.check())Lifter.cDeg++;
+        if(psx.button(PSB_RSTIK_UP) && lifterDelay.check())Lifter.cDeg++;
+        if(psx.button(PSB_RSTIK_DOWN) && lifterDelay.check())Lifter.cDeg--;
 
         motors.left_speed = 0;
         motors.right_speed = 0;

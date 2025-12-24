@@ -96,8 +96,4 @@ void SimpleVerticalMenu::show(){
     oledf.clear();
     oledf.show();
     buttons[cur].callback();
-
-
-    
-
 }

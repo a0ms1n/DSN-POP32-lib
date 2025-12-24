@@ -26,7 +26,6 @@ bool PIDCore::Compute()
                 break;
         }  
         
-        
         double_t dError = error - prev_error;
         double_t peTerm = gains.Kp * error;
         double_t pmTerm = gains.Kp * dInput;

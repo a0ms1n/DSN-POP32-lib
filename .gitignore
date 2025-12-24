@@ -3,4 +3,3 @@
 build/
 src/_local_test/
 src/utils/debug_function.h
-src/_local_examples/
