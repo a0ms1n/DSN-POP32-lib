@@ -24,3 +24,11 @@ class VerticalMenu{
     /// @warning This will blocking other function.
     void show();
 };
+
+class SimpleVerticalMenu{
+    public:
+    std::vector<Button> buttons;
+    SimpleVerticalMenu(const std::vector<Button> &x):buttons(x){}
+
+    void show();
+};

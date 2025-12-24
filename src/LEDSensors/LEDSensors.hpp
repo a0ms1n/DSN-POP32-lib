@@ -9,6 +9,10 @@ inline void LEDSensor::set_black(){
     blackValue = readRaw();
 }
 
+inline void LEDSensor::update_mid(){
+    midValue = (blackValue+whiteValue)/2;
+}
+
 inline void LEDSensor::calibrate(){
     readRaw();
     #if __SENSOR_WB_VALUE == WHITE_BLACK
@@ -45,6 +49,7 @@ inline int32_t LEDSensor::read(){
     #elif __SENSOR_WB_VALUE == BLACK_WHITE
     cValue = map(cValue,blackValue,whiteValue,1000,0);
     #endif
+    cValue = constrain(cValue,0,1000);
     return cValue;
 }
 
@@ -66,6 +71,12 @@ inline void LEDSensorGroup<N>::set_black(){
 template <size_t N>
 inline void LEDSensorGroup<N>::calibrate(){
     for(uint8_t i=0;i<N;i++)sensors[i]->calibrate();
+}
+
+template <size_t N>
+inline void LEDSensorGroup<N>::update_mid()
+{
+    for(uint8_t i=0;i<N;i++)sensors[i]->update_mid();
 }
 
 template <size_t N>
@@ -91,4 +102,36 @@ inline int32_t &LEDSensorGroup<N>::get(uint8_t index){
 template <size_t N>
 inline int32_t& LEDSensorGroup<N>::getObj(uint8_t index){
     return this->sensors[index];
+}
+
+template <size_t N>
+inline int32_t LEDSensorLine<N>::readLine(bool do_read = true){
+    if(do_read)this->read();
+    cOnline = false;
+    int32_t avg = 0;
+    int32_t sum = 0;
+
+    for (uint8_t idx = 0;idx < N;idx++){
+        int32_t val = this->get(idx);
+        if(val > __Track){
+            cOnline = true; 
+        }
+        if(val > __Noise){
+            avg += (int32_t)val*(idx*1000);
+            sum += val;
+        }
+    }
+    if(!cOnline){
+        if(!__AutoRotate)return cPosition; 
+        if (cPosition < __MIDDLE_VALUE){
+            cPosition = 0;
+            return 0;
+		}
+		else{
+            cPosition = __RIGHT;
+			return __RIGHT;
+		}
+    }
+    cPosition = avg/sum;
+    return cPosition;
 }

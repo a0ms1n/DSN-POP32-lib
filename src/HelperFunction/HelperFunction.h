@@ -11,3 +11,4 @@ void CallbackPlaceHolder();
 void IMUTest();
 void SensorTest();
 void MotorTest();
+void Calibrator();

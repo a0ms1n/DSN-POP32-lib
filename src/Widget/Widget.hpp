@@ -81,3 +81,23 @@ void VerticalMenu::show(){
     oledf.show();
     buttons[selected].callback();
 }
+
+void SimpleVerticalMenu::show(){
+    int BUTTON_COUNT = buttons.size();
+    int8_t cur = 0;
+    while(SW_A()){
+        cur = knob(BUTTON_COUNT-1);
+        for(int idx = max(0,cur-2);idx<=min(BUTTON_COUNT-1,cur+2);idx++){
+
+        }
+        if(SW_A())break;
+    }
+    while(SW_A());
+    oledf.clear();
+    oledf.show();
+    buttons[cur].callback();
+
+
+    
+
+}

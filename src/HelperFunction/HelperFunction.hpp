@@ -117,6 +117,10 @@ void PsxTest(){
 
 #endif
 
+void Calibrator(){
+
+}
+
 #ifdef __ENABLE_MAZE_ROBOT_HELPER1
 
 /// @brief  To Overwrite 'Run' function, use BasicMenu.buttons[0].callback = (YOUR (void) FUNCTION).
@@ -129,7 +133,7 @@ VerticalMenu BasicMenu = {{
     {"PSX Test",PsxTest},
     #endif
     {"Sensor Test",SensorTest},
-    {"Motor Test",MotorTest}
+    {"Motor Test",MotorTest},
 }};
 
 #endif
