@@ -82,7 +82,7 @@ inline void DriveController<N>::RotateDrive(double_t angle,PIDCore &pid,double_t
     drive_pid->Init(drive_setpoint,drive_current);
     drive_imu->ResetWaitZero();
     drive_current = 0.0f;
-    drive_setpoint = angle;
+    drive_setpoint = angle * direction;
     drive_val[0] = direction; // direction
     drive_val[1] = precision; // correct flag
     drive_val[2] = correct_ms;

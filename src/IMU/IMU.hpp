@@ -26,21 +26,35 @@ inline void IMU::Reset(){
 
 inline void IMU::ResetWaitZero(double_t precision){
     Reset();
-    while(!Update());
+    TimeoutFlag.set();
+    while(!Update()){
+        oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
+        oledf.show();
+        oledf.clear();
+    };
     do{
-        Update();
-    }while(!(pvYaw >= -precision && pvYaw <= precision));
+        oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
+        oledf.show();
+        oledf.clear();
+    }while(!(pvYaw >= -precision && pvYaw <= precision) && !TimeoutFlag.check());
+    Update();
 }
 
 inline void IMU::ResetWaitZero(){
     Reset();
-    while(!Update());
+    TimeoutFlag.set();
+    while(!Update()){
+        oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
+        oledf.show();
+        oledf.clear();
+    };
     do{
         Update();
         oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
         oledf.show();
         oledf.clear();
-    }while(!(cYaw >= -precision && cYaw <= precision));
+    }while(!(cYaw >= -precision && cYaw <= precision) && !TimeoutFlag.check());
+    Update();
 }
 
 /// @brief Toggle IMU auto mode.

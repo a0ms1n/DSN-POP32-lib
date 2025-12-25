@@ -7,9 +7,9 @@ class IMU{
         double_t pvYaw=0;
         double_t dYaw = 0;
         bool status = false;
-        FlagTimer TimeoutFlag;
+        FlagTimer TimeoutFlag = {1500};
         uint8_t rxBuf[8];
-        double_t precision = 0.5f;
+        double_t precision = 1.0f;
 
         inline void ZeroYaw();
         inline void Reset();
