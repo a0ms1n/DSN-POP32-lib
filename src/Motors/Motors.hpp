@@ -16,37 +16,70 @@ inline void MotorPair<N>::update(){
     }
     #else
     for(size_t i=0;i<N;i++){
-        motor255(leftGroup[i],left_speed*(leftReverse[i]?-1:1));
-        motor255(rightGroup[i],right_speed*(rightReverse[i]?-1:1));
+        motor255(leftGroup[i],(int32_t)(left_speed*(leftRatio[i])));
+        motor255(rightGroup[i],(int32_t)(right_speed*(rightRatio[i])));
     }
     #endif
 }
 
 template <size_t N>
 inline void MotorPair<N>::set(const int16_t &left_speed, const int16_t &right_speed){
+    #ifndef __AUTO_CONSTRAIN_ON_UPDATE
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #else
+    this->left_speed = left_speed;
+    this->right_speed = right_speed;
+    #endif
 }
 
 template <size_t N>
 inline void MotorPair<N>::set_minclamp(const int16_t &left_speed, const int16_t &right_speed){
+    #ifndef __AUTO_CONSTRAIN_ON_UPDATE
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #else
+    this->left_speed = left_speed;
+    this->right_speed = right_speed;
+    #endif
     this->left_speed = _MINCLAMP(this->left_speed,this->min_speed);
     this->right_speed = _MINCLAMP(this->right_speed,this->min_speed);
 }
 
 template <size_t N>
-inline void MotorPair<N>::run(const int16_t &left_speed, const int16_t &right_speed){
+inline void MotorPair<N>::run(){
+    #ifndef __AUTO_CONSTRAIN_ON_UPDATE
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #else
+    this->left_speed = left_speed;
+    this->right_speed = right_speed;
+    #endif
+    update();
+}
+
+template <size_t N>
+inline void MotorPair<N>::run(const int16_t &left_speed, const int16_t &right_speed)
+{
+    #ifndef __AUTO_CONSTRAIN_ON_UPDATE
+    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #else
+    this->left_speed = left_speed;
+    this->right_speed = right_speed;
+    #endif
     update();
 }
 
 template <size_t N>
 inline void MotorPair<N>::run_minclamp(const int16_t &left_speed, const int16_t &right_speed){
+    #ifndef __AUTO_CONSTRAIN_ON_UPDATE
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #else
+    this->left_speed = left_speed;
+    this->right_speed = right_speed;
+    #endif
     this->left_speed = _MINCLAMP(this->left_speed,this->min_speed);
     this->right_speed = _MINCLAMP(this->right_speed,this->min_speed);
     update();
@@ -59,8 +92,10 @@ inline void MotorPair<N>::run_dir(int16_t speed,const int16_t angular_vel,double
 
     this->left_speed = speed - (angular_vel*direction);
     this->right_speed = speed + (angular_vel*direction);
-    this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
-    this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #ifndef __AUTO_CONSTRAIN_ON_UPDATE
+    this->left_speed = _ABSCLAMP(this->left_speed,this->max_speed);
+    this->right_speed = _ABSCLAMP(this->right_speed,this->max_speed);
+    #endif
     update();
 
 }
@@ -71,8 +106,10 @@ inline void MotorPair<N>::run_dir_minclamp(int16_t speed, const int16_t angular_
     speed = abs(speed);
     this->left_speed = speed - (angular_vel*direction);
     this->right_speed = speed + (angular_vel*direction);
+    #ifndef __AUTO_CONSTRAIN_ON_UPDATE
     this->left_speed = _ABSCLAMP(left_speed,this->max_speed);
     this->right_speed = _ABSCLAMP(right_speed,this->max_speed);
+    #endif
     this->left_speed = _MINCLAMP(this->left_speed,this->min_speed);
     this->right_speed = _MINCLAMP(this->right_speed,this->min_speed);
     update();
@@ -86,15 +123,15 @@ inline void MotorPair<N>::stop(){
 }
 
 template <size_t N>
-inline void MotorPair<N>::setReverse(const bool (&left_reverse)[N], const bool (&right_reverse)[N]){
+inline void MotorPair<N>::setRatio(const double_t (&left_ratio)[N], const double_t (&right_ratio)[N]){
     for (size_t i = 0; i < N; ++i) {
-        leftReverse[i] = left_reverse[i];
-        rightReverse[i] = right_reverse[i];
+        leftRatio[i] = left_ratio[i];
+        rightRatio[i] = right_ratio[i];
     }
 }
 
 template <size_t N>
-inline void MotorPair<N>::setSpeedRange(const int16_t &max_speed, const int16_t &min_speed=0){
+inline void MotorPair<N>::setSpeedRange(const int16_t &min_speed = 0, const int16_t &max_speed=255){
     this->max_speed = max_speed;
     this->min_speed = min_speed;
 }

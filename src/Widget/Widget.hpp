@@ -5,13 +5,13 @@
 void VerticalMenu::show(){
     int BUTTON_COUNT = buttons.size();
 
-    float gridScroll = 0.0f;
+    double_t gridScroll = 0.0f;
 
     FlagTimer Timer;
     
     
     int target_offset_y = 0;
-    float current_offset_y = 0.0f;
+    double_t current_offset_y = 0.0f;
 
     Button last_button = {"", 0, (OLED_H - buttons[0].h) / 2, 0};
     for (int i = 0; i < BUTTON_COUNT; i++) {
@@ -26,7 +26,7 @@ void VerticalMenu::show(){
 
     Timer.set();
     while (1) {
-        float dt = Timer.gap() / 1000.0f;
+        double_t dt = Timer.gap(true) / 1000.0f;
 
         gridScroll += dt * 60;
         
@@ -35,7 +35,7 @@ void VerticalMenu::show(){
         int center_target_y = OLED_H / 2;
 
         target_offset_y = center_target_y - selected_button_center_y;
-        current_offset_y = lerp(current_offset_y, (float)target_offset_y, dt * 10.0f);
+        current_offset_y = lerp(current_offset_y, (double_t)target_offset_y, dt * 10.0f);
 
         selected = knob(BUTTON_COUNT-1);
 
@@ -69,9 +69,7 @@ void VerticalMenu::show(){
         // getTextSizeFmt(fw, fh, "FPS: %f", 1000.0f / (fps * 1000.0f));
         // drawRect(0, 0, fw, fh, BLACK);
         // drawTextFmt(0, 0, INVERSE, "FPS: %f", 1000.0f / (fps * 1000.0f));
-
         oledf.show();
-
         if (SW_A()) {
             break;
         }

@@ -4,14 +4,14 @@
 class LEDSensor {
     public:
     uint8_t channel;
-    int32_t blackValue;
-    int32_t whiteValue;
-    int32_t midValue;
+    int32_t blackValue=0;
+    int32_t whiteValue=0;
+    int32_t midValue=0;
 
     /// @brief cached value after calling compute function.
     int32_t cValue;
 
-    LEDSensor(uint8_t ch, int32_t white, int32_t black)
+    LEDSensor(uint8_t ch, int32_t white=100, int32_t black=200)
         : channel(ch), blackValue(black), whiteValue(white) {}
 
     inline void set_white();

@@ -7,8 +7,18 @@
 #include "../GlobalObject.h"
 
 void POP32_INIT();
+
+namespace HelperFunction{
 void CallbackPlaceHolder();
-void IMUTest();
+
 void SensorTest();
 void MotorTest();
-void Calibrator();
+#ifdef _enable_IMU
+void IMUTest();
+void SpinTest();
+void StraightTest();
+#endif
+#ifdef _enable_PSX
+void PsxTest();
+#endif
+};

@@ -1,7 +1,7 @@
 #pragma once
 #include "PIDCore.h"
 
-inline PIDCore::PIDCore(const PIDGains &gains, const double_t &outMin, const double_t &outMax)
+inline PIDCore::PIDCore(const PIDGains &gains, const double_t &outMin, const double_t &outMax,const double_t IErrorTreshold = 0)
 :gains(gains),outMin(outMin),outMax(outMax){}
 
 bool PIDCore::Compute()
@@ -38,7 +38,7 @@ bool PIDCore::Compute()
         }
 
         pTerm = peTerm - pmTerm; // used by GetDterm()
-        if(abs(iTerm) <= IErrorTreshold)iTerm = 0;
+        if(abs(iTerm) <= gains.IErrorTreshold)iTerm = 0;
         else iTerm = gains.Ki * error;
         if (dmode == dMode::dOnError) dTerm = gains.Kd * dError;
         else dTerm = -gains.Kd * dInput; // dOnMeas
@@ -52,7 +52,7 @@ bool PIDCore::Compute()
         }
 
         output_sum += iTerm;
-        if(abs(iTerm) <= IErrorTreshold)output_sum = 0;
+        if(abs(iTerm) <= gains.IErrorTreshold)output_sum = 0;
         else if (iawmode == iAwMode::iAwOff) output_sum -= pmTerm;
         else output_sum = constrain(output_sum - pmTerm, outMin, outMax);   
         output = constrain(output_sum + peTerm + dTerm, outMin, outMax);  

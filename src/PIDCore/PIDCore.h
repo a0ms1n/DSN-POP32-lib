@@ -1,9 +1,9 @@
 #pragma once
 #include "../Timer/Timer.hpp"
 
-/// @brief PID gains (Kp, Ki, Kd, errorNormalizer).
+/// @brief PID gains (Kp, Ki, Kd, errorNormalizer, IerrorTreshold).
 struct PIDGains{
-    double_t Kp=0,Ki=0,Kd=0,Knorm=1;
+    double_t Kp=1.0,Ki=0.0,Kd=0.0,Knorm=1.0,IErrorTreshold=0;
 };
 
 /// @brief PID Controller class.
@@ -35,14 +35,11 @@ class PIDCore{
         uint64_t dt_ms=1;
 
         double_t outMin=-255.0f,outMax=255.0f;
-        
-        /// @brief Ignore iTerm if error is less than... (set to -1 to turn off)
-        double_t IErrorTreshold = 0;
 
         /// @brief PID output value.
         double_t output=0;
 
-        PIDCore(const PIDGains &,const double_t&,const double_t&);
+        PIDCore(const PIDGains &,const double_t&,const double_t&,const double_t IErrorTreshold = 0);
 
         /// @brief Update PID controller, to current setpoint.
         bool Compute();

@@ -18,10 +18,8 @@ int64_t fast_abs64(int64_t x) { int64_t m = x >> 63; return (x ^ m) - m; }
 /// @brief Clamp `val` to range (-inf,-min] U [min,inf)
 #define _MINCLAMP(val,min) ((val>=0)?((val<min)?min:val):((val>-min)?-min:val))
 
-#define lerp(a,b,t) (a+t*(b-a));
-
-// template <typename T>
-// T lerp(T a, T b, T t) {return a + t * (b - a);}
+template <typename T>
+T lerp(T a, T b, T t) {return a + t * (b - a);}
 
 inline double angularMinDiff(double a, double b) {
     double diff = a - b;

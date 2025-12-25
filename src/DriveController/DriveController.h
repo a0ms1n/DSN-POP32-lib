@@ -14,6 +14,7 @@ class DriveController{
         MotorPair<N> *drive_motors = nullptr;
         bool (*userCurrentUpdate)() = nullptr;
         PrivateUpdateFunc CurrentUpdate = nullptr;
+        FlagTimer driveTimer;
 
         #ifdef _enable_IMU
         IMU *drive_imu = nullptr;
@@ -29,12 +30,6 @@ class DriveController{
         #else
         DriveController(MotorPair<N> *,PIDCore*);
         #endif
-
-        /// @brief Base speed for driving.
-        int16_t base_speed = 100;
-
-        /// @brief Maximum speed for driving.
-        int16_t max_speed = 200;
         
         /// @brief Initialize DriveController with MotorPair.
         /// @warning Make sure that motors_ptr is valid during the whole lifetime of DriveController.
@@ -50,8 +45,8 @@ class DriveController{
 
         /// @brief  Start routine of straight driving.
         /// @param pid : PID controller reference for straight driving.
-        void StraightDrive(PIDCore &pid);
-        void RotateDrive(double_t angle,PIDCore &pid,double_t direction);
+        void StraightDrive(int32_t base_speed,PIDCore &pid);
+        void RotateDrive(double_t angle,PIDCore &pid,double_t direction,double_t correct_ms);
 
         #endif
 
@@ -59,9 +54,6 @@ class DriveController{
         /// @warning Make sure that the function pointer is valid during the whole DriveController lifetime.
         /// @param updateFunc : Function to call, make sure it returns bool (false -> continue, true -> stop)
         void CustomDrive(bool (*updateRoutine)());
-
-        /// @brief Set base speed and max speed for driving.
-        void SetSpeed(const int16_t &base_speed, const int16_t &max_speed);
     
     //private:
         bool StraightDriveRoutine();

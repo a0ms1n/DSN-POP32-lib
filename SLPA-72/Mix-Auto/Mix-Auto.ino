@@ -4,10 +4,8 @@
 
 // เข้าไปเเก้/ดู PIN ใน Config.h
 #include "Config.h"
-#include "../../DSN-POP32.h"
+#include "../../src/DSN-POP32.h"
 
-bool _onLine = false;
-int32_t _current_pos = 0;
 
 // PIN, White_Value, Black_Value
 LEDSensor sensors[] ={
@@ -26,7 +24,7 @@ void setup(){
     beep();
     POP32_INIT();
     BasicMenu.buttons[0].callback = Run;
-    motors.setSpeedRange(255,100);
+    motors.setSpeedRange(100,255);
     //motors.setReverse({1},{1});
     ground_sensor.update_mid();
 }   

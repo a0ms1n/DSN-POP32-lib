@@ -13,7 +13,7 @@ void POP32_INIT(){
     oledf.OLED_DMA_Init();
 }
 
-void CallbackPlaceHolder(){
+void HelperFunction::CallbackPlaceHolder(){
     beep();
     beep();
     oledf.clear();
@@ -28,7 +28,7 @@ void CallbackPlaceHolder(){
 
 #ifdef _enable_IMU
 /// @brief Reading value from IMU
-void IMUTest(){
+void HelperFunction::IMUTest(){
     beep();
     imu.Start();
     while(1){
@@ -52,10 +52,71 @@ void IMUTest(){
         oledf.show();
     }
 }
+
+void HelperFunction::SpinTest(){
+    motors.setSpeedRange(95,240);
+    imu.Start();
+    int32_t v = 0;
+    while(!SW_B()){
+        while(!SW_OK()){  
+            if(SW_B())return;     
+            v = knob(60,200);
+            oledf.clear();
+            oledf.text(0,0,1,"PID Spin Test");
+            oledf.text(0,10,1,"(use PIDRotate)");
+            oledf.text(0,30,1,"Select Angle : %d",v);
+            oledf.text(0,40,1,"Kp:%.2f Ki:%.2f",(float)PIDRotate.gains.Kp,(float)PIDRotate.gains.Ki);
+            oledf.text(0,50,1,"Kd:%.2f Knorm: %.2f",(float)PIDRotate.gains.Kd,(float)PIDRotate.gains.Knorm);
+            oledf.show();
+        }
+        while(SW_OK());
+        drive_motors.RotateDrive(v,PIDRotate);
+        beep();
+        while(drive_motors.Update()){
+            oledf.clear();
+            oledf.text(0,0,1,"Timer : %d",(int32_t)millis());
+            oledf.text(0,20,1,"Yaw : %.2f",imu.cYaw);
+            oledf.show();
+        };
+    }
+}
+
+void HelperFunction::StraightTest(){
+    PIDStraight.SetOutputLimits(-210, 210);
+    motors.setSpeedRange(50,255);
+    imu.Start();
+    FlagTimer ft(6000);
+    int32_t v = 0;
+    while(!SW_B()){
+        while(!SW_OK()){  
+            if(SW_B())return;     
+            v = knob(70,250);
+            oledf.clear();
+            oledf.text(0,0,1,"PID Straight Test");
+            oledf.text(0,10,1,"(use PIDStraight)");
+            oledf.text(0,30,1,"Select Speed : %d",v);
+            oledf.text(0,40,1,"Kp:%.2f Ki:%.2f",(float)PIDStraight.gains.Kp,(float)PIDStraight.gains.Ki);
+            oledf.text(0,50,1,"Kd:%.2f Knorm: %.2f",(float)PIDStraight.gains.Kd,(float)PIDStraight.gains.Knorm);
+            oledf.show();
+        }
+        while(SW_OK());
+        drive_motors.StraightDrive(v,PIDStraight);
+        beep();
+        ft.set();
+        while(drive_motors.Update() && !ft.check()){
+            oledf.clear();
+            oledf.text(0,0,1,"Timer : %d",(int32_t)millis());
+            oledf.text(0,20,1,"Yaw : %.2f",imu.cYaw);
+            oledf.show();
+        };
+        drive_motors.Stop();
+    }
+}
+
 #endif
 
 /// @brief
-void SensorTest(){
+void HelperFunction::SensorTest(){
     while(1){
         if(SW_B()){
             break;
@@ -70,7 +131,7 @@ void SensorTest(){
     }
 }
 
-void MotorTest(){
+void HelperFunction::MotorTest(){
     beep();
     oledf.text(20,0,1,"Motor Test");
     oledf.text(0,9,1,"Press A to test.");
@@ -97,7 +158,7 @@ void MotorTest(){
 
 #ifdef _enable_PSX
 
-void PsxTest(){
+void HelperFunction::PsxTest(){
     beep();
     while(!SW_B()){
         oledf.text(20,0,1,"PSX Test");
@@ -117,23 +178,23 @@ void PsxTest(){
 
 #endif
 
-void Calibrator(){
-
-}
-
 #ifdef __ENABLE_MAZE_ROBOT_HELPER1
 
 /// @brief  To Overwrite 'Run' function, use BasicMenu.buttons[0].callback = (YOUR (void) FUNCTION).
 VerticalMenu BasicMenu = {{
-    {"Run",CallbackPlaceHolder},
+    {"Run 1",HelperFunction::CallbackPlaceHolder},
+    {"Run 2",HelperFunction::CallbackPlaceHolder},
+    {"Run 3",HelperFunction::CallbackPlaceHolder},
+    {"Sensor Test",HelperFunction::SensorTest},
+    {"Motor Test",HelperFunction::MotorTest},
     #ifdef _enable_IMU
-    {"IMU Test",IMUTest},  
+    {"IMU Test",HelperFunction::IMUTest},  
+    {"Spin Test",HelperFunction::SpinTest},
+    {"Straight Test",HelperFunction::StraightTest},
     #endif
     #ifdef _enable_PSX
-    {"PSX Test",PsxTest},
+    {"PSX Test",HelperFunction::PsxTest},
     #endif
-    {"Sensor Test",SensorTest},
-    {"Motor Test",MotorTest},
 }};
 
 #endif

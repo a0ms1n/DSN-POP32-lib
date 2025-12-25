@@ -4,7 +4,7 @@
 
 // เข้าไปเเก้/ดู PIN ใน Config.h
 #include "Config.h"
-#include "../../DSN-POP32.h"
+#include "../../src/DSN-POP32.h"
 
 void Run();
 
@@ -12,11 +12,11 @@ ServoController Grabber(6,50,0,65); // Pin Servo องศา เริ่มต
 ServoController Lifter(5,10,0,180);
 
 void setup(){
-    motors.setReverse({0,0},{1,1}); // ต่อ Servo ฝั่งขวาสลับกัน
+    motors.setRatio({1,1},{-1,-1}); 
     beep();
     POP32_INIT();
     BasicMenu.buttons[0].callback = Run;
-    motors.setSpeedRange(230,0);
+    motors.setSpeedRange(0,230);
     Grabber.setInit();
     Lifter.setInit();
     delay(1000);

@@ -25,7 +25,7 @@
 //#define __USE_LEGS
 
 /// @brief Number of motor pairs.
-#define __MOTOR_PAIRS 1
+#define __MOTOR_PAIRS 2
 
 #if __MOTOR_PAIRS == 1
 constexpr int8_t __MOTOR_PINS[2][__MOTOR_PAIRS] = {
