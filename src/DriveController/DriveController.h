@@ -46,7 +46,8 @@ class DriveController{
         /// @brief  Start routine of straight driving.
         /// @param pid : PID controller reference for straight driving.
         void StraightDrive(int32_t base_speed,PIDCore &pid);
-        void RotateDrive(double_t angle,PIDCore &pid,double_t direction,double_t correct_ms);
+        void StraightDrive(int32_t base_speed,PIDCore *pid);
+        void RotateDrive(double_t angle,PIDCore &pid,double_t direction,double_t correct_ms,double_t precision);
 
         #endif
 

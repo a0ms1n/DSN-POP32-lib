@@ -65,7 +65,18 @@ inline void DriveController<N>::StraightDrive(int32_t base_speed,PIDCore &pid){
 }
 
 template <size_t N>
-inline void DriveController<N>::RotateDrive(double_t angle,PIDCore &pid,double_t direction=__LEFT_ROTATE,double_t correct_ms = 500){
+inline void DriveController<N>::StraightDrive(int32_t base_speed,PIDCore *pid){
+    CurrentUpdate = &StraightDriveRoutine;
+    drive_pid = pid;
+    drive_pid->Init(drive_setpoint,drive_current);
+    drive_imu->ResetWaitZero();
+    drive_current = 0.0f;
+    drive_setpoint = 0.0f;
+    this->drive_motors->base_speed = base_speed;
+}
+
+template <size_t N>
+inline void DriveController<N>::RotateDrive(double_t angle,PIDCore &pid,double_t direction=__LEFT_ROTATE,double_t correct_ms = 500,double_t precision = 0.7){
     CurrentUpdate = &RotateDriveRoutine;
     drive_pid = &pid;
     drive_pid->Init(drive_setpoint,drive_current);
@@ -73,8 +84,9 @@ inline void DriveController<N>::RotateDrive(double_t angle,PIDCore &pid,double_t
     drive_current = 0.0f;
     drive_setpoint = angle;
     drive_val[0] = direction; // direction
-    drive_val[1] = 0; // correct flag
+    drive_val[1] = precision; // correct flag
     drive_val[2] = correct_ms;
+    driveTimer.gap(true);
 }
 
 #endif
@@ -102,13 +114,13 @@ inline bool DriveController<N>::RotateDriveRoutine(){
     drive_pid->Compute();
     int32_t out = (int32_t)drive_pid->output;
     drive_motors->run_dir_minclamp(0,out,drive_motors->base_speed);
-    if(abs(drive_current-drive_setpoint) <= 0.5){
-        drive_val[1]++;
-        if(drive_val[1]>=drive_val[2]){
+    if(abs(drive_current-drive_setpoint) <= drive_val[1]){
+        if(driveTimer.gap(false)){
             Stop();
             return;
         }
     }
+    else driveTimer.gap(true);
     return true;
 }
 

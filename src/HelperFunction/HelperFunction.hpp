@@ -54,7 +54,7 @@ void HelperFunction::IMUTest(){
 }
 
 void HelperFunction::SpinTest(){
-    motors.setSpeedRange(95,240);
+    motors.setSpeedRange(110,240);
     imu.Start();
     int32_t v = 0;
     while(!SW_B()){
@@ -90,7 +90,7 @@ void HelperFunction::StraightTest(){
     while(!SW_B()){
         while(!SW_OK()){  
             if(SW_B())return;     
-            v = knob(70,250);
+            v = knob(50,200);
             oledf.clear();
             oledf.text(0,0,1,"PID Straight Test");
             oledf.text(0,10,1,"(use PIDStraight)");
