@@ -88,9 +88,9 @@ inline void MotorPair<N>::run_minclamp(const int16_t &left_speed, const int16_t 
 template <size_t N>
 inline void MotorPair<N>::run_dir(int16_t speed,const int16_t angular_vel,double_t direction){
     direction = constrain(direction,-1.0,1.0);
-    speed = abs(speed);
+    //speed = abs(speed);
 
-    this->left_speed = speed - (angular_vel*direction);
+    this->left_speed =  speed - (angular_vel*direction);
     this->right_speed = speed + (angular_vel*direction);
     #ifndef __AUTO_CONSTRAIN_ON_UPDATE
     this->left_speed = _ABSCLAMP(this->left_speed,this->max_speed);
@@ -103,7 +103,7 @@ inline void MotorPair<N>::run_dir(int16_t speed,const int16_t angular_vel,double
 template <size_t N>
 inline void MotorPair<N>::run_dir_minclamp(int16_t speed, const int16_t angular_vel, double_t direction){
     direction = constrain(direction,-1.0,1.0);
-    speed = abs(speed);
+    //speed = abs(speed);
     this->left_speed = speed - (angular_vel*direction);
     this->right_speed = speed + (angular_vel*direction);
     #ifndef __AUTO_CONSTRAIN_ON_UPDATE

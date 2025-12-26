@@ -45,9 +45,8 @@ class DriveController{
 
         /// @brief  Start routine of straight driving.
         /// @param pid : PID controller reference for straight driving.
-        void StraightDrive(int32_t base_speed,PIDCore &pid);
-        void StraightDrive(int32_t base_speed,PIDCore *pid);
-        void RotateDrive(double_t angle,PIDCore &pid,double_t direction,double_t correct_ms,double_t precision);
+        void StraightDrive(int32_t base_speed,PIDCore *pid,bool _reset = true);
+        void RotateDrive(double_t angle,PIDCore *pid,double_t correct_ms = 500,double_t precision = 0.7,bool _reset = true);
 
         #endif
 
@@ -55,6 +54,7 @@ class DriveController{
         /// @warning Make sure that the function pointer is valid during the whole DriveController lifetime.
         /// @param updateFunc : Function to call, make sure it returns bool (false -> continue, true -> stop)
         void CustomDrive(bool (*updateRoutine)());
+        void ClearDrive();
     
     //private:
         bool StraightDriveRoutine();

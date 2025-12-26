@@ -21,7 +21,7 @@ PIDCore PIDRotate(PIDRotate_gains,-180.0,180.0);
 #ifdef _enable_IMU
 DriveController<__MOTOR_PAIRS> drive_motors(&motors,&imu,&PIDStraight);
 #else
-DriveController<__MOTOR_PAIRS> drive_motors(&motors,&PIDDrive);
+DriveController<__MOTOR_PAIRS> drive_motors(&motors,&PIDStraight);
 #endif
 
 #ifdef _enable_PSX

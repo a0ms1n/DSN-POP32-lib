@@ -70,7 +70,7 @@ void HelperFunction::SpinTest(){
             oledf.show();
         }
         while(SW_OK());
-        drive_motors.RotateDrive(v,PIDRotate);
+        drive_motors.RotateDrive(-v,&PIDRotate);
         beep();
         while(drive_motors.Update()){
             oledf.clear();
@@ -100,7 +100,7 @@ void HelperFunction::StraightTest(){
             oledf.show();
         }
         while(SW_OK());
-        drive_motors.StraightDrive(v,PIDStraight);
+        drive_motors.StraightDrive(v,&PIDStraight);
         beep();
         ft.set();
         while(drive_motors.Update() && !ft.check()){
