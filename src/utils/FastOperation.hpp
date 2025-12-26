@@ -27,3 +27,9 @@ inline double angularMinDiff(double a, double b) {
     while (diff < -180.0f) diff += 360.0f;
     return diff;
 }
+
+inline double wrapAngle(double a){
+    while(a>180.0f)a-=360.0f;
+    while(a<-180.0f)a+=360.0f;
+    return a;
+}

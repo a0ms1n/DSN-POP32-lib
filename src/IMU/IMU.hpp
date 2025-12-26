@@ -21,12 +21,15 @@ inline void IMU::Reset(){
     cYaw = 0;
     pvYaw = 0;
     dYaw = 0;
-    delay(20);
+    delay(30);
 }
 
 inline void IMU::ResetWaitZero(double_t precision){
     Reset();
-    TimeoutFlag.set();
+    FlagTimer dTimeoutFlag(reset_timeout);
+    FlagTimer ft(300);
+    ft.set();
+    dTimeoutFlag.set();
     while(!Update()){
         oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
         oledf.show();
@@ -36,25 +39,37 @@ inline void IMU::ResetWaitZero(double_t precision){
         oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
         oledf.show();
         oledf.clear();
-    }while(!(pvYaw >= -precision && pvYaw <= precision) && !TimeoutFlag.check());
-    Update();
+        //if(ft.check())Reset();
+    }while(!(pvYaw >= -precision && pvYaw <= precision) && !dTimeoutFlag.check());
+    //Update();
+    while(!oled_dma_busy);
+    oledf.clear();
+    oledf.show();
+
 }
 
 inline void IMU::ResetWaitZero(){
     Reset();
-    TimeoutFlag.set();
+    FlagTimer dTimeoutFlag(reset_timeout);
+    FlagTimer ft(1000);
+    ft.set();
+    dTimeoutFlag.set();
     while(!Update()){
         oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
         oledf.show();
         oledf.clear();
     };
+    Reset();
     do{
-        Update();
+        while(!Update());
         oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
         oledf.show();
         oledf.clear();
-    }while(!(cYaw >= -precision && cYaw <= precision) && !TimeoutFlag.check());
-    Update();
+        //if(ft.check())Reset();
+    }while(!(cYaw >= -precision && cYaw <= precision) && !dTimeoutFlag.check());
+    while(!oled_dma_busy);
+    oledf.clear();
+    oledf.show();
 }
 
 /// @brief Toggle IMU auto mode.

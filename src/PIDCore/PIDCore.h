@@ -43,10 +43,11 @@ class PIDCore{
 
         /// @brief Update PID controller, to current setpoint.
         bool Compute();
+        bool Compute(double_t error);
 
         /// @brief Initialize PID controller with setpoint and current references.
         /// @warning Make sure the references are valid during the whole PIDCore lifetime.
-        void Init(double_t &setpoint, double_t &current);
+        void Init(double_t *setpoint, double_t *current);
 
         /// @brief Reset PID controller internal states.
         void Reset();
