@@ -85,11 +85,11 @@ void rotate(int32_t angle){
 }
 
 void toggleServo(){
-    servo(1,120);
-    delay(500);
-    servo(1,40);
-    delay(500);
-    servo(1,120);
+    servo(1,130);
+    delay(600);
+    servo(1,30);
+    delay(600);
+    servo(1,130);
     delay(500);
     servo(1,-1);
 }

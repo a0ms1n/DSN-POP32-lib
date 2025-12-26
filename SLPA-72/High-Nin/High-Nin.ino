@@ -12,6 +12,9 @@ void Run3();
 
 void setup(){
     beep();
+    servo(1,130);
+    delay(500);
+    servo(1,-1);
     POP32_INIT();
     imu.Start();
     BasicMenu.buttons[0].callback = Run1; // Run 1
