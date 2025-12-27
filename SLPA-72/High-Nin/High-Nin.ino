@@ -35,6 +35,7 @@ void Run1(){
     beep();
     forwardTill(80,0,1,0);  
     forwardTill(80,1,1,0);   
+    forwardAlign()
     backwardTime(60,300,1,0);
     rotate(-90);
 

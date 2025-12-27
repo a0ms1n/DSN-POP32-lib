@@ -94,7 +94,7 @@ void toggleServoOff(){
     servo(1,140);
 }
 
-void frontAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
+void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
@@ -110,7 +110,7 @@ void frontAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
     }   
 }
 
-void backAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
+void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Back.readLine();
