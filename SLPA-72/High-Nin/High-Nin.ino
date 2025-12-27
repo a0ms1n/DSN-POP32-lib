@@ -23,8 +23,8 @@ void setup(){
     BasicMenu.buttons[2].callback = Run3; // Run 3
     Front.__Track = 700;
     Back.__Track = 700;
-    motors.setSpeedRange(83,250);
-    motors.setRatio({1,1.2},{1.0,1.0});
+    motors.setSpeedRange(85,250);
+    motors.setRatio({1,1.1},{1.0,1.0});
 }   
 
 void loop(){
