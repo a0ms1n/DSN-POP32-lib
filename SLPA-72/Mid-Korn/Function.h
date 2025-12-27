@@ -128,8 +128,8 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
             if(!Back.cOnline)motors.run(-speed,-speed);
 
             // Black at right -> go right
-            else if(Back.errorFromMid() > 0)motors.run(-speed,speed);
-            else motors.run(speed,-speed);
+            else if(Back.errorFromMid() > 0)motors.run(speed,-speed);
+            else motors.run(-speed,speed);
         }while(abs(Back.errorFromMid()) >= 50 || !Back.cOnline);
         if(idx == repeat)break;
         motors.run(speed,speed);
