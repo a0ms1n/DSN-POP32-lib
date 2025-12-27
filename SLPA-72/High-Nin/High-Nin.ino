@@ -16,6 +16,7 @@ void setup(){
     servo(servoPIN,startAngle);
     delay(500);
     servo(servoPIN,-1);
+    PIDRotate.gains = newRotateGains;
     imu.Start();
     BasicMenu.buttons[0].callback = Run1; // Run 1
     BasicMenu.buttons[1].callback = Run2; // Run 2
@@ -33,15 +34,27 @@ void loop(){
 void Run1(){
     imu.Start();
     beep();
-    forwardTill(80,0,1,1);  
-    forwardTill(80,1,0,0);   
-    forwardAlign(80,3);
-    backwardTime(60,300,1,0);
+    forwardTill(150,0,1,1);  
+    forwardTime(150,200,0,1);
+    forwardTill(100,1,0,1);
+    backwardTime(100,350,0,0);
+    
     rotate(-90);
-    forwardTill(90,1);
-    forwardAlign(80,3);
-    backwardTime(60,300,0,0);
+    backwardTill(80,1,1);
+    backwardAlign(80,3);
+
+    forwardTime(170,300,1,1);
+    forwardTime(120,100,0,1);
+    forwardTill(100,1,0,0);
+    backwardTime(100,350,0,0);
+    
     rotate(90);
+    backwardTill(80,1,1);
+    backwardAlign(80,3);
+
+    forwardTime(150,200,1,1);
+    forwardTill(100,1,0,0);
+    backwardTime(100,350,0,0);
 
 }
 

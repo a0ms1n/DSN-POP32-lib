@@ -17,13 +17,15 @@ LEDSensorLine<2> Front({
     &sensors[2]
 });
 
+PIDGains newRotateGains = {3.3,2.5,1.4,1.2,0};
+
 LEDSensorLine<2> Back({
     &sensors[5],
     &sensors[6],
 });
 
 int32_t servoPIN = 1;
-int32_t startAngle = 180;
+int32_t startAngle = 175;
 int32_t endAngle = 30;
 
 void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){

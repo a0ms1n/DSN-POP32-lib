@@ -15,7 +15,7 @@ PIDGains PIDStraight_gains = {3.5,0.2,0.2,1.0,0.5};
 PIDCore PIDStraight(PIDStraight_gains,-200.0,200.0);
 
 // Speed lim set to (100,255)
-PIDGains PIDRotate_gains = {2.6,2.5,1.3,1.2,1};
+PIDGains PIDRotate_gains = {2.6,2.5,1.3,1.2,0};
 PIDCore PIDRotate(PIDRotate_gains,-180.0,180.0);
 
 #ifdef _enable_IMU
