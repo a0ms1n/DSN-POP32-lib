@@ -17,7 +17,7 @@ LEDSensorLine<2> Front({
     &sensors[2]
 });
 
-PIDGains newRotateGains = {3.3,2.5,1.4,1.2,0};
+PIDGains newRotateGains = {3.1,2.2,1.4,1.2,0.2};
 
 LEDSensorLine<2> Back({
     &sensors[5],

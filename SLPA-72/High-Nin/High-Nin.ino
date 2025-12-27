@@ -23,8 +23,8 @@ void setup(){
     BasicMenu.buttons[2].callback = Run3; // Run 3
     Front.__Track = 750;
     Back.__Track = 750;
-    motors.setSpeedRange(90,250);
-    motors.setRatio({1,1.3},{1.0,1.0});
+    motors.setSpeedRange(85,250);
+    motors.setRatio({1,1.2},{1.0,1.0});
 }   
 
 void loop(){
@@ -40,8 +40,8 @@ void Run1(){
     backwardTime(100,350,0,0);
     
     rotate(-90);
-    backwardTill(80,1,1);
-    backwardAlign(80,3);
+    backwardTill(75,1,1);
+    backwardAlign(65,1);
 
     forwardTime(170,300,1,1);
     forwardTime(120,100,0,1);
@@ -49,23 +49,45 @@ void Run1(){
     backwardTime(100,350,0,0);
     
     rotate(90);
-    backwardTill(80,1,1);
-    backwardAlign(80,3);
+    backwardTill(75,1,1);
+    backwardAlign(65,1);
 
     forwardTime(150,200,1,1);
     forwardTill(100,1,0,0);
     backwardTime(100,350,0,0);
+    rotate(90);
+    backwardTill(75,1,1);
+    backwardAlign(65,1);
+
+    forwardTime(150,100,1,1);
+    forwardTime(120,200,0,1);
+    forwardTill(100,1,0,1);
+    backwardTime(100,150,0,0);
+    Run2();
+    backwardTime(150,100,1,1);
+    backwardTime(120,200,0,1);
+    backwardTill(100,1,0,0);
+    forwardTime(100,350,0,0);
+
+    rotate(90);
+    backwardTill(75,1,1);
+    backwardAlign(65,1);
+    forwardTime(150,100,1,1);
+    forwardTime(120,200,0,1);
+    forwardTill(100,1,0,0);
+
+
 
 }
 
 void Run2(){
     toggleServoOn();
-    delay(1000);
+    delay(200);
     toggleServoOff();
 
 }
 
 void Run3(){
-    forwardAlign(60,3);
+    Sound::UmaPyou();
 
 }
