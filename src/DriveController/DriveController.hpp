@@ -99,7 +99,7 @@ inline bool DriveController<N>::StraightDriveRoutine(){
     if(!drive_imu->Update())return true;
     drive_current += drive_imu->dYaw;
     drive_pid->Compute();
-    drive_motors->run_dir_minclamp(this->drive_motors->base_speed,(int32_t)drive_pid->output,1);
+    drive_motors->run_dir(this->drive_motors->base_speed,(int32_t)drive_pid->output,1);
     return true;
 }
 

@@ -135,3 +135,13 @@ inline int32_t LEDSensorLine<N>::readLine(bool do_read = true){
     cPosition = avg/sum;
     return cPosition;
 }
+
+template <size_t N>
+inline int32_t LEDSensorLine<N>::errorFromMid(){
+    return __MIDDLE_VALUE - cPosition;
+}
+
+template <size_t N>
+inline int32_t LEDSensorLine<N>::posFromMid(int32_t pos){
+    return __MIDDLE_VALUE + (int32_t)pos*1000;
+}

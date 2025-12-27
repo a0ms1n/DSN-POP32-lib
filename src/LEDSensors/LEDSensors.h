@@ -71,6 +71,8 @@ class LEDSensorLine : public LEDSensorGroup<N> {
 
     /// @brief return cPosition, based on current sensor.
     inline int32_t readLine(bool do_read = true);
+    inline int32_t errorFromMid();
+    inline int32_t posFromMid(int32_t pos);
 
 };
 

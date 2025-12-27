@@ -41,7 +41,7 @@ void Run1(){
 }
 
 void Run2(){
-    toggleServo();
+    toggleServoOn();
 
 }
 
