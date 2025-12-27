@@ -12,10 +12,10 @@ void Run3();
 
 void setup(){
     beep();
-    servo(1,130);
+    POP32_INIT();
+    servo(1,0);
     delay(500);
     servo(1,-1);
-    POP32_INIT();
     imu.Start();
     BasicMenu.buttons[0].callback = Run1; // Run 1
     BasicMenu.buttons[1].callback = Run2; // Run 2
@@ -33,11 +33,15 @@ void loop(){
 void Run1(){
     imu.Start();
     beep();
-    forwardTill(80,0,1,0);  
-    forwardTill(80,1,1,0);   
-    forwardAlign()
+    forwardTill(80,0,1,1);  
+    forwardTill(80,1,0,0);   
+    forwardAlign(80,3);
     backwardTime(60,300,1,0);
     rotate(-90);
+    forwardTill(90,1);
+    forwardAlign(80,3);
+    backwardTime(60,300,0,0);
+    rotate(90);
 
 }
 
@@ -47,5 +51,6 @@ void Run2(){
 }
 
 void Run3(){
+    forwardAlign(60,3);
 
 }
