@@ -20,7 +20,9 @@ LEDSensorLine<2> Front({
 LEDSensorLine<2> Back({
     &sensors[5],
     &sensors[6],
-}); 
+});
+
+int32_t servoPIN = 1;
 
 void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
     drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
@@ -85,13 +87,13 @@ void rotate(int32_t angle){
 }
 
 void toggleServoOn(){
-    servo(1,140);
+    servo(servoPIN,180);
     delay(200);
-    servo(1,20);
+    servo(servoPIN,50);
 }
 
 void toggleServoOff(){
-    servo(1,140);
+    servo(servoPIN,180);
 }
 
 void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
