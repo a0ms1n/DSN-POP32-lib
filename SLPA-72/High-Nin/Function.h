@@ -106,6 +106,7 @@ void frontAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
         }while(abs(Front.errorFromMid()) >= 100);
         if(idx == repeat)return;
         motors.run(-speed,-speed);
+        delay(back_delay);
     }   
 }
 
@@ -121,6 +122,7 @@ void backAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
         }while(abs(Front.errorFromMid()) >= 100);
         if(idx == repeat)return;
         motors.run(speed,speed);
+        delay(back_delay);
     }   
 }
 
