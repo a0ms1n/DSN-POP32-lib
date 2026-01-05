@@ -48,9 +48,9 @@ constexpr int8_t __MOTOR_PINS[2][__MOTOR_PAIRS] = {
 //#define __SENSOR_WB_VALUE WHITE_BLACK // White < Black
 #define __SENSOR_WB_VALUE BLACK_WHITE // Black < White
 
-#define __SENSOR_NUM 5
+#define __SENSOR_NUM 6
 constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
-    0,1,2,3,4
+    0,1,2,3,4,8
 };
 
 // Features Configuration //

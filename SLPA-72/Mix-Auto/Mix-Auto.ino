@@ -4,19 +4,7 @@
 
 // เข้าไปเเก้/ดู PIN ใน Config.h
 #include "Config.h"
-#include "../../src/DSN-POP32.h"
-
-
-// PIN, White_Value, Black_Value
-LEDSensor sensors[] ={
-    {1,1000,500}, // L 
-    {3,1000,500}, // LM
-    {4,1000,500}, // RM 
-    {2,1000,500}  // R
-};
-
-
-LEDSensorLine<4> ground_sensor({&sensors[0],&sensors[1],&sensors[2],&sensors[3]},0,50,400);
+#include "Function.h"
 
 void Run();
 
@@ -24,6 +12,7 @@ void setup(){
     beep();
     POP32_INIT();
     BasicMenu.buttons[0].callback = Run;
+    BasicMenu.buttons[1].callback = Run2;
     motors.setSpeedRange(100,255);
     //motors.setReverse({1},{1});
     ground_sensor.update_mid();
@@ -34,14 +23,18 @@ void loop(){
 }
 
 void Run(){
-    while(!SW_B()){
+    ForwardUntilCross(130);
+}
+
+void Run2(){
+    while(true){
         ground_sensor.read();
         int32_t val = ground_sensor.readLine();
         oledf.clear();
-        oledf.text(0,0,1,"%d",val);
+        oledf.text(0,0,1,"%d %d",val,(int32_t)ground_sensor.posFromMid(-1.5));
         oledf.show();
-        if(val < 1000)motors.run(-127,127);
-        else if (val > 2000)motors.run(127,-127);
-        else motors.run(127,127);
-    }   
+        motors.run(-157,157);
+        if(val>=ground_sensor.__MIDDLE_VALUE)break;
+    }
+    motors.stop();
 }

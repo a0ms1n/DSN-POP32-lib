@@ -142,6 +142,11 @@ inline int32_t LEDSensorLine<N>::errorFromMid(){
 }
 
 template <size_t N>
-inline int32_t LEDSensorLine<N>::posFromMid(int32_t pos){
-    return __MIDDLE_VALUE + (int32_t)pos*1000;
+inline int32_t LEDSensorLine<N>::posFromMid(double_t pos){
+    return __MIDDLE_VALUE + pos*1000.0;
+}
+
+template <size_t N>
+inline int32_t LEDSensorLine<N>::isTrack(int32_t pos){
+    return get(pos) >= __Track;
 }

@@ -63,6 +63,7 @@ class LEDSensorLine : public LEDSensorGroup<N> {
     int16_t __Noise = 50;
     int16_t __Track = 340;
     int32_t __MIDDLE_VALUE = (N-1)*500;
+    int32_t __LEFT = 0;
     int32_t __RIGHT = (N-1)*1000;
     bool __AutoRotate = 0;
 
@@ -72,7 +73,8 @@ class LEDSensorLine : public LEDSensorGroup<N> {
     /// @brief return cPosition, based on current sensor.
     inline int32_t readLine(bool do_read = true);
     inline int32_t errorFromMid();
-    inline int32_t posFromMid(int32_t pos);
+    inline int32_t posFromMid(double_t pos);
+    inline int32_t isTrack(int32_t pos);
 
 };
 
