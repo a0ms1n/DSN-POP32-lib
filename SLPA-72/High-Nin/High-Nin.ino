@@ -43,64 +43,64 @@ void Run1(){
     imu.Start();
     beep();
     // First Turn
-    // forwardTill(speed_slow,0,1,1);  
-    // forwardTime(speed_fast,150,0,0);
-    // forwardTill(speed_slow - 30,1,0,1);
+    forwardTill(speed_slow,0,1,1);  
+    forwardTime(speed_fast,150,0,0);
+    forwardTill(speed_slow - 30,1,0,1);
     
-    // backwardTime(speed_slow,300,0,0);
-    // rotate(-90);
-    // // backwardTill(75,1,1);
-    // backwardAlign(70,1);
+    backwardTime(speed_slow,300,0,0);
+    rotate(-90);
+    // backwardTill(75,1,1);
+    backwardAlign(70,1);
 
-    // forwardTill(speed_slow - 30,1,1,1);
-    // backwardTime(speed_slow,300,0,0);
-    // rotate(90);
-    // // backwardTill(75,1,1);
-    // backwardAlign(70,1);
+    forwardTill(speed_slow - 30,1,1,1);
+    backwardTime(speed_slow,300,0,0);
+    rotate(90);
+    // backwardTill(75,1,1);
+    backwardAlign(70,1);
     
 
-    // forwardTill(speed_slow,1,1,1);
-    // backwardTime(speed_slow,350,0,0);
-    // rotate(90);
+    forwardTill(speed_slow,1,1,1);
+    backwardTime(speed_slow,350,0,0);
+    rotate(90);
 
-    // // เลี้ยวไปหาเหลือง
-    // forwardTill(speed_slow,1,1,1);
-    // backwardTime(speed_slow,350,0,0);
-    // rotate(-90);
-    // // backwardTill(75,1,1);
-    // backwardAlign(70,1);
+    // เลี้ยวไปหาเหลือง
+    forwardTill(speed_slow,1,1,1);
+    backwardTime(speed_slow,350,0,0);
+    rotate(-90);
+    // backwardTill(75,1,1);
+    backwardAlign(70,1);
 
-    // forwardTill(speed_slow,1,1,1);
-    // backwardTime(speed_slow,350,0,0);
-    // rotate(-90);
-    // // backwardTill(75,1,1);
-    // backwardAlign(70,1);
+    forwardTill(speed_slow,1,1,1);
+    backwardTime(speed_slow,350,0,0);
+    rotate(-90);
+    // backwardTill(75,1,1);
+    backwardAlign(70,1);
 
-    // // Poy เหลือง
-    // forwardTill(speed_slow,1,1,1);
-    // backwardTime(speed_slow,280,0,0);
-    // Poy();
-    // backwardTime(speed_slow,350,0,0);
-    // backwardAlign(70,1);
-    // forwardTime(speed_slow , 200 , 0 , 0);
-    // rotate(-90);
+    // Poy เหลือง
+    forwardTill(speed_slow,1,1,1);
+    backwardTime(speed_slow,280,0,0);
+    Poy();
+    backwardTime(speed_slow,350,0,0);
+    backwardAlign(70,1);
+    forwardTime(speed_slow , 200 , 0 , 0);
+    rotate(-90);
 
-    // forwardTime(speed_slow , 200 , 0 , 0);
-    // forwardTill(speed_slow,1,1,1);
-    // backwardTime(speed_slow,350,0,0);
-    // rotate(90);
-    // // backwardTill(75,1,1);
-    // backwardAlign(70,1);
+    forwardTime(speed_slow , 250 , 0 , 0);
+    forwardTill(speed_slow,1,1,1);
+    backwardTime(speed_slow,320,0,0);
+    rotate(90);
+    // backwardTill(75,1,1);
+    backwardAlign(70,1);
 
-    // // backwardAlign(60 , 2);
+    // backwardAlign(60 , 2);
+    forwardTill(speed_slow,1,1,1);
+    backwardTime(speed_slow,350,0,0);
+    rotate(-90);
+    // backwardTill(75,1,1);
+    // backwardAlign(60,1);
+    // backwardAlign(60 , 2);
     // forwardTill(speed_slow,1,1,1);
-    // backwardTime(speed_slow,350,0,0);
-    // rotate(-90);
-    // // backwardTill(75,1,1);
-    // // backwardAlign(60,1);
-    // // backwardAlign(60 , 2);
-    // // forwardTill(speed_slow,1,1,1);
-    // // forwardTime(speed_fast,300,0,0);
+    // forwardTime(speed_fast,300,0,0);
 
     // ตะเกียบ
     forwardTime(60,1820,0,0);
