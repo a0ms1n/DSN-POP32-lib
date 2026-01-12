@@ -2,14 +2,14 @@
 #include "../../src/DSN-POP32.h"
 
 LEDSensor sensors[] ={
-    {0,3200,500}, // หน้าซ้าย
-    {1,2400,200}, // หน้ากลางซ้าย
-    {2,1800,200}, // หน้ากลางขวา
-    {3,3300,600}, // หน้าขวา
-    {4,3150,500}, // หลังซ้าย
-    {5,3050,500}, // หลังกลางซ้าย
-    {6,2300,400}, // หลังกลางขวา
-    {7,2700,400}, // หลังขวา
+    {0,3200,700}, // หน้าซ้าย
+    {1,1700,800}, // หน้ากลางซ้าย
+    {2,3200,600}, // หน้ากลางขวา
+    {3,2840,700}, // หน้าขวา
+    {4,3150,700}, // หลังซ้าย
+    {5,3140,700}, // หลังกลางซ้าย
+    {6,2300,550}, // หลังกลางขวา
+    {7,2300,400}, // หลังขวา
 };
 
 LEDSensorLine<2> Front({
@@ -17,7 +17,7 @@ LEDSensorLine<2> Front({
     &sensors[2]
 });
 
-PIDGains newRotateGains = {2.8,3.6,2.5,1.3,0.2};
+PIDGains newRotateGains = {2.0,3.0,2.5,1.1,0.2};
 
 LEDSensorLine<2> Back({
     &sensors[5],
@@ -84,9 +84,19 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,400,0.9);
+    drive_motors.RotateDrive(angle,&PIDRotate,400,0.9); // 400 , 0.9
     while(drive_motors.Update());
     motors.stop();
+}
+
+void Thailand()
+{
+    servo(6 , 270);
+}
+
+void Thailand_back()
+{
+    servo(6 , 90);
 }
 
 void toggleServoOn(){
@@ -106,8 +116,8 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
             if(!Front.cOnline)motors.run(speed,speed);
 
             // Black at right -> go right
-            else if(Front.errorFromMid() > 0)motors.run(-speed,speed);
-            else motors.run(speed,-speed);
+            else if(Front.errorFromMid() > 0)motors.run(-speed - 20,speed);
+            else motors.run(speed + 20,-speed);
             oledf.clear();
             oledf.text(0,0,1,"%d",(int32_t)Front.errorFromMid());
             oledf.show();
@@ -123,24 +133,35 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
 }
 
 void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
-    for(int16_t idx = 1;idx<=repeat;idx++){
+    for(int16_t idx = 1; idx <= repeat; idx++){
         do{
             Back.readLine();
-            if(!Back.cOnline)motors.run(-speed,-speed);
 
-            // Black at right -> go right
-            else if(Back.errorFromMid() > 0)motors.run(speed,-speed);
-            else motors.run(-speed,speed);
+            if(!Back.cOnline)
+                motors.run(-speed, -speed);
+
+            // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
+            else if(Back.errorFromMid() > 0)
+                motors.run(speed, -speed - 20);
+
+            // เส้นอยู่ซ้าย → หมุนซ้าย (ตอนถอย)
+            else
+                motors.run(-speed, speed + 20);
+
         }while(abs(Back.errorFromMid()) >= 50 || !Back.cOnline);
-        if(idx == repeat)break;
-        motors.run(speed,speed);
+
+        if(idx == repeat) break;
+
+        motors.run(speed, speed);
         delay(back_delay);
+
         do{
             Back.readLine();
         }while(Back.cOnline);
-    }   
+    }
     motors.stop();
 }
+
 
 namespace Sound{
     void UmaPyou(){
