@@ -2,15 +2,17 @@
 #include "../../src/DSN-POP32.h"
 
 LEDSensor sensors[] ={
-    {0,3200,500}, // หน้าซ้าย
-    {1,2400,200}, // หน้ากลางซ้าย
-    {2,1800,200}, // หน้ากลางขวา
-    {3,3300,600}, // หน้าขวา
-    {4,3150,500}, // หลังซ้าย
-    {5,3050,500}, // หลังกลางซ้าย
-    {6,2300,400}, // หลังกลางขวา
-    {7,2700,400}, // หลังขวา
+    {6,3000,1500}, // หน้าซ้าย
+    {8,3420,820}, // หน้ากลางซ้าย
+    {2,3830,1120}, // หน้ากลางขวา
+    {4,3400,1500}, // หน้าขวา
+    {4,3150,1500}, // หลังซ้าย
+    {3,3200,1200}, // หลังกลางซ้าย
+    {1,3130,900}, // หลังกลางขวา
+    {7,2700,1500}, // หลังขวา
 };
+
+PIDGains newRotateGains = {2.6,3.1,1.3,1.3,0}; // Kp = 2.0;
 
 LEDSensorLine<2> Front({
     &sensors[1],
@@ -23,8 +25,8 @@ LEDSensorLine<2> Back({
 });
 
 int32_t servoPIN = 1;
-int32_t startAngle = 180;
-int32_t endAngle = 30;
+int32_t startAngle = -180;
+int32_t endAngle = -70;
 
 void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
     drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
@@ -82,7 +84,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,500,0.8);
+    drive_motors.RotateDrive(angle,&PIDRotate,400,0.5);
     while(drive_motors.Update());
     motors.stop();
     delay(100);
@@ -117,11 +119,12 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
         do{
             Front.readLine();
         }while(Front.cOnline);
-    }   
+    }
     motors.stop();
+    
 }
 
-void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
+void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 10){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Back.readLine();
@@ -137,7 +140,7 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
         do{
             Back.readLine();
         }while(Back.cOnline);
-    }   
+    }
     motors.stop();
 }
 
@@ -150,4 +153,30 @@ namespace Sound{
             sound(soundseq[i][0],soundseq[i][1]);
         }
     }
+}
+
+void Poy() 
+{
+  servo(1,80); delay(500); // ต้อง set 0
+  servo(1,180);
+}
+
+void Poy2() 
+{
+  servo(3, 70); delay(300);
+  servo(3, 175);
+}
+
+void spinLeft(int speed) {
+    motor(1, -speed);
+    motor(2, -speed);
+    motor(3, speed);
+    motor(4, speed);
+}
+
+void spinRight(int speed) {
+  motor(1 , 50);
+  motor(2 , 50);
+  motor(3 , -50);
+  motor(4 , -50);
 }
