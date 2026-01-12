@@ -10,7 +10,7 @@
 // Robot Properties //
 
 /// @brief Define this when using IMU
-//#define _enable_IMU
+#define _enable_IMU
 
 /// @brief Define this when using PSX
 //#define _enable_PSX

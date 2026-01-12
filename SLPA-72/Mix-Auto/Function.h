@@ -1,9 +1,6 @@
 #pragma once
 #include "../../src/DSN-POP32.h"
 
-int speedL = 200;
-int speedR = 155;
-
 // SENSOR PIN 0 แก้แล้วนะคั้บบบบบ
 // ถ้าจะให้หุ่นยนต์ รอกระป๋องเเล้วคีบ ให้หมุนไป Run2 
 
@@ -27,9 +24,9 @@ void ForwardUntilCross(int32_t speed){ //เดินจับเส้นดำ
         oledf.clear();
         oledf.text(0,0,1,"%d %d %d",val,(int32_t)ground_sensor.get(0),(int32_t)ground_sensor.get(4));
         oledf.show();
-        if(val < ground_sensor.posFromMid(-1))motors.run(-speedL,speedR);
-        else if (val > ground_sensor.posFromMid(1))motors.run(speedL,-speedR);
-        else motors.run(speedL,speedR);
+        if(val < ground_sensor.posFromMid(-1))motors.run(-speed,speed);
+        else if (val > ground_sensor.posFromMid(1))motors.run(speed,-speed);
+        else motors.run(speed,speed);
 
         if(ground_sensor.isTrack(ground_sensor.__LEFT) && ground_sensor.isTrack(4)){
           motors.stop();
@@ -42,7 +39,7 @@ void ForwardUntilCross(int32_t speed){ //เดินจับเส้นดำ
 void SkipCross(int32_t speed,int32_t ms = 200){ //ใช้ตอนกำลังจะข้ามเส้น วิธีใช้ใส่SkipCross(ความเร็ว);
     while(true){
         ground_sensor.readLine();
-        motors.run(speedL,speedR);
+        motors.run(speed,speed);
         if( !ground_sensor.isTrack(0) || !ground_sensor.isTrack(4)){
             delay(ms);
             motors.stop();
@@ -84,7 +81,7 @@ void TurnRight(int32_t speed,int32_t ms = 0){
 }
 
 void ForwardTime(int32_t speed,int32_t ms){
-    motors.run(speedL,speedR);
+    motors.run(speed,speed);
     delay(ms);
     motors.stop();
 }
@@ -104,6 +101,34 @@ void ForwardUntilCrossBlackWhite(int32_t speed){
           motors.stop();
           beep();
           break;
+        }
+    }
+}
+
+void ForwardStraightTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
+    drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
+    while(true){
+        drive_motors.Update();
+        ground_sensor.readLine(true);
+        if(ground_sensor.cOnline ^ (!_tillBlack)){
+            if(_continuous)drive_motors.ClearDrive();
+            else drive_motors.Stop();
+            break;
+        }
+    }
+}
+
+// เดินตรง ใช้ไจโร
+void ForwardStraightTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _continuous = false){
+    drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
+    FlagTimer ft(time_ms);
+    ft.set();
+    while(true){
+        drive_motors.Update();
+        if(ft.check()){
+            if(_continuous)drive_motors.ClearDrive();
+            else drive_motors.Stop();
+            break;
         }
     }
 }

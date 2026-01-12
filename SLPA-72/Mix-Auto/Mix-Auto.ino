@@ -8,7 +8,7 @@
 
 int32_t can_sensor_PIN = 8;
 int32_t can_sensor_val = 200;
-int32_t Botton = 7;
+int32_t Button = 7;
 
 int GrabPIN = 2;
 int ArmUp = 3;
@@ -24,8 +24,12 @@ void setup(){
     BasicMenu.buttons[1].callback = Run2;
     BasicMenu.buttons[2].callback = Run3;
     motors.setSpeedRange(100,255);
+    
     //motors.setReverse({1},{1});
     ground_sensor.update_mid();
+
+    // เปอร์เซ็นจับค่าดำ 0 - 1000
+    ground_sensor.__Track = 650;
 }   
 
 void loop(){
@@ -51,7 +55,12 @@ void Run(){
     ForwardUntilCross(160);
     ForwardTime(160,3400);
     beep();
-    
+
+    ground_sensor.__Track = 850;
+    ForwardStraightTime(200,2000);
+        
+    return;
+    // ForwardStraightTill() ;;
     ForwardUntilCross(160);
     SkipCross(180);
     TurnRight(230);
@@ -66,12 +75,6 @@ void Run(){
 
     ForwardTime(160,1500);
     ForwardUntilCross(220);
-
-
-
-
-    
-    
 
     
 }
@@ -93,18 +96,23 @@ void Run2(){
     beep();
     delay(1000);
     beep();
-    servo(GrabPIN,23);
+    servo(GrabPIN,0);
+    while(true);
     Run();
 
 }
 
 void Run3(){
-    servo(GrabPIN, 0);
-    delay(500); 
-   
-   
-    
-    
-    
 
+    while(true){
+        oled.clear();
+        oled.text(0,0,1,"%d",(int32_t)analog(Button));
+        oled.show();
+    }
+
+    // servo(GrabPIN, 100);
+    // delay(1500); 
+    // servo(GrabPIN, 0);
+    // delay(1500);
+    // servo(GrabPIN, 100);
 }
