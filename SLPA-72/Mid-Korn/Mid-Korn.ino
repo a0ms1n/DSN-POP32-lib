@@ -26,7 +26,7 @@ void setup(){
     Front.__Track = 700;
     Back.__Track = 700;
     motors.setSpeedRange(85,250);
-    motors.setRatio({1,1},{1.0,1.0});
+    motors.setRatio({1,1},{1.2,1.0});
 }   
 
 void loop(){
@@ -41,123 +41,125 @@ void loop(){
     forwardTill(140,0,0);
     forwardTime(200,550,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
     
     
     rotate(-90); // +-5
 
     forwardTime(200,400,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
     rotate(-90);
 
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
 
     rotate(-90);
 
     backwardTill(140,1,0);
-    backwardAlign(Slow,1);
-    FD2(40,40); delay(300);
+    backwardAlign(Slow,2);
+    FD2(44,40);  delay(300);
     forwardTill(120,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
 
     rotate(90);
 
     forwardTime(200,400,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
 
     Poy(); delay(300); AO(); delay(300); //Green 1
 
-    BK2(40,40); delay(900); //ก่อนขึ้นสะพาน
+    BK2(44,40); delay(900); //ก่อนขึ้นสะพาน
 
     rotate(90);
-    backwardTill(140,1,0);
-    backwardAlign(Slow,1);
+    backwardTill(140,1,1);
+    backwardAlign(Slow,2);
 
-    forwardTime(200,1200,0);
+    forwardTime(200,1200,0); //ขึ้นสะพาน
     AO(); delay(10);
-    forwardTime(160,1500,0);
+    forwardTime(100,1500);
 
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
-
-    rotate(-90);
-    forwardTill(140,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
 
     rotate(-90);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
+
+    rotate(-90);
+    forwardTill(140,1,0);
+    forwardAlign(Slow,2);
     Poy(); delay(300); AO(); delay(300); //Green 2
 
     backwardTill(140,1,0);
-    backwardAlign(Slow,1);
-    FD2(60,60); delay(300);
+    backwardAlign(Slow,2);
+    FD2(44,40); delay(300);
 
     rotate(-90);
 
     forwardTime(200,450,0);
-    forwardTill(140,1,0); //ปรับแสงแรง
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardTill(120,1,0); //ปรับแสงแรง
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
 
     rotate(90);
 
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
     Poy(); delay(300); AO(); delay(300); //Green 3
 
     backwardTill(140,1,0);
-    backwardAlign(Slow,1);
-    FD2(40,40); delay(300);
+    backwardAlign(Slow,2);
+    FD2(44,40); delay(300);
 
     rotate(90); 
 
-    FD2(60,60);//ก่อนตะเกียบกละบ
+    FD2(44,40); //ก่อนตะเกียบกละบ
     delay(800);
     AO(); delay(100);
 
     rotate(-90);
     backwardTill(140,1,0);
-    backwardAlign(Slow,1);
+    backwardAlign(Slow,2);
 
     forwardTime(100,2050,1); // ข้ามตะเกียบกลับ
 
     rotate(90);
 
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardAlign(Slow,2);
+    BK2(44,40); delay(300);
 
     rotate(-90);
 
     backwardTill(160,1,0);
-    backwardAlign(Slow,1);
+    backwardAlign(Slow,2);
 
     forwardTill(160,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
 
     forwardTill(140,0,0); // จนเจอขาว
     forwardTime(140,500,0); // CheckPoint 1
     backwardTime(140,1500,0);
 
     backwardTill(120,1,0);
-    backwardAlign(Slow,1);
-    FD2(40,40);
+    backwardAlign(Slow,2);
+    FD2(44,40); 
     delay(300);
 
     rotate(-90);
+    forwardTime(200,550,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
-    BK2(40,40); delay(300);
+    forwardAlign(Slow,2);
+
+    BK2(44,40); delay(300);
     rotate(90);
 
     forwardTime(200,550,0);
@@ -166,7 +168,7 @@ void loop(){
     backwardTime(200,550,0);
     backwardTill(120,1,0);
     backwardAlign(70,2);
-    FD2(40,40); delay(150);
+    FD2(44,40);  delay(150);
 
     rotate(90);
 
@@ -183,7 +185,7 @@ void loop(){
     backwardTime(200,550,0);
     backwardTill(120,1,0);
     backwardAlign(70,2);
-    FD2(40,40); delay(300);
+    FD2(44,40);  delay(300);
 
     rotate(90);
     backwardTill(120,1,0);
@@ -199,45 +201,57 @@ void loop(){
     forwardTill(140,1,0);
     
     
-    BK2(40,40); delay(300);
+    BK2(44,40); delay(300);
 
     rotate(-90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
 
     forwardTill(120,1,0);
     
     
-    BK2(40,40); delay(300);
+    BK2(44,40); delay(300);
 
     rotate(-90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
 
     forwardTill(140,1,0);
     
     
-    BK2(40,40); delay(300);
-
+    BK2(44,40); delay(300);
     rotate(90);
-
     forwardTill(140,1,0);
     
     
-    BK2(40,40); delay(300);
+    BK2(44,40); delay(300);
 
     rotate(90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
 
     forwardTime(200,550,0);
     forwardTill(140,1,0);
     
     
-    BK2(40,40); delay(300);
+    BK2(44,40); delay(300);
 
     rotate(90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
 
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
     forwardTime(200,550,0);
     forwardTill(140,1,0);
     
     
 
-    FD2(40,40); delay(600);
+    FD2(44,40);  delay(600);
 
     AO(); delay(100000);
 
@@ -247,9 +261,14 @@ void loop(){
 void Run2(){
     imu.Start();
     beep();
-    forwardTime(200,1200,1);
-    forwardTime(100,1500,1);
-    forwardTill(140,1,0);
+    rotate(90);
+    backwardTill(140,1,1);
+    backwardAlign(Slow,2);
+
+    forwardTime(200,1200,0); //ขึ้นสะพาน
+    AO(); delay(10);
+    forwardTime(160,1500);
+
 
     AO(); delay(10000);
     
@@ -260,13 +279,13 @@ void Run3()
     // forwardTime(200,500);
     // forwardTime(200,700,1);
     // forwardTill(160,1,1);
-    // rotate(90);
-    // rotate(-90);
+     rotate(90);
+    rotate(-90);
     // forwardTime(100,1600);
     // forwardTime(200,600);
     // Poy(); // เทสปล่อย
-    AO(); delay(1000);
-    forwardTime(200,1500,0);
+    //AO(); delay(1000);
+    //forwardTime(200,300,0);
     
     AO(); delay(10000);
     /*
