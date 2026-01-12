@@ -80,10 +80,10 @@ void loop(){
     backwardTill(140,1,0);
     backwardAlign(Slow,1);
 
-    forwardTime(160,1500,1);
-    AO(); delay(100);
+    forwardTime(200,1200,0);
+    AO(); delay(10);
+    forwardTime(160,1500,0);
 
-    forwardTime(100,1500,1);
     forwardTill(140,1,0);
     forwardAlign(Slow,1);
     BK2(40,40); delay(300);
@@ -100,7 +100,7 @@ void loop(){
 
     backwardTill(140,1,0);
     backwardAlign(Slow,1);
-    FD2(40,40); delay(300);
+    FD2(60,60); delay(300);
 
     rotate(-90);
 
@@ -121,7 +121,7 @@ void loop(){
 
     rotate(90); 
 
-    FD2(40,40);//ก่อนตะเกียบกละบ
+    FD2(60,60);//ก่อนตะเกียบกละบ
     delay(800);
     AO(); delay(100);
 
@@ -163,6 +163,7 @@ void loop(){
     forwardTime(200,550,0);
     forwardTill(140,1,0); // check  2
 
+    backwardTime(200,550,0);
     backwardTill(120,1,0);
     backwardAlign(70,2);
     FD2(40,40); delay(150);
@@ -246,7 +247,8 @@ void loop(){
 void Run2(){
     imu.Start();
     beep();
-    forwardTime(200,450,0);
+    forwardTime(200,1200,1);
+    forwardTime(100,1500,1);
     forwardTill(140,1,0);
 
     AO(); delay(10000);
