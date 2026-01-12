@@ -16,7 +16,7 @@ void setup(){
     beep();
     POP32_INIT();
     BasicMenu.buttons[0].callback = Run;
-    motors.setSpeedRange(0,230);
+    motors.setSpeedRange(0,255);
     Grabber.setInit();
     Lifter.setInit();
     delay(1000);
@@ -44,13 +44,13 @@ void Run(){
         int32_t val = psx.read();
 
         // L1 -> ลดความเร็ว
-        if(psx.button(PSB_L1) && psx.buttonNewState(PSB_L1))current_base_speed = constrain(current_base_speed - 10,90,215);
+        if(psx.button(PSB_L1) && psx.buttonNewState(PSB_L1))current_base_speed = constrain(current_base_speed - 10,90,255);
 
         // R1 -> เพิ่มความเร็ว
-        if(psx.button(PSB_R1) && psx.buttonNewState(PSB_R1))current_base_speed = constrain(current_base_speed + 10,90,215);
+        if(psx.button(PSB_R1) && psx.buttonNewState(PSB_R1))current_base_speed = constrain(current_base_speed + 10,90,255);
 
         if(psx.button(PSB_L2) && psx.buttonNewState(PSB_L2))current_base_speed = 90;
-        if(psx.button(PSB_R2) && psx.buttonNewState(PSB_R2))current_base_speed = 215;
+        if(psx.button(PSB_R2) && psx.buttonNewState(PSB_R2))current_base_speed = 255;
 
         // R ขวา - กาง
         if(psx.button(PSB_RSTIK_RIGHT) && grabberDelay.check())Grabber.cDeg++;

@@ -29,8 +29,8 @@
 
 #if __MOTOR_PAIRS == 1
 constexpr int8_t __MOTOR_PINS[2][__MOTOR_PAIRS] = {
-    {1}, // (Left)
-    {2}  // (Right)
+    {3}, // (Left)
+    {4}  // (Right)
 };
 
 #elif __MOTOR_PAIRS == 2
@@ -48,9 +48,9 @@ constexpr int8_t __MOTOR_PINS[2][__MOTOR_PAIRS] = {
 //#define __SENSOR_WB_VALUE WHITE_BLACK // White < Black
 #define __SENSOR_WB_VALUE BLACK_WHITE // Black < White
 
-#define __SENSOR_NUM 6
+#define __SENSOR_NUM 7
 constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
-    0,1,2,3,4,8
+    0,1,2,3,4,7,8
 };
 
 // Features Configuration //
