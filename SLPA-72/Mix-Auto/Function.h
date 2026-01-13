@@ -17,15 +17,15 @@ LEDSensor sensors[] ={
 LEDSensorLine<5> ground_sensor({&sensors[0],&sensors[1],&sensors[2],&sensors[3],&sensors[4]},0,50,500);
 
 
-void ForwardUntilCross(int32_t speed){ //เดินจับเส้นดำจนกว่าจะเจอแยก วิธีใช้ใส่ ForwardUntilCross(ความเร็ว);
+void ForwardUntilCross(int32_t speed,int32_t spin_speed){ //เดินจับเส้นดำจนกว่าจะเจอแยก วิธีใช้ใส่ ForwardUntilCross(ความเร็ว);
     while(true){
         ground_sensor.read();
         int32_t val = ground_sensor.readLine();
         oledf.clear();
         oledf.text(0,0,1,"%d %d %d",val,(int32_t)ground_sensor.get(0),(int32_t)ground_sensor.get(4));
         oledf.show();
-        if(val < ground_sensor.posFromMid(-1))motors.run(-speed,speed);
-        else if (val > ground_sensor.posFromMid(1))motors.run(speed,-speed);
+        if(val < ground_sensor.posFromMid(-1))motors.run(-spin_speed,spin_speed);
+        else if (val > ground_sensor.posFromMid(1))motors.run(spin_speed,-spin_speed);
         else motors.run(speed,speed);
 
         if(ground_sensor.isTrack(ground_sensor.__LEFT) && ground_sensor.isTrack(4)){
@@ -86,16 +86,15 @@ void ForwardTime(int32_t speed,int32_t ms){
     motors.stop();
 }
 
-void ForwardUntilCrossBW(int32_t speed){
+void ForwardUntilCrossBW(int32_t speed,int32_t spin_speed){
     while(true){
         ground_sensor.read();
         int32_t val = ground_sensor.readLine();
         oledf.clear();
         oledf.text(0,0,1,"%d",val);
         oledf.show();
-        if (ground_sensor.cOnline)motors.run(speed,speed);
-        else if(val < ground_sensor.posFromMid(-1))motors.run(-speed,speed);
-        else if (val > ground_sensor.posFromMid(1))motors.run(speed,-speed);
+        if(val < ground_sensor.posFromMid(-1))motors.run(-spin_speed,spin_speed);
+        else if (val > ground_sensor.posFromMid(1))motors.run(spin_speed,-spin_speed);
         else motors.run(speed,speed);
 
         if(ground_sensor.cOnline && ground_sensor.isTrack(0) && ground_sensor.isTrack(4)){

@@ -40,45 +40,28 @@ void loop(){
 }
 
 void Run(){
-
     ForwardTime(220,500);
-    ForwardUntilCross(220);
-    SkipCross(180);
-    TurnLeft(220);
+    ForwardUntilCross(200,180);
+    SkipCross(200,300);
+    TurnLeft(200);
+    beep();
+    
+    ForwardUntilCross(220,180);
+    SkipCross(200,300);
+    TurnLeft(200);
     beep();
 
-    ForwardUntilCross(220);
-    SkipCross(180);
-    TurnLeft(220);
-    
-    ForwardUntilCross(220);
-
-
-
-    SkipCross(180);
-    TurnRight(180);
-    
-    ForwardUntilCross(160);
+    ForwardUntilCross(220,180);
+    SkipCross(200,300);
+    TurnRight(200,50);
     beep();
 
-    ForwardStraightTime(160,3500);
-        
-    //return;
-    // ForwardStraightTill() ;;
-    ForwardUntilCross(160);
-    SkipCross(180);
-    TurnRight(230);
+    ForwardUntilCrossBW(200,170);
+    ForwardStraightTime(200,4000);
 
-    ForwardUntilCross(220);
-    SkipCross(180);
-    TurnRight(230);
+}
 
-    ForwardUntilCross(220);
-    SkipCross(180);
-    TurnRight(230);
-
-  /*  ForwardTime(160,10);
-    ForwardUntilCross(220); */
+void RunEx(){
 
     
 }
@@ -107,8 +90,8 @@ void Run2(){
 
 void Run3(){
 
-    ForwardUntilCrossBW(200);
-
+    // ForwardUntilCrossBW(200);
+    
     // servo(GrabPIN, 100);
     // delay(1500); 
     // servo(GrabPIN, 0);
