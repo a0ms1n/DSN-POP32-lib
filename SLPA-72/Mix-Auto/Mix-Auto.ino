@@ -50,21 +50,19 @@ void Run(){
     TurnLeft(200);
 
     ForwardUntilCross(220,180);
-    SkipCross(200,300);
-    TurnRight(200,50);
+    SkipCross(200,400);
+    TurnRight(200,60);
     
-    ForwardUntilCrossBW(150,165);
+    ForwardUntilCrossBW(155,160);
+    SkipCross(200,300);
     delay(400);
 
-    ForwardStraightTime(170,3750);
+    ForwardStraightTime(160,3800);
+    SkipCross(200,250);
     delay(300);
-    beep();
 
-    ForwardUntilCross(220,180);
-    SkipCross(200,300);
-    TurnRight(200);
-    beep();
-
+    ForwardUntilCross(220,220);
+    SkipCross(200,320);
 
 }
 
