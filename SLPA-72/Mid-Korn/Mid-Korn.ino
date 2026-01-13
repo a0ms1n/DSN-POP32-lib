@@ -74,7 +74,7 @@ void loop(){
 
     Poy(); delay(300); AO(); delay(300); //Green 1
 
-    BK2(44,40); delay(900); //ก่อนขึ้นสะพาน
+    BK2(44,40); delay(800); //ก่อนขึ้นสะพาน
 
     rotate(90);
     backwardTill(140,1,1);
@@ -84,7 +84,7 @@ void loop(){
     AO(); delay(10);
     forwardTime(100,1500);
 
-    forwardTill(140,1,0);
+    forwardTill(140,1,1);
     forwardAlign(Slow,2);
     BK2(44,40); delay(300);
 
@@ -177,12 +177,13 @@ void loop(){
     rotate(-90);
     forwardTime(200,550,0);
     forwardTill(140,1,0);
+    BK2(44,40); delay(100);
     
     
 
     Poy(); delay(300); AO(); delay(300); //Green4
 
-    backwardTime(200,550,0);
+    backwardTime(200,350,0);
     backwardTill(120,1,0);
     backwardAlign(70,2);
     FD2(44,40);  delay(300);
@@ -261,15 +262,57 @@ void loop(){
 void Run2(){
     imu.Start();
     beep();
+    
+    forwardTill(140,1,0);
+    
+    BK2(44,40); delay(300);
+
+    rotate(-90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
+
+    forwardTill(120,1,0);
+    
+    
+    BK2(44,40); delay(300);
+
+    rotate(-90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
+
+    forwardTill(140,1,0);
+    
+    
+    BK2(44,40); delay(300);
     rotate(90);
-    backwardTill(140,1,1);
-    backwardAlign(Slow,2);
+    forwardTill(140,1,0);
+    
+    
+    BK2(44,40); delay(300);
 
-    forwardTime(200,1200,0); //ขึ้นสะพาน
-    AO(); delay(10);
-    forwardTime(160,1500);
+    rotate(90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
 
+    forwardTime(200,550,0);
+    forwardTill(140,1,0);
+    
+    
+    BK2(44,40); delay(300);
 
+    rotate(90);
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    FD2(44,40);
+
+    backwardTill(120,1,0);
+    backwardAlign(70,2);
+    forwardTime(200,550,0);
+    forwardTill(140,1,0);
+    
     AO(); delay(10000);
     
 }
