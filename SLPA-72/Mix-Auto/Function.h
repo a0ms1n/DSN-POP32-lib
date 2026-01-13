@@ -86,14 +86,15 @@ void ForwardTime(int32_t speed,int32_t ms){
     motors.stop();
 }
 
-void ForwardUntilCrossBlackWhite(int32_t speed){
+void ForwardUntilCrossBW(int32_t speed){
     while(true){
         ground_sensor.read();
         int32_t val = ground_sensor.readLine();
         oledf.clear();
         oledf.text(0,0,1,"%d",val);
         oledf.show();
-        if(val < ground_sensor.posFromMid(-1))motors.run(-speed,speed);
+        if (ground_sensor.cOnline)motors.run(speed,speed);
+        else if(val < ground_sensor.posFromMid(-1))motors.run(-speed,speed);
         else if (val > ground_sensor.posFromMid(1))motors.run(speed,-speed);
         else motors.run(speed,speed);
 

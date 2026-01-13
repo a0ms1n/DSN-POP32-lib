@@ -41,8 +41,8 @@ void loop(){
 
 void Run(){
 
-    ForwardTime(200,500);
-    ForwardUntilCross(210);
+    ForwardTime(220,500);
+    ForwardUntilCross(220);
     SkipCross(180);
     TurnLeft(220);
     beep();
@@ -52,6 +52,9 @@ void Run(){
     TurnLeft(220);
     
     ForwardUntilCross(220);
+
+
+
     SkipCross(180);
     TurnRight(180);
     
@@ -104,14 +107,8 @@ void Run2(){
 
 void Run3(){
 
-     
-     beep();
-    ForwardStraightTime(200,4000);
+    ForwardUntilCrossBW(200);
 
-
-    }
-                                                
-                                                
     // servo(GrabPIN, 100);
     // delay(1500); 
     // servo(GrabPIN, 0);
@@ -122,3 +119,9 @@ void Run3(){
     //    oled.clear();
     //     oled.text(0,0,0,"%d",(int32_t)analog(Button));
     //     oled.show();
+
+
+}
+                                                
+                                                
+
