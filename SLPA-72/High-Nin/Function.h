@@ -3,7 +3,7 @@
 
 LEDSensor sensors[] ={
     {0,75,10}, // หน้าซ้าย
-    {1,300,50}, // หน้ากลางซ้าย
+    {1,170,50}, // หน้ากลางซ้าย
     {2,3000,450}, // หน้ากลางขวา
     {3,30,5}, // หน้าขวา
     {4,2200,350}, // หลังซ้าย
@@ -109,7 +109,7 @@ void toggleServoOff(){
     servo(servoPIN,startAngle);
 }
 
-void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 200){
+void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
@@ -132,7 +132,7 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 200){
     motors.stop();
 }
 
-void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 200){
+void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1; idx <= repeat; idx++){
         do{
             Back.readLine();
