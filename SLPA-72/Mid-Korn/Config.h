@@ -50,7 +50,7 @@ constexpr int8_t __MOTOR_PINS[2][__MOTOR_PAIRS] = {
 
 #define __SENSOR_NUM 4
 constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
-    1,2,3,8
+    1,2,3,7
 };
 
 // Features Configuration //
