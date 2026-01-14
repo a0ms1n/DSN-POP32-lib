@@ -74,7 +74,7 @@ class LEDSensorLine : public LEDSensorGroup<N> {
     inline int32_t readLine(bool do_read = true);
     inline int32_t errorFromMid();
     inline int32_t posFromMid(double_t pos);
-    inline int32_t isTrack(int32_t pos);
+    inline int32_t isTrack(int32_t pos); 
 
 };
 

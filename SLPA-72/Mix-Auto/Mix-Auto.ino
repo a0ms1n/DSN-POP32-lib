@@ -32,7 +32,7 @@ void setup(){
     ground_sensor.update_mid();
 
     // เปอร์เซ็นจับค่าดำ 0 - 1000
-    ground_sensor.__Track = 600;
+    ground_sensor.__Track = 800;
 }   
 
 void loop(){
@@ -40,29 +40,44 @@ void loop(){
 }
 
 void Run(){
-    ForwardTime(220,500);
+    ForwardStraightTillWhite(200);
     ForwardUntilCross(200,180);
-    SkipCross(200,300);
-    TurnLeft(200);
+    SkipCross(190,350);
+    TurnLeft(190);
+    Align(150);
     
-    ForwardUntilCross(220,180);
-    SkipCross(200,300);
+    ForwardUntilCross(200,180);
+    SkipCross(190,350);
     TurnLeft(200);
+    Align(150);
 
-    ForwardUntilCross(220,180);
-    SkipCross(200,400);
-    TurnRight(200,60);
+    ForwardUntilCross(200,180);
+    SkipCross(190,350);
+    TurnRight(200);
+    Align(150);
+    // ForwardStraightCross(160);
+    ForwardUntilCrossBW(155,120);
+    ForwardStraightTime(-140,500);
+    Align(160);
+    ForwardUntilCross(115,120);
+
+    ground_sensor.__Track = 500;
+    ForwardStraightTillWhite(145);
+    ground_sensor.__Track = 700;
+    ForwardStraightTime(145,300);
+    ForwardStraightTime(-140,500);
+    ForwardUntilCross(170,150);
+    Align(160);
+
+    ForwardStraightTime(180,1180);
+    Align(160);
+    rotate(-90);
+    ForwardStraightTillWhite(190);
     
-    ForwardUntilCrossBW(155,160);
-    SkipCross(200,300);
-    delay(400);
+    ForwardTime(200,220);
+    ForwardUntilCross(170,150);
+    rotate(-90);
 
-    ForwardStraightTime(160,3800);
-    SkipCross(200,250);
-    delay(300);
-
-    ForwardUntilCross(220,220);
-    SkipCross(200,320);
 
 }
 
@@ -95,6 +110,8 @@ void Run2(){
 
 void Run3(){
 
+    ground_sensor.__Track = 500;
+    ForwardStraightTillWhite(155);
     // ForwardUntilCrossBW(200);
     
     // servo(GrabPIN, 100);

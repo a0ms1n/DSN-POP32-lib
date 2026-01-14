@@ -6,18 +6,26 @@
 
 // PIN, White_Value, Black_Value
 LEDSensor sensors[] ={
-    {1,3800,650}, // L 
-    {3,2300,370}, // LM
-    {0,3800,430}, // M
-    {4,3500,350}, // RM 
-    {2,3800,570}  // R
+    {1,3800,2100}, // L 
+    {3,3800,1600}, // LM
+    {0,3800,1900}, // M
+    {4,3800,2200}, // RM 
+    {2,3800,2200}  // R
 };
 
 // {Sensors Refs}, AutoRotate, Error, Track
 LEDSensorLine<5> ground_sensor({&sensors[0],&sensors[1],&sensors[2],&sensors[3],&sensors[4]},0,50,500);
 
+void rotate(int32_t angle){
+    motors.stop();
+    drive_motors.RotateDrive(angle,&PIDRotate,500,0.8);
+    while(drive_motors.Update());
+    motors.stop();
+    delay(100);
+}
 
 void ForwardUntilCross(int32_t speed,int32_t spin_speed){ //เดินจับเส้นดำจนกว่าจะเจอแยก วิธีใช้ใส่ ForwardUntilCross(ความเร็ว);
+    double_t angle_diff = 0.0;
     while(true){
         ground_sensor.read();
         int32_t val = ground_sensor.readLine();
@@ -30,7 +38,6 @@ void ForwardUntilCross(int32_t speed,int32_t spin_speed){ //เดินจั�
 
         if(ground_sensor.isTrack(ground_sensor.__LEFT) && ground_sensor.isTrack(4)){
           motors.stop();
-          beep();
           break;
         }
     }
@@ -48,7 +55,7 @@ void SkipCross(int32_t speed,int32_t ms = 200){ //ใช้ตอนกำลั
     }
 }
 
-void TurnLeft(int32_t speed,int32_t ms = 0){ 
+void TurnLeft(int32_t speed){ 
     // ใช้คู่กับskipcross วิธีใช้skipCross(ความเร็ว);
     //                     TurnLeft(ความเร็ว);
     while(true){
@@ -61,11 +68,10 @@ void TurnLeft(int32_t speed,int32_t ms = 0){
         ground_sensor.readLine();
         if(ground_sensor.isTrack(2))break;
     }
-    delay(ms);
     motors.stop();
 }
 
-void TurnRight(int32_t speed,int32_t ms = 0){
+void TurnRight(int32_t speed){
     while(true){
         motors.run(speed,-speed);
         ground_sensor.readLine();
@@ -76,7 +82,6 @@ void TurnRight(int32_t speed,int32_t ms = 0){
         ground_sensor.readLine();
         if(ground_sensor.isTrack(2))break;
     }
-    delay(ms);
     motors.stop();
 }
 
@@ -105,12 +110,12 @@ void ForwardUntilCrossBW(int32_t speed,int32_t spin_speed){
     }
 }
 
-void ForwardStraightTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
+void ForwardStraightCross(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
     drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
     while(true){
         drive_motors.Update();
         ground_sensor.readLine(true);
-        if(ground_sensor.cOnline ^ (!_tillBlack)){
+        if(ground_sensor.cOnline && ground_sensor.isTrack(0) && ground_sensor.isTrack(4)){
             if(_continuous)drive_motors.ClearDrive();
             else drive_motors.Stop();
             break;
@@ -126,6 +131,32 @@ void ForwardStraightTime(int32_t base_speed, int32_t time_ms, bool _reset = true
     while(true){
         drive_motors.Update();
         if(ft.check()){
+            if(_continuous)drive_motors.ClearDrive();
+            else drive_motors.Stop();
+            break;
+        }
+    }
+}
+
+
+void Align(int32_t spin_speed){
+    while(true){
+        int32_t val = ground_sensor.readLine();
+        if(val < ground_sensor.posFromMid(-1)+250)motors.run(-spin_speed,spin_speed);
+        else if (val > ground_sensor.posFromMid(1)-250)motors.run(spin_speed,-spin_speed);
+        else {
+          motors.stop();
+          break;
+        }
+    }
+}
+
+void ForwardStraightTillWhite(int32_t base_speed,bool _reset = true,bool _continuous = false){
+    drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
+    while(true){
+        int32_t val = ground_sensor.readLine();
+        drive_motors.Update();
+        if(!ground_sensor.isTrack(0) && !ground_sensor.isTrack(4)){
             if(_continuous)drive_motors.ClearDrive();
             else drive_motors.Stop();
             break;
