@@ -175,7 +175,7 @@ inline void LEDSensorGroup<N>::AutoCalibrate(int32_t ms = 3000){
     oledf.text(0,0,1,"Black values :");
     for(uint8_t idx=0;idx<N;idx+=2){
         oledf.text(0,9+idx/2*9,1,"%d : %d",(int)sensors[idx]->channel,(int)sensors[idx]->blackValue);
-        if(idx+1<N)oledf.text(60,9+idx/2*9,1,"%d : %d",(int)sensors[idx]->channel,(int)sensors[idx]->blackValue);
+        if(idx+1<N)oledf.text(60,9+idx/2*9,1,"%d : %d",(int)sensors[idx+1]->channel,(int)sensors[idx]->blackValue);
     }
     oledf.show();
 
@@ -186,7 +186,7 @@ inline void LEDSensorGroup<N>::AutoCalibrate(int32_t ms = 3000){
     oledf.text(0,0,1,"White values :");
     for(uint8_t idx=0;idx<N;idx+=2){
         oledf.text(0,9+idx/2*9,1,"%d : %d",(int)sensors[idx]->channel,(int)sensors[idx]->whiteValue);
-        if(idx+1<N)oledf.text(60,9+idx/2*9,1,"%d : %d",(int)sensors[idx]->channel,(int)sensors[idx]->whiteValue);
+        if(idx+1<N)oledf.text(60,9+idx/2*9,1,"%d : %d",(int)sensors[idx+1]->channel,(int)sensors[idx]->whiteValue);
     }
     oledf.show();
     while(!SW_A());while(SW_A());
