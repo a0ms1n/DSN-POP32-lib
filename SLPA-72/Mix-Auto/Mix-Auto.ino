@@ -5,13 +5,7 @@
 // เข้าไปเเก้/ดู PIN ใน Config.h
 
 #include "Function.h"
-
-int32_t can_sensor_PIN = 8;
-int32_t can_sensor_val = 300;
-int32_t Button = 7;
-
-int GrabPIN = 2;
-int ArmUp = 3;
+#define DE2000() delay(2000);
 
 void Run();
 
@@ -32,7 +26,7 @@ void setup(){
     ground_sensor.update_mid();
 
     // เปอร์เซ็นจับค่าดำ 0 - 1000
-    ground_sensor.__Track = 800;
+    ground_sensor.__Track = 500;
     BasicMenu.buttons.push_back({
         "Sensor Calibrate",SensorCalibrate
     });
@@ -43,44 +37,51 @@ void loop(){
 }
 
 void Run(){
-    ForwardStraightTillWhite(200);
-    ForwardUntilCross(200,180);
-    SkipCross(190,350);
-    TurnLeft(190);
+    ForwardStraightTillWhite(220,400);
+    ForwardUntilCross(220,150);
+    SkipCross(140,250);
+    TurnLeft(170);
     Align(150);
     
-    ForwardUntilCross(200,180);
-    SkipCross(190,350);
-    TurnLeft(200);
+    ForwardUntilCross(220,150);
+    SkipCross(140,250);
+    TurnLeft(170);
     Align(150);
 
     ForwardUntilCross(200,180);
-    SkipCross(190,350);
-    TurnRight(200);
+    SkipCross(120,350);
+    TurnRight(170);
     Align(150);
-    // ForwardStraightCross(160);
+    
     ForwardUntilCrossBW(155,120);
-    ForwardStraightTime(-140,500);
-    Align(160);
-    ForwardUntilCross(115,120);
+    
+    ForwardStraightTime(-140,400);
+    Align(110);
+    ForwardUntilCross(100,110);
 
-    ground_sensor.__Track = 500;
     ForwardStraightTillWhite(145);
-    ground_sensor.__Track = 700;
     ForwardStraightTime(145,300);
-    ForwardStraightTime(-140,500);
     ForwardUntilCross(170,150);
     Align(160);
 
-    ForwardStraightTime(180,1180);
+    ForwardStraightTime(140,1580);
     Align(160);
     rotate(-90);
     ForwardStraightTillWhite(190);
     
-    ForwardTime(200,220);
-    ForwardUntilCross(170,150);
-    rotate(-90);
+    ForwardTime(170,220);
 
+    ForwardUntilCross(170,150);
+    SkipCross(140,300);
+    TurnRight(150);
+    Align(160);
+    ForwardUntilTime(240,150,4200);
+    ForwardUntilCross(190,150);
+    SkipCross(140,300);
+
+    ForwardUntilCross(220,150);
+    SkipCross(140,300);
+    ForwardUntilButton(220,150);
 
 }
 
