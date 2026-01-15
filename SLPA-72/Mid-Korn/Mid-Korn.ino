@@ -1,6 +1,7 @@
 #include "Config.h"
 #include "../../src/DSN-POP32.h"
 #include "Function.h"
+#include "Music.h"
 
 // PIN, White_Value, Black_Value
 // ไล่เซนเซอร์ตรงนี้
@@ -114,7 +115,7 @@ void loop(){
 
     Poy(); delay(300); AO(); delay(300);  //green 2
 
-    backwardTime(200,550,0);
+    backwardTime(200,500,0);
 
 
     rotate(-90,0);
@@ -157,7 +158,7 @@ void loop(){
 
     Poy(); delay(300); AO(); delay(300);  // green 3
 
-    BK2(83,90); delay(500);
+    backwardTime(200,400,0);
     backwardTill(140,1,0);
     backwardAlign(80,2);
     forwardTime(120,200,0);
@@ -185,8 +186,8 @@ void loop(){
     rotate(90,1); ///asdasdas
     forwardTime(200,500,1,0);
     forwardTill(140,1,0);
-    forwardAlign(80,1);
-    BK2(45,40); delay(200);
+    forwardAlign(80,2);
+    BK2(45,40); delay(300);
     
 
     rotate(90,1);
@@ -195,15 +196,18 @@ void loop(){
     
     forwardTill(140,1,0);
     forwardAlign(80,1);
-    backwardTime(140,300,0);    //ขึ้นสะพาน
+    backwardTime(140,250,0);    //ขึ้นสะพาน
     
 
     rotate(-90,0);
-    forwardTime(200,500,1,0);
+    backwardTill(140,1,0);
+    backwardAlign(80,3);
+
+    forwardTime(200,500,0);
     
     forwardTill(140,1,0);
     forwardAlign(80,1);
-    backwardTime(140,300,0);    //ลงสะพาน
+    backwardTime(140,200,0);    //ลงสะพาน
     
 
     rotate(-90,0);
@@ -232,7 +236,7 @@ void loop(){
     forwardTime(100,1500,0);
     forwardTill(140,1,0);
     forwardAlign(80,1);
-    backwardTime(140,300,0);
+    backwardTime(140,200,0);
 
     rotate(90,0);
     backwardTill(140,1,0);
@@ -257,9 +261,9 @@ void loop(){
     rotate(-90,0);
     backwardTill(140,1,0);
     backwardAlign(80,2);
-    forwardTill(140,1,0);
+    forwardTill(120,1,0);
     forwardAlign(80,1);
-    backwardTime(140,300,0);
+    backwardTime(140,250,0);
     
 
     rotate(-90,0);
@@ -274,13 +278,16 @@ void loop(){
     forwardTime(200,500,0);
     forwardTill(140,1,0);
     forwardAlign(80,2);
-    backwardTime(140,200,0);
+    backwardTime(140,100,0);
     
     
     rotate(-90,0);
     forwardTime(140,600,0);
 
+    rickroll();
+
     AO(); delay(100000);
+
     
 
  }
@@ -326,7 +333,7 @@ void Run2(){
     forwardTime(200,600,0);
     forwardTill(140,1,0);
     forwardAlign(80,1);
-    backwardTime(140,300,0);
+    backwardTime(140,200,0);
     
 
     rotate(-90,0);
@@ -340,7 +347,7 @@ void Run2(){
     backwardAlign(80,2);
     forwardTill(140,1,0);
     forwardAlign(80,1);
-    BK2(45,40); delay(300);
+    BK2(45,40); delay(200);
     
 
     rotate(90,1);
@@ -348,7 +355,7 @@ void Run2(){
     forwardTime(100,1500,0);
     forwardTill(140,1,0);
     forwardAlign(80,1);
-    backwardTime(140,300,0);
+    backwardTime(140,200,0);
 
     rotate(90,0);
     backwardTill(140,1,0);
@@ -396,6 +403,8 @@ void Run2(){
     rotate(-90,0);
     forwardTime(140,600,0);
 
+
+
     AO(); delay(100000);
 
  }
@@ -405,15 +414,15 @@ void Run3()
 {   
     //FD2(83,90); delay(700); ///
 
-    forwardTill(120,1,0);
+    //forwardTill(120,1,0);
     
-    BK2(45,40); delay(300);
+    //BK2(45,40); delay(300);
     //forwardTime(120,200,0);forwardTill(140,1,0);
     
-    rotate(90,0); ///asdasdas
-    backwardTill(140,1,0);
-    backwardAlign(80,2);
-    FD2(45,40); delay(1000);
+    //rotate(90,0); ///asdasdas
+    //backwardTill(140,1,0);
+    //backwardAlign(80,2);
+    //FD2(45,40); delay(1000);
     //forwardTime(200,500);
     // forwardTime(200,700,1);
     // forwardTill(160,1,1);
@@ -430,6 +439,7 @@ void Run3()
     //delay(600);
     // forwardTime(200,700,0);
     //forwardTill(140,1,0);
+    rickroll();
     AO(); delay(10000);
     /*
     forwardTime(100,1400);
