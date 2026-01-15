@@ -13,6 +13,10 @@ void Run2();
 void Run3();
 
 void setup(){
+    BasicMenu.buttons.push_back({
+        "Sensor Calibrate",SensorCalibrate
+    });
+
     beep();
     POP32_INIT();   
     PIDRotate.gains = newRotateGains;
@@ -27,6 +31,7 @@ void setup(){
     Back.__Track = 800;
     motors.setSpeedRange(85,250);
     motors.setRatio({1,1},{1.0,1.08});
+    
 }   
 
 void loop(){

@@ -16,6 +16,9 @@ void Run3();
 
 void setup()
 {
+    BasicMenu.buttons.push_back({
+        "Sensor Calibrate",SensorCalibrate
+    });
     PIDRotate.SetOutputLimits(-180,180);
     beep();
     POP32_INIT();
