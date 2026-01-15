@@ -6,7 +6,6 @@
 /// @brief Set yaw to zero.
 /// @warning delay for 120 ms, and ALWAYS use .Toggle before.
 inline void IMU::ZeroYaw(){
-
     //Zero Pitch
     Serial1.write(0XA5);Serial1.write(0X54); 
     delay(60);
@@ -29,16 +28,30 @@ inline void IMU::ResetWaitZero(double_t precision){
     FlagTimer dTimeoutFlag(reset_timeout);
     dTimeoutFlag.set();
     while(!Update()){
-        oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
+        oledf.text(0,0,1,"Update Waiting... : %.2f",(float)cYaw);
         oledf.show();
         oledf.clear();
+        if(dTimeoutFlag.check()){
+            beep();
+            beep();
+            beep();
+            Update();
+            return;
+        }
     };
     do{
         oledf.text(0,0,1,"Waiting... : %.2f",(float)cYaw);
         oledf.show();
         oledf.clear();
+        if(dTimeoutFlag.check()){
+            beep();
+            beep();
+            beep();
+            Update();
+            return;
+        }
         //if(ft.check())Reset();
-    }while(!(pvYaw >= -precision && pvYaw <= precision) && !dTimeoutFlag.check());
+    }while(!(pvYaw >= -precision && pvYaw <= precision));
     Update();
 }
 

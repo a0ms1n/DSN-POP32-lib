@@ -7,10 +7,10 @@ class IMU{
         double_t pvYaw=0;
         double_t dYaw = 0;
         bool status = false;
-        int64_t reset_timeout = 15000;
+        int64_t reset_timeout = 3500;
         uint8_t rxBuf[8];
-        double_t precision = 0.3f;
-        FlagTimer TimeoutFlag = FlagTimer(1000);
+        double_t precision = 0.7f;
+        FlagTimer TimeoutFlag = FlagTimer(20);
         inline void ZeroYaw();
         inline void Reset();
         inline void ResetWaitZero(double_t precision);
