@@ -16,9 +16,9 @@ LEDSensor sensors[] ={
 // {Sensors Refs}, AutoRotate, Error, Track
 LEDSensorLine<5> ground_sensor({&sensors[0],&sensors[1],&sensors[2],&sensors[3],&sensors[4]},0,50,500);
 
-void rotate(int32_t angle){
+void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,500,0.8);
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.8);
     while(drive_motors.Update());
     motors.stop();
     delay(100);
