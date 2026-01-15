@@ -2,9 +2,9 @@
 #include "../../src/DSN-POP32.h"
 
 LEDSensor sensors[] ={
-    {0,75,10}, // หน้าซ้าย
-    {1,170,50}, // หน้ากลางซ้าย
-    {2,3000,450}, // หน้ากลางขวา
+    {0,250,75}, // หน้าซ้าย
+    {1,135,25}, // หน้ากลางซ้าย
+    {2,3000,500}, // หน้ากลางขวา
     {3,30,5}, // หน้าขวา
     {4,2200,350}, // หลังซ้าย
     {5,2800,650}, // หลังกลางซ้าย
@@ -99,7 +99,8 @@ void Thailand_back()
     servo(6 , 90);
 }
 
-void toggleServoOn(){
+void toggleServoOn()
+{
     servo(servoPIN,startAngle);
     delay(200);
     servo(servoPIN,endAngle);
@@ -110,25 +111,32 @@ void toggleServoOff(){
 }
 
 void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
-    for(int16_t idx = 1;idx<=repeat;idx++){
+    for(int16_t idx = 1; idx <= repeat; idx++){
         do{
             Front.readLine();
-            if(!Front.cOnline)motors.run(speed,speed);
 
-            // Black at right -> go right
-            else if(Front.errorFromMid() > 0)motors.run(-speed - 20,speed);
-            else motors.run(speed + 20,-speed);
-            oledf.clear();
-            oledf.text(0,0,1,"%d",(int32_t)Front.errorFromMid());
-            oledf.show();
-        }while(abs(Front.errorFromMid()) >= 50 || !Front.cOnline);
-        if(idx == repeat)break;
-        motors.run(-speed,-speed);
+            if(!Front.cOnline)
+                motors.run(-speed, -speed);
+
+            // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
+            else if(Front.errorFromMid() > 0)
+                motors.run(-speed, speed + 20);
+
+            // เส้นอยู่ซ้าย → หมุนซ้าย (ตอนถอย)
+            else
+                motors.run(speed, -speed - 20);
+
+        }while(abs(Back.errorFromMid()) >= 50 || !Back.cOnline);
+
+        if(idx == repeat) break;
+
+        motors.run(speed, speed);
         delay(back_delay);
+
         do{
             Front.readLine();
         }while(Front.cOnline);
-    }   
+    }
     motors.stop();
 }
 
