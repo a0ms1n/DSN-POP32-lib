@@ -50,6 +50,7 @@ class LEDSensorGroup{
 
     /// @brief Get object (ref) from specific sensor (by index (0-based)).
     inline int32_t& getObj(uint8_t);
+    inline void AutoCalibrate(int32_t ms = 3000);
 };
 
 /// @brief Sensor from left to right.

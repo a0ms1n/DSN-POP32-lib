@@ -3,7 +3,7 @@
 
 
 // เข้าไปเเก้/ดู PIN ใน Config.h
-#include "Config.h"
+
 #include "Function.h"
 
 int32_t can_sensor_PIN = 8;
@@ -33,6 +33,9 @@ void setup(){
 
     // เปอร์เซ็นจับค่าดำ 0 - 1000
     ground_sensor.__Track = 800;
+    BasicMenu.buttons.push_back({
+        "Sensor Calibrate",SensorCalibrate
+    });
 }   
 
 void loop(){

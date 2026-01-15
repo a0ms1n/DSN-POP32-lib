@@ -1,4 +1,5 @@
 #pragma once
+#include "Config.h"
 #include "../../src/DSN-POP32.h"
 
 // SENSOR PIN 0 แก้แล้วนะคั้บบบบบ
@@ -6,15 +7,17 @@
 
 // PIN, White_Value, Black_Value
 LEDSensor sensors[] ={
-    {1,3800,2100}, // L 
-    {3,3800,1600}, // LM
-    {0,3800,1900}, // M
-    {4,3800,2200}, // RM 
-    {2,3800,2200}  // R
+    {5,3800,2100}, // L - ซ้ายสุด
+    {1,3800,1400}, // L2 
+    {3,3800,1300}, // L3
+    {0,3800,1000}, // M
+    {4,3800,2200}, // R3 
+    {2,3800,1200},  // R2
+    {6,3800,2000}  // R - ขวาสุด
 };
 
 // {Sensors Refs}, AutoRotate, Error, Track
-LEDSensorLine<5> ground_sensor({&sensors[0],&sensors[1],&sensors[2],&sensors[3],&sensors[4]},0,50,500);
+LEDSensorLine<7> ground_sensor({&sensors[0],&sensors[1],&sensors[2],&sensors[3],&sensors[4],&sensors[5],&sensors[6]},0,50,500);
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
@@ -162,4 +165,8 @@ void ForwardStraightTillWhite(int32_t base_speed,bool _reset = true,bool _contin
             break;
         }
     }
+}
+
+void SensorCalibrate(){
+    ground_sensor.AutoCalibrate();
 }

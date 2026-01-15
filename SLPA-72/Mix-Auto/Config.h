@@ -38,19 +38,22 @@ constexpr int8_t __MOTOR_PINS[2][__MOTOR_PAIRS] = {
     {4,1}, // (Front Left,  Back Left)
     {3,2}  // (Front Right, Back Right)
 };
-#endif
+#endif  
 
 #define __AUTO_CONSTRAIN_ON_UPDATE
 
 /* Sensors */
 
 /// @brief Choose which is Low/High value (White or Black);
+#define WHITE_BLACK 0
+#define BLACK_WHITE 1
+
 //#define __SENSOR_WB_VALUE WHITE_BLACK // White < Black
 #define __SENSOR_WB_VALUE BLACK_WHITE // Black < White
 
 #define __SENSOR_NUM 8
 constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
-    0,1,2,3,4,7,8
+    0,1,2,3,4,5,6,8
 };
 
 // Features Configuration //

@@ -45,8 +45,8 @@ constexpr int8_t __MOTOR_PINS[__MOTOR_PAIRS][2] = {
 /* Sensors */
 
 /// @brief Choose which is Low/High value (White or Black);
-#define __SENSOR_WB_VALUE WHITE_BLACK // White < Black
-//#define __SENSOR_WB_VALUE BLACK_WHITE // Black < White
+//#define __SENSOR_WB_VALUE WHITE_BLACK // White < Black
+#define __SENSOR_WB_VALUE BLACK_WHITE // Black < White
 
 #define __SENSOR_NUM 6
 constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
