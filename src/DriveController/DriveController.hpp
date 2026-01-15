@@ -73,10 +73,10 @@ inline void DriveController<N>::StraightDrive(int32_t base_speed,PIDCore *pid,bo
 }
 
 template <size_t N>
-inline void DriveController<N>::RotateDrive(double_t angle,PIDCore *pid,double_t correct_ms = 500,double_t precision = 0.7){
+inline void DriveController<N>::RotateDrive(double_t angle,PIDCore *pid,bool _reset = true,double_t correct_ms = 500,double_t precision = 0.7){
     CurrentUpdate = &RotateDriveRoutine;
     drive_pid = pid;
-    drive_imu->ResetWaitZero();
+    if(_reset)drive_imu->ResetWaitZero();
     drive_current = 0.0f;
     drive_setpoint = angle;
     drive_val[1] = precision; // correct flag
