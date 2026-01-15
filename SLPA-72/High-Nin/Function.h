@@ -2,14 +2,14 @@
 #include "../../src/DSN-POP32.h"
 
 LEDSensor sensors[] ={
-    {0,3200,700}, // หน้าซ้าย
-    {1,1700,800}, // หน้ากลางซ้าย
-    {2,3200,600}, // หน้ากลางขวา
-    {3,2840,700}, // หน้าขวา
-    {4,3150,700}, // หลังซ้าย
-    {5,3140,700}, // หลังกลางซ้าย
-    {6,2300,550}, // หลังกลางขวา
-    {7,2300,400}, // หลังขวา
+    {0,75,10}, // หน้าซ้าย
+    {1,170,50}, // หน้ากลางซ้าย
+    {2,3000,450}, // หน้ากลางขวา
+    {3,30,5}, // หน้าขวา
+    {4,2200,350}, // หลังซ้าย
+    {5,2800,650}, // หลังกลางซ้าย
+    {6,3200,600}, // หลังกลางขวา
+    {7,3250,700}, // หลังขวา
 };
 
 LEDSensorLine<2> Front({
@@ -17,7 +17,7 @@ LEDSensorLine<2> Front({
     &sensors[2]
 });
 
-PIDGains newRotateGains = {2.0,3.0,2.5,1.1,0.2};
+PIDGains newRotateGains = {3.0,3.0,2.5,1.1,0.2};
 
 LEDSensorLine<2> Back({
     &sensors[5],
@@ -25,8 +25,8 @@ LEDSensorLine<2> Back({
 });
 
 int32_t servoPIN = 1;
-int32_t startAngle = 175;
-int32_t endAngle = 30;
+int32_t startAngle = 180;
+int32_t endAngle = 90;
 
 void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
     drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
@@ -82,16 +82,16 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
     }
 }
 
-void rotate(int32_t angle){
+void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,400,0.9); // 400 , 0.9
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.9); // 400 , 0.9
     while(drive_motors.Update());
     motors.stop();
 }
 
 void Thailand()
 {
-    servo(6 , 270);
+    servo(6 , 0);
 }
 
 void Thailand_back()
@@ -109,7 +109,7 @@ void toggleServoOff(){
     servo(servoPIN,startAngle);
 }
 
-void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
+void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
@@ -132,7 +132,7 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
     motors.stop();
 }
 
-void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 150){
+void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1; idx <= repeat; idx++){
         do{
             Back.readLine();
