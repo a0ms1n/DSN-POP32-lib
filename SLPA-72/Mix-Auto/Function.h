@@ -24,7 +24,6 @@ void rotate(int32_t angle,bool reset = true){
     drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.8);
     while(drive_motors.Update());
     motors.stop();
-    delay(100);
 }
 
 void ForwardUntilCross(int32_t speed,int32_t spin_speed){ //เดินจับเส้นดำจนกว่าจะเจอแยก วิธีใช้ใส่ ForwardUntilCross(ความเร็ว);

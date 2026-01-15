@@ -203,7 +203,6 @@ void Poy()
 }
 
 void Run3(){
-    Sound::UmaPyou();
     // backwardAlign(70 , 1);
     // Thailand();
     // toggleServoOn();
