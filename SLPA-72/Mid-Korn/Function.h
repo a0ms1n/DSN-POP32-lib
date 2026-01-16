@@ -3,12 +3,12 @@
 
 LEDSensor sensors[] ={
     {8,3350,670}, // หน้าซ้าย
-    {7,3390,800}, // หน้ากลางซ้าย
-    {2,3820,1000}, // หน้ากลางขวา
+    {7,2820,500}, // หน้ากลางซ้าย
+    {2,3160,680}, // หน้ากลางขวา
     {4,3400,1500}, // หน้าขวา
     {5,3150,1500}, // หลังซ้าย
-    {3,3000,750}, // หลังกลางซ้าย
-    {1,2780,700}, // หลังกลางขวา
+    {3,3810,630}, // หลังกลางซ้าย
+    {1,3400,660}, // หลังกลางขวา
     {0,1500,385}, // หลังขวา
 };
 
@@ -33,7 +33,7 @@ void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,
     while(true){
         drive_motors.Update();
         Front.readLine(true);
-        if(Front.cOnline ^ (!_tillBlack)){
+        if((Front.isTrack(0) ^ (!_tillBlack)) && (Front.isTrack(1) ^ (!_tillBlack))){
             if(_continuous)drive_motors.ClearDrive();
             else drive_motors.Stop();
             break;
@@ -46,7 +46,7 @@ void backwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true
     while(true){
         drive_motors.Update();
         Back.readLine(true);
-        if(Back.cOnline ^ (!_tillBlack)){
+        if((Back.isTrack(0) ^ (!_tillBlack)) && (Back.isTrack(1) ^ (!_tillBlack))){
             if(_continuous)drive_motors.ClearDrive();
             else drive_motors.Stop();
             break;
@@ -84,7 +84,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.4);
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,150,0.4);
     while(drive_motors.Update());
     motors.stop();
 }
@@ -188,3 +188,4 @@ void spinRight(int speed) {
   motor(3 , -50);
   motor(4 , -50);
 }
+
