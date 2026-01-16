@@ -263,7 +263,7 @@ void CanGrab(){
     servo(GrabPIN,0);
 }
 
-void CanPoy()}{
+void CanPoy(){
     servo(GrabPIN,100);
     delay(1000);
     servo(GrabPIN,-1);

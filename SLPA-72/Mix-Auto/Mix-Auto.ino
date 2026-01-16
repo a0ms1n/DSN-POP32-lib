@@ -88,7 +88,7 @@ void Run(){
 
 void Run2(){
     CanPoy();
-    LiftDown()
+    LiftDown();
     int cnt = 3;
     while(cnt>=0){
         oledf.clear();
