@@ -5,7 +5,6 @@
 // เข้าไปเเก้/ดู PIN ใน Config.h
 
 #include "Function.h"
-#define DE2000() delay(2000);
 
 void Run();
 
@@ -37,64 +36,8 @@ void loop(){
     BasicMenu.show();
 }
 
-void Run(){
-    ForwardStraightTillWhite(230,400); //ตรงกว่าจะขาว ค.เร้ว ตรงไปอีก...ms
-    ForwardUntilCross(230,150); //ค.เร็วตรง ค.เร็วหมุน
-    SkipCross(140,250); //ค.เร็ว ตรงไปอีก...ms
-    TurnLeft(180);
-    Align(150);
-    
-    ForwardUntilCross(230,150);
-    SkipCross(140,250);
-    TurnLeft(170);
-    Align(150);
-
-    ForwardUntilCross(230,180);
-    SkipCross(120,350);
-    TurnRight(170);
-    Align(150);
-    
-    ForwardUntilCrossBW(160,120); //เส้นประ ค.เร็วตรง ค.เร็วหมุน
-    
-    ForwardStraightTime(-160,450); //-ถอยหลังด้วยไจโร
-    Align(100);
-    ForwardUntilCross(75,75);
-
-    ForwardStraightTillWhite(190); // สีเขียว
-
-    
-    ForwardStraightTime(250,300);
-    ForwardUntilTime(250,150,1700);
-    ground_sensor.__Track = 400;
-    ForwardUntilCross(180,150);
-    ground_sensor.__Track = 500;
-    ForwardStraightTime(150,1580); // ****
-    Align(160);
-    rotate(-90); // หมุนขวา ไจโร
-    ForwardStraightTillWhite(190);
-    
-    ForwardTime(170,220);
-
-    ForwardUntilCross(170,150);
-    SkipCross(140,300);
-    TurnRight(150);
-    Align(160);
-    ForwardUntilTime(240,150,4200);
-    ForwardUntilCross(190,150);
-    SkipCross(140,300);
-
-    ForwardUntilCross(240,130);
-    SkipCross(140,300);
-    ForwardUntilButton(240,130);
-    LiftUp();
-    delay(1000);
-    CanPoy();
-    Flagup();
-    Sound::ChillGuy();
-
-}
-
-void Run2(){
+// อ้าเเขน กดรันนี้เพื่อ รอรับกระป๋อง
+void Run1(){
     CanGrab();
     delay(1000);
     CanPoy(); // ปล่อยปอง
@@ -114,22 +57,78 @@ void Run2(){
     beep();
     CanGrab();
     beep();
-    Run();
+    Run2();
+}
+
+/// ออกตัวโดยไม่รอกระป๋อง 
+void Run2(){
+    ForwardStraightTillWhite(230,400); //ตรงกว่าจะขาว ค.เร้ว ตรงไปอีก...ms
+    ForwardUntilCross(230,150); //ค.เร็วตรง ค.เร็วหมุน
+    SkipCross(170,200); //ค.เร็ว ตรงไปอีก...ms
+    TurnLeft(200);
+    Align(150);
+    
+    ForwardUntilCross(230,150);
+    SkipCross(170,200);
+    TurnLeft(170);
+    Align(150);
+
+    ForwardUntilCross(230,180);
+    SkipCross(120,350);
+    TurnRight(200);
+    Align(150);
+    
+    ForwardUntilCrossBW(180,140); //เส้นประ ค.เร็วตรง ค.เร็วหมุน
+    
+    ForwardStraightTime(-160,450); //-ถอยหลังด้วยไจโร
+    Align(100);
+    ForwardUntilCross(75,85);
+
+    ForwardStraightTillWhite(220); // สีเขียว
+    LineScan(15,1); // หมุนหาเส้น กรณีเลยเส้น ลบได้ ถ้ามั่นใจว่าหุ่นเดินตรงเส้นเป๊ะๆ
+
+    ForwardStraightTime(250,300);
+    ForwardUntilTime(250,150,1700);
+    ground_sensor.__Track = 400;
+    ForwardUntilCross(180,150);
+    ground_sensor.__Track = 500;
+    ForwardStraightTime(150,1580); // ****
+    Align(160);
+    rotate(-90); // หมุนขวา ไจโร
+    Run3();
 
 }
 
+// เดินจากจุดเซฟ 
 void Run3(){
-    ForwardUntilCross(220,150);
+    CanGrab();
+    LiftDown();
+    FlagDown();
+    ForwardStraightTillWhite(190);
+    
+    ForwardTime(170,220);
+
+    ForwardUntilCross(170,150);
     SkipCross(140,300);
-    ForwardUntilButton(220,150);
+    TurnRight(150);
+    Align(160);
+    ForwardUntilTime(250,150,2200);
+    ForwardUntilTime(180,140,2200);
+    ForwardUntilCross(170,130);
+    SkipCross(140,300);
+
+    ForwardUntilCross(240,130);
+    SkipCross(140,300);
+    ForwardUntilButton(250,130);
     LiftUp();
     delay(1000);
     CanPoy();
-
     Flagup();
     Sound::ChillGuy();
+
 }                         
-                                                
+     
+// สำหรับทดลองโค้ดบางส่วน
 void Run4(){
-    
+    Sound::Blue();
 }
