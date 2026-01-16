@@ -248,6 +248,34 @@ void SensorCalibrate(){
     ground_sensor.AutoCalibrate(4000);
 }
 
+void CanGrab(){
+    servo(GrabPIN,40);
+}
+
+void Flagup(){
+    servo(FlagPIN,90);
+}
+
+void FlagDown(){
+    servo(FlagPIN,180);
+    delay(600);
+    servo(GrabPIN,-1);
+}
+
+void CanPoy(){
+    servo(GrabPIN,134);
+    delay(600);
+    servo(GrabPIN,-1);
+}
+
+void LiftDown(){
+    servo(ArmPIN,180);
+}
+
+void LiftUp(){
+    servo(ArmPIN,0);
+}
+
 namespace Sound{
     void ChillGuy(){
         static int16_t soundseq[][2] = {
@@ -258,30 +286,4 @@ namespace Sound{
             if(SW_OK())break;
         }
     }
-}
-
-void CanGrab(){
-    servo(GrabPIN,40);
-}
-
-void Flagup(){
-    servo(FlagPIN,90);
-}
-
-void Flag(){
-    servo(FlagPIN,180);
-}
-
-void CanPoy(){
-    servo(GrabPIN,134);
-    delay(300);
-    servo(GrabPIN,-1);
-}
-
-void LiftDown(){
-    servo(ArmPIN,180);
-}
-
-void LiftUp(){
-    servo(ArmPIN,0);
 }

@@ -10,13 +10,14 @@
 void Run();
 
 void setup(){
-    Flag();
+    FlagDown();
     LiftDown();
     beep();
     POP32_INIT();
     BasicMenu.buttons[0].callback = Run;
     BasicMenu.buttons[1].callback = Run2;
     BasicMenu.buttons[2].callback = Run3;
+    BasicMenu.buttons[3].callback = Run4;
     motors.setSpeedRange(100,255);
     imu.Start();
     PIDStraight.SetOutputLimits(-210, 210);
@@ -29,10 +30,6 @@ void setup(){
     ground_sensor.__Track = 500;
     BasicMenu.buttons.push_back({
         "Sensor Calibrate",SensorCalibrate
-    });
-
-    BasicMenu.buttons.push_back({
-        "Servo Test",ServoTest
     });
 }   
 
@@ -122,10 +119,7 @@ void Run2(){
 }
 
 void Run3(){
-
-    
-
-   ForwardUntilCross(220,150);
+    ForwardUntilCross(220,150);
     SkipCross(140,300);
     ForwardUntilButton(220,150);
     LiftUp();
@@ -134,65 +128,8 @@ void Run3(){
 
     Flagup();
     Sound::ChillGuy();
-    
-    
-
-
-    // ground_sensor.__Track = 500;
-    // ForwardStraightTillWhite(155);
-    // ForwardUntilCrossBW(200);
-    
-    // servo(GrabPIN, 100);
-    // delay(1500); 
-    // servo(GrabPIN, 0);
-    // delay(1500);
-    // servo(GrabPIN, 100);
-
-    // while(true){
-    //    oled.clear();
-    //     oled.text(0,0,0,"%d",(int32_t)analog(Button));
-    //     oled.show();
-
-
-}
-
-void ServoTest(){
-    beep();
-    oledf.clear();
-    oledf.text(0,0,1,"A -> Grab");
-    oledf.text(0,20,1,"B -> Arm");
-    oledf.show();
-
-    while(true){
-        if(SW_A()){
-            while(SW_A());
-            while(true){
-                int val = knob(0,180);
-                oledf.clear();
-                oledf.text(0,0,1,"angle = %d",val);
-                servo(GrabPIN,val);
-                oledf.show();
-                if(SW_A())break;
-            }
-            break;
-        }
-        else if(SW_B()){
-            while(SW_B());
-            while(true){
-                int val = knob(0,180);
-                oledf.clear();
-                oledf.text(0,0,1,"angle = %d",val);
-                servo(ArmPIN,val);
-                oledf.show();
-                if(SW_B())break;
-            }
-            break;
-
-        }
-    }
-    servo(GrabPIN,-1);
-    servo(ArmPIN,-1);
-
-}                              
+}                         
                                                 
-
+void Run4(){
+    
+}

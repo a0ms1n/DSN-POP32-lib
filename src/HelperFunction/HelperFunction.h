@@ -21,4 +21,5 @@ void StraightTest();
 #ifdef _enable_PSX
 void PsxTest();
 #endif
+void ServoTest();
 };

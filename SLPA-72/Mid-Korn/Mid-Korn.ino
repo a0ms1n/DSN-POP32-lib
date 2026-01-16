@@ -29,6 +29,7 @@ void setup(){
     BasicMenu.buttons[0].callback = Run1; // Run 1
     BasicMenu.buttons[1].callback = Run2; // Run 2
     BasicMenu.buttons[2].callback = Run3; // Run 3
+    BasicMenu.buttons[3].callback = Run4;
     BasicMenu.buttons.push_back({"Music",MusicJaa});
     Front.__Track = 700;
     Back.__Track = 700;
@@ -350,6 +351,10 @@ void Run3()
     forwardAlign(100,2);
     AO(); delay(10000);
     */
+}
+
+void Run4(){
+    
 }
 
 void MusicJaa(){

@@ -30,6 +30,7 @@ void setup()
     BasicMenu.buttons[0].callback = Run1; // Run 1
     BasicMenu.buttons[1].callback = Run2; // Run 2
     BasicMenu.buttons[2].callback = Run3; // Run 3
+    BasicMenu.buttons[3].callback = Run4; 
     Front.__Track = 750;
     Back.__Track = 750;
     motors.setSpeedRange(110,340);
@@ -245,4 +246,8 @@ void Run3(){
     // delay(500);
     // AO();
 
+}
+
+void Run4(){
+    
 }
