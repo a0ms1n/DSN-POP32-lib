@@ -60,13 +60,13 @@ void Run(){
     
     ForwardStraightTime(-160,450); //-ถอยหลังด้วยไจโร
     Align(100);
-    ForwardUntilCross(80,80);
+    ForwardUntilCross(75,75);
 
-    ForwardStraightTillWhite(145); // สีเขรยว
+    ForwardStraightTillWhite(190); // สีเขียว
 
     
-    ForwardStraightTime(200,300);
-    ForwardUntilTime(250,150,2200);
+    ForwardStraightTime(250,300);
+    ForwardUntilTime(250,150,1700);
     ground_sensor.__Track = 400;
     ForwardUntilCross(180,150);
     ground_sensor.__Track = 500;
