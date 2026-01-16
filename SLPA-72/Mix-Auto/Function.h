@@ -258,3 +258,21 @@ namespace Sound{
         }
     }
 }
+
+void CanGrab(){
+    servo(GrabPIN,0);
+}
+
+void CanPoy()}{
+    servo(GrabPIN,100);
+    delay(1000);
+    servo(GrabPIN,-1);
+}
+
+void LiftDown(){
+
+}
+
+void LiftUp(){
+    
+}

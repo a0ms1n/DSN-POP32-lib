@@ -82,18 +82,13 @@ void Run(){
     ForwardUntilCross(220,150);
     SkipCross(140,300);
     ForwardUntilButton(220,150);
+    Sound::ChillGuy();
 
-}
-
-void RunEx(){
-
-    
 }
 
 void Run2(){
-    servo(GrabPIN,100);
-    delay(1000);
-    servo(GrabPIN,-1);
+    CanPoy();
+    LiftDown()
     int cnt = 3;
     while(cnt>=0){
         oledf.clear();
@@ -105,9 +100,9 @@ void Run2(){
     }
     beep();
     beep();
-    delay(1000);
+    delay(2000);
     beep();
-    servo(GrabPIN,0);
+    CanGrab();
     Run();
 
 }
