@@ -103,11 +103,11 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
-            if(!Front.cOnline)motors.run(speed,speed);
+            if(!Front.cOnline)motors.run(speed,speed + 20);
 
             // Black at right -> go right
-            else if(Front.errorFromMid() > 0)motors.run(-speed,speed);
-            else motors.run(speed,-speed);
+            else if(Front.errorFromMid() > 0)motors.run(-speed - 20,speed);
+            else motors.run(speed + 20,-speed);
             oledf.clear();
             oledf.text(0,0,1,"%d",(int32_t)Front.errorFromMid());
             oledf.show();
@@ -128,15 +128,15 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
             Back.readLine();
 
             if(!Back.cOnline)
-                motors.run(-speed, -speed);
+                motors.run(-speed, -speed-30);
 
             // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
             else if(Back.errorFromMid() > 0)
-                motors.run(speed, -speed - 30);
+                motors.run(speed, -speed - 50);
 
             // เส้นอยู่ซ้าย → หมุนซ้าย (ตอนถอย)
             else
-                motors.run(-speed, speed + 30);
+                motors.run(-speed, speed + 50);
 
         }while(abs(Back.errorFromMid()) >= 50 || !Back.cOnline);
 
