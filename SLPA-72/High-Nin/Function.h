@@ -2,14 +2,14 @@
 #include "../../src/DSN-POP32.h"
 
 LEDSensor sensors[] ={
-    {0,250,75}, // หน้าซ้าย
-    {1,135,25}, // หน้ากลางซ้าย
-    {2,3000,500}, // หน้ากลางขวา
-    {3,30,5}, // หน้าขวา
-    {4,2200,350}, // หลังซ้าย
-    {5,2800,650}, // หลังกลางซ้าย
-    {6,3200,600}, // หลังกลางขวา
-    {7,3250,700}, // หลังขวา
+    {0,50,5}, // หน้าซ้าย
+    {1,115,25}, // หน้ากลางซ้าย
+    {2,1150,200}, // หน้ากลางขวา
+    {3,120,15}, // หน้าขวา
+    {4,2900,800}, // หลังซ้าย
+    {5,2750,650}, // หลังกลางซ้าย
+    {6,2800,700}, // หลังกลางขวา
+    {7,2000,400}, // หลังขวา
 };
 
 LEDSensorLine<2> Front({
@@ -17,7 +17,8 @@ LEDSensorLine<2> Front({
     &sensors[2]
 });
 
-PIDGains newRotateGains = {3.0,3.0,2.5,1.1,0.2};
+PIDGains newRotateGains = {3.0,3.0,2.5,1.1,0.2}; //3.0,3.0,2.5,1.1,0.2
+PIDGains newStraightGains = {3.5,0.5,0.6,1.0,0.5}; // 3.5,0.5,0.6,1.0,0.5
 
 LEDSensorLine<2> Back({
     &sensors[5],
@@ -25,8 +26,8 @@ LEDSensorLine<2> Back({
 });
 
 int32_t servoPIN = 1;
-int32_t startAngle = 180;
-int32_t endAngle = 90;
+int32_t startAngle = 175;
+int32_t endAngle = 70;
 
 void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
     drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
@@ -84,14 +85,14 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.9); // 400 , 0.9
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.5); // 400 , 0.9
     while(drive_motors.Update());
     motors.stop();
 }
 
 void Thailand()
 {
-    servo(6 , 0);
+    servo(6 , 180);
 }
 
 void Thailand_back()
@@ -102,7 +103,7 @@ void Thailand_back()
 void toggleServoOn()
 {
     servo(servoPIN,startAngle);
-    delay(200);
+    delay(300);
     servo(servoPIN,endAngle);
 }
 
@@ -110,37 +111,30 @@ void toggleServoOff(){
     servo(servoPIN,startAngle);
 }
 
-void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
-    for(int16_t idx = 1; idx <= repeat; idx++){
+void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 1000){
+        for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
+            if(!Front.cOnline)motors.run(speed,speed);
 
-            if(!Front.cOnline)
-                motors.run(-speed, -speed);
-
-            // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
-            else if(Front.errorFromMid() > 0)
-                motors.run(-speed, speed + 20);
-
-            // เส้นอยู่ซ้าย → หมุนซ้าย (ตอนถอย)
-            else
-                motors.run(speed, -speed - 20);
-
-        }while(abs(Back.errorFromMid()) >= 50 || !Back.cOnline);
-
-        if(idx == repeat) break;
-
-        motors.run(speed, speed);
+            // Black at right -> go right
+            else if(Front.errorFromMid() > 0)motors.run(-speed - 10,speed);
+            else motors.run(speed + 10,-speed);
+            oledf.clear();
+            oledf.text(0,0,1,"%d",(int32_t)Front.errorFromMid());
+            oledf.show();
+        }while(abs(Front.errorFromMid()) >= 50 || !Front.cOnline);
+        if(idx == repeat)break;
+        motors.run(-speed,-speed);
         delay(back_delay);
-
         do{
             Front.readLine();
         }while(Front.cOnline);
-    }
+    }   
     motors.stop();
 }
 
-void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
+void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 1000){
     for(int16_t idx = 1; idx <= repeat; idx++){
         do{
             Back.readLine();
