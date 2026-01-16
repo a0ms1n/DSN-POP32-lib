@@ -264,9 +264,17 @@ void CanGrab(){
     servo(GrabPIN,40);
 }
 
+void Flagup(){
+    servo(FlagPIN,90);
+}
+
+void Flag(){
+    servo(FlagPIN,180);
+}
+
 void CanPoy(){
     servo(GrabPIN,134);
-    delay(1500);
+    delay(300);
     servo(GrabPIN,-1);
 }
 

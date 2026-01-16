@@ -10,6 +10,7 @@
 void Run();
 
 void setup(){
+    Flag();
     LiftDown();
     beep();
     POP32_INIT();
@@ -91,6 +92,7 @@ void Run(){
     LiftUp();
     delay(1000);
     CanPoy();
+    Flagup();
     Sound::ChillGuy();
 
 }
@@ -120,13 +122,22 @@ void Run2(){
 }
 
 void Run3(){
-    ForwardUntilCross(220,150);
+
+    
+
+   ForwardUntilCross(220,150);
     SkipCross(140,300);
     ForwardUntilButton(220,150);
     LiftUp();
     delay(1000);
     CanPoy();
+
+    Flagup();
     Sound::ChillGuy();
+    
+    
+
+
     // ground_sensor.__Track = 500;
     // ForwardStraightTillWhite(155);
     // ForwardUntilCrossBW(200);
