@@ -69,6 +69,14 @@ void LiftUp(){
     servo(ArmPIN,0);
 }
 
+// หมุนด้วยไจโร + เลี้ยวซ้าย - เลี้ยวขวา
+void rotate(int32_t angle,bool reset = true){
+    motors.stop();
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.5);
+    while(drive_motors.Update());
+    motors.stop();
+}
+
 // หมุนรอบตัวเองเพื่อหาเส้นดำ
 void LineScan(int32_t step = 15,int32_t reverse = false){
     for(int angle = step;angle <= 90;angle+=step){
@@ -82,7 +90,7 @@ void LineScan(int32_t step = 15,int32_t reverse = false){
                 return;
             }
         }
-        rotate(-angle*(reverse?-1:1));
+        rotate(-angle*(reverse?-1:1),false);
         motors.stop();
 
         drive_motors.RotateDrive(-angle*(reverse?-1:1),&PIDRotate,0,500,0.9);
@@ -94,19 +102,11 @@ void LineScan(int32_t step = 15,int32_t reverse = false){
                 return;
             }
         }
-        rotate(angle*(reverse?-1:1));
+        rotate(angle*(reverse?-1:1),false);
         motors.stop();
         
 
     }
-}
-
-// หมุนด้วยไจโร + เลี้ยวซ้าย - เลี้ยวขวา
-void rotate(int32_t angle,bool reset = true){
-    motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.5);
-    while(drive_motors.Update());
-    motors.stop();
 }
 
 // เดินตามเส้น จนหมดเวลา

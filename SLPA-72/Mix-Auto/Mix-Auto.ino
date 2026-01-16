@@ -13,7 +13,7 @@ void setup(){
     LiftDown();
     beep();
     POP32_INIT();
-    BasicMenu.buttons[0].callback = Run;
+    BasicMenu.buttons[0].callback = Run1;
     BasicMenu.buttons[1].callback = Run2;
     BasicMenu.buttons[2].callback = Run3;
     BasicMenu.buttons[3].callback = Run4;
@@ -95,6 +95,7 @@ void Run2(){
     ForwardStraightTime(150,1580); // ****
     Align(160);
     rotate(-90); // หมุนขวา ไจโร
+    beep();
     Run3();
 
 }
