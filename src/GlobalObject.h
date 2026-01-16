@@ -11,7 +11,7 @@ IMU imu;
 #endif
 MotorPair<__MOTOR_PAIRS> motors(__MOTOR_PINS[0],__MOTOR_PINS[1]);
 
-PIDGains PIDStraight_gains = {3.5,0.2,0.2,1.0,0.5};
+PIDGains PIDStraight_gains = {4.6,0.9,3.5,1.5,0.1};
 PIDCore PIDStraight(PIDStraight_gains,-200.0,200.0);
 
 // Speed lim set to (100,255)

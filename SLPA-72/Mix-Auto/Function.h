@@ -12,30 +12,31 @@ int32_t _left_sensor = 1;
 double RightAngle = 87.0;
 
 int32_t can_sensor_PIN = 8;
-int32_t can_sensor_val = 210;
+int32_t can_sensor_val = 410; // ค่าเซนเซอร์กระป๋องอิอิ
 int32_t Button = 7;
 
-int GrabPIN = 2;
-int ArmUp = 3;
+int GrabPIN = 2; // มือจับ
+int ArmPIN = 3; // เเขนยก
+int FlagPIN = 4; // ธง
 
 LEDSensor sensors[] ={
-    {5,3800,1500}, // L - ซ้ายสุด
-    {1,3800,1500}, // L2 
-    {3,3800,1500}, // L3
-    {0,3800,1500}, // M
-    {4,3800,1600}, // R3 
-    {2,3800,1600},  // R2
-    {6,3800,800}  // R - ขวาสุด
+    {5,3800,2000}, // L - ซ้ายสุด
+    {1,3800,1800}, // L2 
+    {3,3800,1200}, // L3
+    {0,3800,1200}, // M
+    {4,3800,1100}, // R3 
+    {2,3800,1100},  // R2
+    {6,3800,1100}  // R - ขวาสุด
 };
 
 // {Sensors Refs}, AutoRotate, Error, Track
 LEDSensorLine<7> ground_sensor({&sensors[0],&sensors[1],&sensors[2],&sensors[3],&sensors[4],&sensors[5],&sensors[6]},0,50,500);
 
-PIDGains newRotateGains = {2.7,3.1,1.3,1.3,0}; 
+PIDGains newRotateGains = {4.7,3.1,3.3,1.3,0.2}; 
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.8);
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.9);
     while(drive_motors.Update());
     motors.stop();
 }
@@ -260,19 +261,19 @@ namespace Sound{
 }
 
 void CanGrab(){
-    servo(GrabPIN,0);
+    servo(GrabPIN,40);
 }
 
 void CanPoy(){
-    servo(GrabPIN,100);
-    delay(1000);
+    servo(GrabPIN,134);
+    delay(1500);
     servo(GrabPIN,-1);
 }
 
 void LiftDown(){
-
+    servo(ArmPIN,180);
 }
 
 void LiftUp(){
-    
+    servo(ArmPIN,0);
 }
