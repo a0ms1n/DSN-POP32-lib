@@ -3,12 +3,12 @@
 
 LEDSensor sensors[] ={
     {8,3350,670}, // หน้าซ้าย
-    {7,2820,500}, // หน้ากลางซ้าย
-    {2,3160,680}, // หน้ากลางขวา
+    {7,3720,750}, // หน้ากลางซ้าย
+    {2,3190,660}, // หน้ากลางขวา
     {4,3400,1500}, // หน้าขวา
     {5,3150,1500}, // หลังซ้าย
-    {3,3810,630}, // หลังกลางซ้าย
-    {1,3400,660}, // หลังกลางขวา
+    {3,3430,750}, // หลังกลางซ้าย
+    {1,3820,860}, // หลังกลางขวา
     {0,1500,385}, // หลังขวา
 };
 
@@ -99,15 +99,18 @@ void toggleServoOff(){
     servo(servoPIN,startAngle);
 }
 
-void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 500){
+void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
             if(!Front.cOnline)motors.run(speed,speed);
 
             // Black at right -> go right
-            else if(Front.errorFromMid() > 0)motors.run(-speed - 20,speed);
-            else motors.run(speed + 20,-speed);
+            else if(Front.errorFromMid() > 0)motors.run(-speed,speed);
+            else motors.run(speed,-speed);
+            oledf.clear();
+            oledf.text(0,0,1,"%d",(int32_t)Front.errorFromMid());
+            oledf.show();
         }while(abs(Front.errorFromMid()) >= 50 || !Front.cOnline);
         if(idx == repeat)break;
         motors.run(-speed,-speed);
@@ -129,11 +132,11 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
 
             // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
             else if(Back.errorFromMid() > 0)
-                motors.run(speed, -speed - 20);
+                motors.run(speed, -speed - 30);
 
             // เส้นอยู่ซ้าย → หมุนซ้าย (ตอนถอย)
             else
-                motors.run(-speed, speed + 20);
+                motors.run(-speed, speed + 30);
 
         }while(abs(Back.errorFromMid()) >= 50 || !Back.cOnline);
 
@@ -149,22 +152,7 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     motors.stop();
 }
 
-void Set_B(int SpeedL , int SpeedR) {
-    int BL = analog(1);
-    int RL = analog(3);
-    int RefBL = 2030; int RefRL = 2220;
 
-    if (BL>RefBL && RL<RefRL) {
-        FD2(-50,0);
-    }
-    else if (BL<RefBL && RL>RefRL) {
-        FD2(0,-50);
-    }
-    else {
-        FD2(SpeedL,SpeedR);
-    }
-    break;
-}
 namespace Sound{
     void UmaPyou(){
         static int16_t soundseq[][2] = {

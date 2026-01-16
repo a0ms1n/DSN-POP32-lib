@@ -106,7 +106,7 @@ void HelperFunction::StraightTest(){
         while(drive_motors.Update() && !ft.check()){
             oledf.clear();
             oledf.text(0,0,1,"Timer : %d",(int32_t)millis());
-            oledf.text(0,20,1,"Yaw : %.2f",imu.cYaw);
+            oledf.text(0,20,1,"Yaw : %.2f %.2f",imu.cYaw,drive_motors.drive_current);
             oledf.show();
         };
         drive_motors.Stop();

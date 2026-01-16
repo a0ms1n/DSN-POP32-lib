@@ -30,10 +30,10 @@ void setup(){
     BasicMenu.buttons[1].callback = Run2; // Run 2
     BasicMenu.buttons[2].callback = Run3; // Run 3
     BasicMenu.buttons.push_back({"Music",MusicJaa});
-    Front.__Track = 800;
-    Back.__Track = 800;
+    Front.__Track = 700;
+    Back.__Track = 700;
     motors.setSpeedRange(90,250);
-    motors.setRatio({1,1},{1.0,1.08});
+    motors.setRatio({1,1},{1.0,1.0});
     
 }   
 
@@ -41,9 +41,7 @@ void loop(){
     BasicMenu.show();
 }
 
-void MusicJaa(){
-    Sound::RickRoll();
-}
+
 
 void Run1(){
     
@@ -54,7 +52,7 @@ void Run1(){
     forwardTill(140,1,0);
     forwardTime(200,600,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
     backwardTime(140,200);
 
     rotate(-90,0);
@@ -63,7 +61,7 @@ void Run1(){
     backwardAlign(Slow,2);
     forwardTime(200,500,0); //Check-Point 1
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
     backwardTime(140,150);
 
     rotate(-90,1);
@@ -72,29 +70,31 @@ void Run1(){
 
     forwardTime(200,700,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
     backwardTime(140,200);
 
-    rotate(-90,0);
+    rotate(-90,1);
 
     forwardTill(140,1,0);
     backwardTime(140,200);
 
     rotate(-90,0);
+    backwardTill(140,1,0);
+    backwardAlign(Slow,2);
 
-    forwardTill(160,1,0);
+    forwardTill(160,1,1);
 
     Poy(); delay(300); AO(); delay(300); //Green 1
 
     backwardTime(200,300,0);
     backwardTill(140,1,0);
     backwardAlign(Slow,1);
-    forwardTime(140,300,0);
+    forwardTime(140,200,0);
 
     rotate(-90,1);
 
     backwardTill(140,1,0);
-    backwardAlign(Slow,2);
+    backwardAlign(Slow,3);
 
     forwardTime(200,800,0);
     forwardTill(140,1,0);
@@ -114,11 +114,11 @@ void Run1(){
     rotate(-90,0);
 
     backwardTill(140,1,0);
-    backwardAlign(Slow,1);
+    backwardAlign(Slow,2);
 
     forwardTime(200,300,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
     backwardTime(140,150);
 
     rotate(-90,0);
@@ -133,30 +133,27 @@ void Run1(){
 
     forwardTime(200,550,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
     backwardTime(140,200,0);
 
     rotate(-90,0);
 
-    forwardTill(160,1,1);
+    forwardTime(140,500,0);
 
     Poy(); delay(300); AO(); delay(300); //Green 2
 
-    forwardAlign(Slow,2);
-
-    backwardTime(200,800,0);
-    backwardTill(140,1,0);
-    backwardAlign(Slow,1);
-    forwardTime(140,200,0);
-
-    rotate(-90,1);
-
+    backwardTime(200,850,0);
     backwardTill(140,1,0);
     backwardAlign(Slow,2);
+    forwardTime(140,200,0);
+
+    rotate(-85,0);
 
     forwardTime(200,1000,0);
+
+    
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,2);
     backwardTime(140,200);
 
     rotate(90,1);
@@ -169,7 +166,7 @@ void Run1(){
 
     Poy(); delay(300); AO(); delay(300); //Green 3
 
-    forwardAlign(Slow,2);
+    // forwardAlign(Slow,2);
 
     backwardTime(100,1700,0);
     backwardTill(140,1,0);
@@ -181,7 +178,7 @@ void Run1(){
 
 
     backwardTill(140,1,0);
-    backwardAlign(75,5,200);
+    backwardAlign(Slow,5,200);
 
     forwardTime(200,1000,0);
     forwardTill(140,1,0);
@@ -192,29 +189,29 @@ void Run1(){
     rotate(-90,1);
 
     backwardTill(140,1,0);
-    backwardAlign(Slow,2);
+    backwardAlign(Slow,3,200);
 
     forwardTime(200,350,0);
 
     rotate(-90,1);
 
-    forwardTill(160,1,0);
-    Poy(); delay(300); AO(); delay(300); //Green4
+    forwardTill(160,1,1); //เดินมาปล่อยพอดี
+
+    Poy(); delay(300); AO(); delay(300); //Green 4
     forwardAlign(Slow,2);
 
     backwardTill(140,1,0);
-    backwardAlign(Slow,2);
+    backwardAlign(Slow,5,200);
 
     forwardTime(140,200,0); 
 
-    rotate(90,1);
+    rotate(90,0);
 
     forwardTime(200,350,0);
 
     rotate(-90,1);
-
     backwardTill(140,1,0);
-    backwardAlign(Slow,1);
+    backwardAlign(Slow,5,200);
 
     forwardTime(200,600,0);
 
@@ -222,7 +219,7 @@ void Run1(){
 
     forwardTime(200,400,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,3,200);
     backwardTime(140,200,0);
 
     rotate(90,0);
@@ -232,7 +229,7 @@ void Run1(){
 
     forwardTime(200,400,0);
     forwardTill(140,1,0);
-    forwardAlign(Slow,1);
+    forwardAlign(Slow,3,200);
     backwardTime(140,200,0);
 
     rotate(90,0);
@@ -252,7 +249,7 @@ void Run1(){
 
     rotate(-90,1);
     backwardTill(140,1,0);
-    backwardAlign(Slow,2);
+    backwardAlign(Slow,5,200);
 
     forwardTime(200,1000,1);
     forwardTill(140,1,0);
@@ -290,114 +287,24 @@ void Run2(){
     imu.Start();
     beep();
     
-    backwardTill(140,1,0);
-    backwardAlign(80,2);
-
-    forwardTime(200,500,1,0);
     forwardTill(140,1,0);
-    forwardAlign(80,1);
-    BK2(45,40); delay(300);
-    
-
-    rotate(90,1); ///asdasdas
-    forwardTime(200,500,1,0);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    BK2(45,40); delay(200);
-    
-
-    rotate(90,1);
-    forwardTime(200,500,1,0);
-
-    
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    backwardTime(140,300,0);    //ขึ้นสะพาน
-    
-
-    rotate(-90,0);
-    forwardTime(200,500,1,0);
-    
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    backwardTime(140,300,0);    //ลงสะพาน
-    
-
-    rotate(-90,0);
-    forwardTime(200,600,0);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    backwardTime(140,200,0);
-    
-
-    rotate(-90,0);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    BK2(45,40); delay(300);
-    
-
-    rotate(90,0);
-    backwardTill(140,1,0);
-    backwardAlign(80,2);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    BK2(45,40); delay(200);
-    
-
-    rotate(90,1);
-    //check 2
-    forwardTime(100,1500,0);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
+    forwardAlign(Slow,2);
     backwardTime(140,200,0);
 
-    rotate(90,0);
+    rotate(-90,0);
+
+    forwardTime(140,400,0);
+
+    Poy(); delay(300); AO(); delay(300); //Green 2
+
+    backwardTime(200,850,0);
     backwardTill(140,1,0);
-    backwardAlign(80,2);
-
-    FD2(83,90); delay(400);
-    forwardTill(120,1,0);
-
-    Poy(); delay(300); AO(); delay(300);  // green 4
-
-    BK2(83,90); delay(550);
-    backwardTill(140,1,0);
-    backwardAlign(80,2);
-
-    rotate(90,0);
-    forwardTime(100,1500,0);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    backwardTime(140,300,0);
-    
+    backwardAlign(Slow,2);
+    forwardTime(140,200,0);
 
     rotate(-90,0);
-    backwardTill(140,1,0);
-    backwardAlign(80,2);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    backwardTime(140,300,0);
-    
 
-    rotate(-90,0);
-    backwardTill(140,1,0);
-    backwardAlign(80,2);
-    forwardTill(140,1,0);
-    forwardAlign(80,1);
-    backwardTime(140,300,0);
-    
-
-    rotate(90,0); //ดำ
-    forwardTime(200,500,0);
-    forwardTill(140,1,0);
-    forwardAlign(80,2);
-    backwardTime(140,200,0);
-    
-    
-    rotate(-90,0);
-    forwardTime(140,600,0);
-
-
+    forwardTime(200,1000,0);
 
     AO(); delay(100000);
 
@@ -406,6 +313,7 @@ void Run2(){
 
 void Run3() 
 {   
+    imu.Start();
     //FD2(83,90); delay(700); ///
 
     //forwardTill(120,1,0);
@@ -417,6 +325,7 @@ void Run3()
     //backwardTill(140,1,0);
     //backwardAlign(80,2);
     //FD2(45,40); delay(1000);
+    
     //Prefer test for Direct
     backwardTill(140,1,0);
     backwardAlign(70,2);
@@ -447,4 +356,8 @@ void Run3()
     forwardAlign(100,2);
     AO(); delay(10000);
     */
+}
+
+void MusicJaa(){
+    Sound::RickRoll();
 }
