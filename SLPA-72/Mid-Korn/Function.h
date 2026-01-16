@@ -33,7 +33,7 @@ void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,
     while(true){
         drive_motors.Update();
         Front.readLine(true);
-        if((Front.isTrack(0) ^ (!_tillBlack)) && (Front.isTrack(1) ^ (!_tillBlack))){
+        if((Front.cOnline ^ (!_tillBlack))){
             if(_continuous)drive_motors.ClearDrive();
             else drive_motors.Stop();
             break;
@@ -46,7 +46,7 @@ void backwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true
     while(true){
         drive_motors.Update();
         Back.readLine(true);
-        if((Back.isTrack(0) ^ (!_tillBlack)) && (Back.isTrack(1) ^ (!_tillBlack))){
+        if((Back.cOnline ^ (!_tillBlack))){
             if(_continuous)drive_motors.ClearDrive();
             else drive_motors.Stop();
             break;
@@ -99,18 +99,15 @@ void toggleServoOff(){
     servo(servoPIN,startAngle);
 }
 
-void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
+void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 500){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
             if(!Front.cOnline)motors.run(speed,speed);
 
             // Black at right -> go right
-            else if(Front.errorFromMid() > 0)motors.run(-speed,speed);
-            else motors.run(speed,-speed);
-            oledf.clear();
-            oledf.text(0,0,1,"%d",(int32_t)Front.errorFromMid());
-            oledf.show();
+            else if(Front.errorFromMid() > 0)motors.run(-speed - 20,speed);
+            else motors.run(speed + 20,-speed);
         }while(abs(Front.errorFromMid()) >= 50 || !Front.cOnline);
         if(idx == repeat)break;
         motors.run(-speed,-speed);
@@ -127,16 +124,16 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
         do{
             Back.readLine();
 
-           if(!Back.cOnline)
+            if(!Back.cOnline)
                 motors.run(-speed, -speed);
 
             // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
             else if(Back.errorFromMid() > 0)
-                motors.run(speed, -speed);
+                motors.run(speed, -speed - 20);
 
-            // เส้นอยู่ซ้าย → หมุนซ้าย (ต7อนถอย)
+            // เส้นอยู่ซ้าย → หมุนซ้าย (ตอนถอย)
             else
-                motors.run(-speed, speed);
+                motors.run(-speed, speed + 20);
 
         }while(abs(Back.errorFromMid()) >= 50 || !Back.cOnline);
 
@@ -152,6 +149,22 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     motors.stop();
 }
 
+void Set_B(int SpeedL , int SpeedR) {
+    int BL = analog(1);
+    int RL = analog(3);
+    int RefBL = 2030; int RefRL = 2220;
+
+    if (BL>RefBL && RL<RefRL) {
+        FD2(-50,0);
+    }
+    else if (BL<RefBL && RL>RefRL) {
+        FD2(0,-50);
+    }
+    else {
+        FD2(SpeedL,SpeedR);
+    }
+    break;
+}
 namespace Sound{
     void UmaPyou(){
         static int16_t soundseq[][2] = {
