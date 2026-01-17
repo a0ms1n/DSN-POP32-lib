@@ -197,6 +197,7 @@ void HelperFunction::ServoTest(){
         oledf.text(0,10,1,"Current Angle : %d",angle);
         oledf.text(0,20,1,"A to move");
         oledf.text(0,30,1,"B to exit");
+        oledf.show();
         if(SW_A()){
             servo(val,angle);
         }
