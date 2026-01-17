@@ -18,6 +18,12 @@
 /// @brief Define this when using Servo
 //#define _enable_Servo
 
+/// @brief Define if want to show Run3() on menu;
+#define _enable_Run3
+
+/// @brief Define if want to show Run4() on menu;
+#define _enable_Run4
+
 /* MOTOR */
 
 /// @brief Type of robot moving part (Legs/Wheels).
@@ -51,9 +57,9 @@ constexpr int8_t __MOTOR_PINS[2][__MOTOR_PAIRS] = {
 //#define __SENSOR_WB_VALUE WHITE_BLACK // White < Black
 #define __SENSOR_WB_VALUE BLACK_WHITE // Black < White
 
-#define __SENSOR_NUM 8
+#define __SENSOR_NUM 9
 constexpr int8_t __SENSOR_PINS[__SENSOR_NUM]={
-    0,1,2,3,4,5,6,8
+    0,1,2,3,4,5,6,7,8
 };
 
 // Features Configuration //

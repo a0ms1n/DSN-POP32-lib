@@ -18,6 +18,12 @@
 /// @brief Define this when using Servo
 #define _enable_Servo
 
+/// @brief Define if want to show Run3() on menu;
+#define _enable_Run3
+
+/// @brief Define if want to show Run4() on menu;
+#define _enable_Run4
+
 /* MOTOR */
 
 /// @brief Type of robot moving part (Legs/Wheels).

@@ -106,7 +106,7 @@ void HelperFunction::StraightTest(){
         while(drive_motors.Update() && !ft.check()){
             oledf.clear();
             oledf.text(0,0,1,"Timer : %d",(int32_t)millis());
-            oledf.text(0,20,1,"Yaw : %.2f",imu.cYaw);
+            oledf.text(0,20,1,"Yaw : %.2f %.2f",imu.cYaw,drive_motors.drive_current);
             oledf.show();
         };
         drive_motors.Stop();
@@ -178,13 +178,54 @@ void HelperFunction::PsxTest(){
 
 #endif
 
+void HelperFunction::ServoTest(){
+    beep();
+    oledf.clear();
+    oledf.text(0,0,1,"A -> Grab");
+    oledf.text(0,20,1,"B -> Arm");
+    oledf.show();
+
+    int val;
+    while(true){
+        val = knob(1,6);
+        oledf.clear();
+        oledf.text(0,0,1,"Current PIN : %d",val);
+        oledf.text(0,10,1,"OK to continue");
+        if(SW_OK())break;
+    }
+    while(SW_OK());
+    while(true){
+        int angle = knob(0,200);
+        oledf.clear();
+        oledf.text(0,0,1,"Current PIN : %d",val);
+        oledf.text(0,10,1,"Current Angle : %d",angle);
+        oledf.text(0,20,1,"A to move");
+        oledf.text(0,30,1,"B to exit");
+        if(SW_A()){
+            servo(val,angle);
+        }
+        if(SW_B()){
+            beep();
+            servo(val,-1);
+            while(!SW_B());
+            return;
+        }
+    }
+}
+
+
 #ifdef __ENABLE_MAZE_ROBOT_HELPER1
 
 /// @brief  To Overwrite 'Run' function, use BasicMenu.buttons[0].callback = (YOUR (void) FUNCTION).
 VerticalMenu BasicMenu = {{
     {"Run 1",HelperFunction::CallbackPlaceHolder},
     {"Run 2",HelperFunction::CallbackPlaceHolder},
+    #ifdef _enable_Run3
     {"Run 3",HelperFunction::CallbackPlaceHolder},
+    #endif
+    #ifdef _enable_Run4
+    {"Run 4",HelperFunction::CallbackPlaceHolder},
+    #endif 
     {"Sensor Test",HelperFunction::SensorTest},
     {"Motor Test",HelperFunction::MotorTest},
     #ifdef _enable_IMU
@@ -192,6 +233,7 @@ VerticalMenu BasicMenu = {{
     {"Spin Test",HelperFunction::SpinTest},
     {"Straight Test",HelperFunction::StraightTest},
     #endif
+    {"Servo Test",HelperFunction::ServoTest},
     #ifdef _enable_PSX
     {"PSX Test",HelperFunction::PsxTest},
     #endif

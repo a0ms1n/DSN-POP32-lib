@@ -12,7 +12,7 @@ ServoController Grabber(6,50,0,65); // Pin Servo องศา เริ่มต
 ServoController Lifter(5,10,0,180);
 
 void setup(){
-    motors.setRatio({1,1},{-1,-1}); 
+    motors.setRatio({1,1},{1,1});  // ความเร็วมอเตอร์ ปรับเป็น -1 ถ้าติดมอเตอร์ผิด
     beep();
     POP32_INIT();
     BasicMenu.buttons[0].callback = Run;
