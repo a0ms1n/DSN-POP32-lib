@@ -34,7 +34,7 @@ void setup(){
     Front.__Track = 700;
     Back.__Track = 700;
     motors.setSpeedRange(90,250);
-    motors.setRatio({1,1},{1.0,1.0});
+    motors.setRatio({1.1,1.1},{1,1.0});
     
 }   
 
@@ -309,7 +309,8 @@ void Run2(){
 void Run3() 
 {   
     imu.Start();
-    //FD2(83,90); delay(700); ///
+    rotate(90,0);
+    //FD2(45,40); delay(1000); ///
 
     //forwardTill(120,1,0);
     
@@ -323,9 +324,9 @@ void Run3()
     
     //Prefer test for Direct
     //backwardTill(140,1,0);
-    forwardTill(80,1);
+    ///forwardTill(80,1);
     //forwardTime(140,200);
-    // forwardTime(200,1000,1);
+    forwardTime(200,1000,1);
     //forwardTill(140,1,0);
 
     // forwardTime(200,700,1);
@@ -343,7 +344,7 @@ void Run3()
     //delay(600);
     // forwardTime(200,700,0);
     //forwardTill(140,1,0);
-    AO(); delay(10000);
+    //AO(); delay(10000);
     /*
     forwardTime(100,1400);
     forwardTime(180,500);
