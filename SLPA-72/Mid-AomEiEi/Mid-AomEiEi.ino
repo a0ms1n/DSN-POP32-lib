@@ -13,10 +13,6 @@ void Run1();
 void Run2();
 void Run3();
 void Run4();
-void Run5(); // Green 1 missed
-void Run6(); // Green 2 missed
-void Run7(); // Green 3 missed
-void Run8(); // Green 4 missed
 
 void MusicJaa();
 
@@ -242,14 +238,23 @@ void Run1(){
     AO(); delay(1000);
 }
 
+#define R_BCK() backwardTime(160,200,0) 
+#define R_FOR() forwardTime(160,200,0)
+
 void Run4(){
-    
+    imu.Start();
+    beep();
+    forwardTill(140,0,0);
+    forwardTime(200,500,0);
+    forwardTill(160,1,0);
+    R_BCK();
+
+    rotate(-90,0);
 }
 
 
 void Run3() {
-    imu.Start();
-    beep();
+    
     backwardAlign(Slow,1);
     forwardTime(200,1000,1);
 }
