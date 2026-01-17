@@ -3,16 +3,16 @@
 
 LEDSensor sensors[] ={
     {8,3350,670}, // หน้าซ้าย
-    {7,3720,750}, // หน้ากลางซ้าย
-    {2,3190,660}, // หน้ากลางขวา
-    {4,3400,1500}, // หน้าขวา
-    {5,3150,1500}, // หลังซ้าย
-    {3,3430,750}, // หลังกลางซ้าย
-    {1,3820,860}, // หลังกลางขวา
-    {0,1500,385}, // หลังขวา
+    {7,3630,1020}, // หน้ากลางซ้าย
+    {2,1600,300}, // หน้ากลางขวา
+    {0,3400,1500}, // หน้าขวา
+    {5,3800,1100}, // หลังซ้าย
+    {3,3400,810}, // หลังกลางซ้าย
+    {1,3830,1250}, // หลังกลางขวา
+    {4,3100,910}, // หลังขวา
 };
 
-PIDGains newRotateGains = {3.1,3.1,1.3,1.3,0}; // Kp = 2.0;
+PIDGains newRotateGains = {3.1,3.9,1.3,1.8,0}; // Kp = 2.0;
 
 LEDSensorLine<2> Front({
     &sensors[1],
@@ -84,7 +84,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,150,0.4);
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,350,0.3);
     while(drive_motors.Update());
     motors.stop();
 }

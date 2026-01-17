@@ -2,14 +2,14 @@
 #include "../../src/DSN-POP32.h"
 
 LEDSensor sensors[] ={
-    {0,50,5}, // หน้าซ้าย
-    {1,115,25}, // หน้ากลางซ้าย
-    {2,1150,200}, // หน้ากลางขวา
-    {3,120,15}, // หน้าขวา
-    {4,2900,800}, // หลังซ้าย
-    {5,2750,650}, // หลังกลางซ้าย
-    {6,2800,700}, // หลังกลางขวา
-    {7,2000,400}, // หลังขวา
+    {0,80,15}, // หน้าซ้าย
+    {1,145,25}, // หน้ากลางซ้าย
+    {2,3850,900}, // หน้ากลางขวา
+    {3,30,10}, // หน้าขวา
+    {4,3200,500}, // หลังซ้าย
+    {5,3100,650}, // หลังกลางซ้าย
+    {6,1200,170}, // หลังกลางขวา
+    {7,3100,500}, // หลังขวา
 };
 
 LEDSensorLine<2> Front({
@@ -17,8 +17,8 @@ LEDSensorLine<2> Front({
     &sensors[2]
 });
 
-PIDGains newRotateGains = {3.0,3.0,2.5,1.1,0.2}; //3.0,3.0,2.5,1.1,0.2
-PIDGains newStraightGains = {3.5,0.5,0.6,1.0,0.5}; // 3.5,0.5,0.6,1.0,0.5
+PIDGains newRotateGains = {3.1,3.9,1.3,1.8,0}; //3.0,3.0,2.5,1.1,0.2
+// PIDGains newStraightGains = {3.5,0.5,0.6,1.0,0.5}; // 3.5,0.5,0.6,1.0,0.5
 
 LEDSensorLine<2> Back({
     &sensors[5],
@@ -26,7 +26,7 @@ LEDSensorLine<2> Back({
 });
 
 int32_t servoPIN = 1;
-int32_t startAngle = 175;
+int32_t startAngle = 172;
 int32_t endAngle = 70;
 
 void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
@@ -85,7 +85,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.5); // 400 , 0.9
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.3); // 400 , 0.9
     while(drive_motors.Update());
     motors.stop();
 }
