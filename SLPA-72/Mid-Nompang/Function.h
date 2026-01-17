@@ -1,23 +1,26 @@
 #pragma once
 #include "../../src/DSN-POP32.h"
 
+// พิน ขาว ดำ
 LEDSensor sensors[] ={
-    {8,3350,670}, // หน้าซ้าย
-    {7,3600,690}, // หน้ากลางซ้าย
-    {2,3420,630}, // หน้ากลางขวา
-    {0,3400,1500}, // หน้าขวา
+    {4,2752,380}, // หน้าซ้าย
+    {0,1773,200}, // หน้ากลางซ้าย
+    {1,1891,200}, // หน้ากลางขวา
+    {6,3100,400}, // หน้าขวา
 
-    {5,3820,800}, // หลังซ้าย
-    {3,3200,590}, // หลังกลางซ้าย
-    {1,1600,210}, // หลังกลางขวา
-    {4,3820,910}, // หลังขวา
+    {5,1508,200}, // หลังซ้าย
+    {2,3590,400}, // หลังกลางซ้าย
+    {3,1300,100}, // หลังกลางขวา
+    {7,3000,400}, // หลังขวา
 };
 
-PIDGains newRotateGains = {2.6,3.4,1.3,1.5,0}; // Kp = 2.0;
+PIDGains newRotateGains = {3.1,3.9,1.3,1.8,0}; // Kp = 2.0;
 
-LEDSensorLine<2> Front({
+LEDSensorLine<4> Front({
+    &sensors[0],
     &sensors[1],
-    &sensors[2]
+    &sensors[2],
+    &sensors[3],
 });
 
 LEDSensorLine<4> Back({
@@ -27,9 +30,9 @@ LEDSensorLine<4> Back({
     &sensors[7],
 });
 
-int32_t servoPIN = 1;
-int32_t startAngle = -180;
-int32_t endAngle = -70;
+int32_t servoPIN = 3;
+int32_t startAngle = 180;
+int32_t endAngle = 0;
 
 void forwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true,bool _continuous = false){
     drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
@@ -87,8 +90,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    delay(100);
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,350,0.4);
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,350,0.3);
     while(drive_motors.Update());
     motors.stop();
 }
@@ -107,7 +109,7 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
-            if(!Front.cOnline)motors.run(speed+5,speed);
+            if(!Front.cOnline)motors.run(speed,speed + 20);
 
             // Black at right -> go right
             else if(Front.errorFromMid() > 0)motors.run(-speed - 20,speed);
@@ -132,7 +134,7 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
             Back.readLine();
 
             if(!Back.cOnline)
-                motors.run(-speed-5, -speed);
+                motors.run(-speed, -speed-30);
 
             // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
             else if(Back.errorFromMid() > 0)

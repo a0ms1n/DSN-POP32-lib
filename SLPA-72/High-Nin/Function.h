@@ -6,6 +6,7 @@ LEDSensor sensors[] ={
     {1,145,25}, // หน้ากลางซ้าย
     {2,3850,900}, // หน้ากลางขวา
     {3,30,10}, // หน้าขวา
+
     {4,3200,500}, // หลังซ้าย
     {5,3100,650}, // หลังกลางซ้าย
     {6,1200,170}, // หลังกลางขวา
@@ -20,9 +21,11 @@ LEDSensorLine<2> Front({
 PIDGains newRotateGains = {3.1,3.9,1.3,1.8,0}; //3.0,3.0,2.5,1.1,0.2
 // PIDGains newStraightGains = {3.5,0.5,0.6,1.0,0.5}; // 3.5,0.5,0.6,1.0,0.5
 
-LEDSensorLine<2> Back({
+LEDSensorLine<4> Back({
+    &sensors[4],
     &sensors[5],
     &sensors[6],
+    &sensors[7],
 });
 
 int32_t servoPIN = 1;
