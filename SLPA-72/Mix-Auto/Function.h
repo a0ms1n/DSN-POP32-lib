@@ -21,13 +21,13 @@ int FlagPIN = 4; // ธง
 
 // พิน , ค่าขาว , ค่าดำ
 LEDSensor sensors[] ={
-    {5,3800,2000}, // L - ซ้ายสุด
-    {1,3800,1800}, // L2 
-    {3,3800,1200}, // L3
-    {0,3800,1200}, // M
-    {4,3800,1100}, // R3 
-    {2,3800,1100},  // R2
-    {6,3800,1100}  // R - ขวาสุด
+    {5,3800,970}, // L - ซ้ายสุด
+    {1,3800,970}, // L2 
+    {3,3800,1700}, // L3
+    {0,3800,1800}, // M
+    {4,3800,1800}, // R3 
+    {2,3800,1800},  // R2
+    {6,3800,1700}  // R - ขวาสุด
 };
 
 // {Sensors Refs}, AutoRotate, Error, Track
@@ -37,7 +37,7 @@ PIDGains newRotateGains = {4.7,3.1,3.5,1.5,0.2};
 
 // จับกระป๋อง
 void CanGrab(){
-    servo(GrabPIN,40);
+    servo(GrabPIN,10);
 }
 
 // ยกธง
@@ -47,9 +47,9 @@ void Flagup(){
 
 // เอาธงลง
 void FlagDown(){
-    servo(FlagPIN,180);
+    servo(FlagPIN,170);
     delay(600);
-    servo(GrabPIN,-1);
+    servo(FlagPIN,-1);
 }
 
 // ปล่อยกระป๋อง
@@ -72,7 +72,7 @@ void LiftUp(){
 // หมุนด้วยไจโร + เลี้ยวซ้าย - เลี้ยวขวา
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.5);
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,500,0.4);
     while(drive_motors.Update());
     motors.stop();
 }
@@ -303,7 +303,9 @@ void ForwardStraightTillWhite(int32_t base_speed,int32_t ms = 0,bool _reset = tr
 }
 
 // เดินหน้่าจนกว่าจะเจอปุ่ม
-void ForwardUntilButton(int32_t speed,int32_t spin_speed){
+void ForwardUntilButton(int32_t speed,int32_t spin_speed,int ms = 2000){
+    FlagTimer ft(ms);
+    ft.set();
     while(true){
         ground_sensor.read();
         int32_t val = ground_sensor.readLine();
@@ -314,7 +316,7 @@ void ForwardUntilButton(int32_t speed,int32_t spin_speed){
         else if (val > ground_sensor.posFromMid(1))motors.run(spin_speed,-spin_speed);
         else motors.run(speed,speed);
 
-        if(analog(Button) <= 10){
+        if(analog(Button) <= 100 || ft.check()){
           motors.stop();
           break;
         }
