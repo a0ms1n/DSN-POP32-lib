@@ -118,7 +118,7 @@ void Run3(){
     TurnRight(170); 
     Align(160);
     
-    ForwardUntilTime(200,180,2500);
+    ForwardUntilTime(180,170,2200);
 
     ForwardUntilCross(160,150);
     SkipCross(120,200);
@@ -137,84 +137,11 @@ void Run3(){
 
 }
 
-/// ออกตัวโดยไม่รอกระป๋อง 
-// void Run2(){
-//     ForwardStraightTillWhite(230,400); //ตรงกว่าจะขาว ค.เร้ว ตรงไปอีก...ms
-//     ForwardUntilCross(225,150); //ค.เร็วตรง ค.เร็วหมุน
-//     SkipCross(170,200); //ค.เร็ว ตรงไปอีก...ms
-//     TurnLeft(200);
-//     Align(150);
-    
-//     ForwardUntilCross(225,150);
-//     SkipCross(170,200);
-//     TurnLeft(150);
-//     Align(150);
-
-//     ForwardUntilCross(200,150);
-//     SkipCross(120,450);
-//     TurnRight(170);
-//     Align(100);
-
-//     ForwardStraightTime(-150,300);
-//     Align(100);
-    
-//     ForwardUntilTime(120,120,1400);
-//     Align(100);
-//     ForwardUntilCrossBW(160,180); //เส้นประ ค.เร็วตรง ค.เร็วหมุน
-    
-//     ForwardStraightTime(-150,550); //-ถอยหลังด้วยไจโร
-//     Align(100);
-//     ForwardUntilCross(80,95);
-
-//     ForwardStraightTime(160,1500);
-//     ForwardStraightTillWhite(170,0,0); // สีเขียว
-//     ForwardStraightTime(160,700);
-//     LineScan(10,1); // หมุนหาเส้น กรณีเลยเส้น ลบได้ ถ้ามั่นใจว่าหุ่นเดินตรงเส้นเป๊ะๆ
-
-    
-//     ForwardUntilTime(150,250,1000);
-//     ground_sensor.__Track = 300;
-//     ForwardUntilCross(170,150);
-//     ground_sensor.__Track = 400;
-//     ForwardStraightTime(150,1580); // ****
-//     rotate(-90); // หมุนขวา ไจโร
-//     beep();
-//     Run3();
-
-// }
-
-// // เดินจากจุดเซฟ 
-// void Run3(){
-//     CanGrab();
-//     LiftDown();
-//     FlagDown();
-//     ForwardStraightTillWhite(190);
-//     ForwardTime(170,220);
-
-//     ForwardUntilCross(170,150);
-//     SkipCross(140,300);
-//     TurnRight(150);
-//     Align(160);
-    
-//     ForwardUntilTime(200,180,2500);
-
-//     ForwardUntilCross(160,150);
-//     SkipCross(120,200);
-
-//     ForwardUntilTime(250,170,2500);
-//     ForwardUntilCross(150,120);
-//     beep();beep();
-    
-//     ForwardUntilButton(200,120);
-//     LiftUp();
-//     delay(1100);
-//     CanPoy();
-//     Flagup();
-//     Sound::ChillGuy();
-
-// }                         
+ 
      
 // สำหรับทดลองโค้ดบางส่วน
 void Run4(){
-    CanGrab();
+    CanPoy();
+    FlagDown();
+    LiftDown();
 }
