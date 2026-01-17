@@ -16,7 +16,7 @@ PIDCore PIDStraight(PIDStraight_gains,-210.0,210.0);
 
 // Speed lim set to (100,255)
 PIDGains PIDRotate_gains = {3.1,3.9,1.3,1.8,0};
-PIDCore PIDRotate(PIDRotate_gains,-180.0,180.0);
+PIDCore PIDRotate(PIDRotate_gains,-170.0,170.0);
 
 #ifdef _enable_IMU
 DriveController<__MOTOR_PAIRS> drive_motors(&motors,&imu,&PIDStraight);
