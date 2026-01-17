@@ -20,7 +20,7 @@ void setup(){
     motors.setSpeedRange(100,255);
     imu.Start();
     PIDStraight.SetOutputLimits(-210, 210);
-    motors.setSpeedRange(50,255);
+    motors.setSpeedRange(60,255);
     
     //motors.setReverse({1},{1});
     ground_sensor.update_mid();
@@ -85,15 +85,15 @@ void Run2(){
     ForwardUntilCross(75,85);
 
     ForwardStraightTillWhite(220); // สีเขียว
+    ForwardStraightTime(250,300);
     LineScan(15,1); // หมุนหาเส้น กรณีเลยเส้น ลบได้ ถ้ามั่นใจว่าหุ่นเดินตรงเส้นเป๊ะๆ
 
-    ForwardStraightTime(250,300);
+    
     ForwardUntilTime(250,150,1700);
     ground_sensor.__Track = 400;
     ForwardUntilCross(180,150);
     ground_sensor.__Track = 500;
     ForwardStraightTime(150,1580); // ****
-    Align(160);
     rotate(-90); // หมุนขวา ไจโร
     beep();
     Run3();
@@ -113,6 +113,7 @@ void Run3(){
     SkipCross(140,300);
     TurnRight(150);
     Align(160);
+    
     ForwardUntilTime(250,150,2200);
     ForwardUntilTime(180,140,2200);
     ForwardUntilCross(170,130);
