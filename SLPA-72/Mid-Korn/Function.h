@@ -88,7 +88,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
     delay(100);
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,350,0.4);
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,350,0.4); // delay rotate
     while(drive_motors.Update());
     motors.stop();
 }
