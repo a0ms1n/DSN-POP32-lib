@@ -8,11 +8,16 @@
 int Base_Speed = 160;
 int Slow = 70; 
 int Fast = 200;
-
+// 600 = 1
 void Run1();
 void Run2();
 void Run3();
 void MusicJaa();
+
+
+
+ int R = -90;
+ int L = 90;
 
 void setup(){
     BasicMenu.buttons.push_back({
@@ -45,10 +50,117 @@ void loop(){
 
 
 void Run1(){
+
+    // backward  backwardTill(160,true); backwardAlign(160); forwardTime(160,300);
+    // forward   forwardTill(160,true); forwardAlignl(70); backwardTime(160,300);
     imu.Start();
-    forwardTime(150,100);
-    forwardAlign(150,true,false);
-    rotate(90,true);
+
+    forwardTime(200,500);
+    forwardAlign(70);
+    backwardTime(140,200);
+    rotate(-90);
+
+    forwardTime(200, 300);
+    rotate(90);
+
+    backwardAlign(70);
+    forwardTime(200, 300);
+    forwardAlign(70);
+    backwardTime(140,200 );
+    rotate(90);
+
+    backwardAlign(70);
+    forwardTime(200, 500);
+    forwardAlign(70);
+    backwardTime(140, 300);
+    rotate(90);
+
+    backwardAlign(70);
+    forwardTime(200, 700);
+    forwardAlign(70);
+    Poy(); // green 1
+
+    backwardTime(200, 700);
+    backwardAlign(70);
+    forwardTime(140, 100);
+    rotate(L);
+
+    backwardAlign(70,3,200);
+    forwardTime(200, 500);
+    forwardAlign(70);
+    backwardTime(140,200);
+    rotate(R);
+
+    forwardTime(200,300);
+    forwardAlign(70);
+    backwardTime(140,200);
+    rotate(R);
+
+    forwardTime(200,300);
+    forwardAlign(70);
+    backwardTime(140, 200);
+    rotate(L);
+
+    forwardTime(200, 300);
+    rotate(L);// red
+
+    backwardAlign(70);
+    forwardTill(120);
+    backwardTime(200, 400);
+    rotate(R);
+
+    forwardTime(200, 300);
+    forwardAlign(70);
+    backwardTime(140, 200);
+    rotate(R);
+
+    forwardAlign(70);
+    Poy();// green 2
+
+    forwardAlign(70,3,200);
+    backwardTime(200, 600);
+    backwardAlign(70);
+    forwardTime(140, 200);
+    rotate(R);
+
+    forwardTime(200, 500);
+    rotate(R);
+
+    backwardAlign(70,3,200);
+    forwardTime(120,1600);
+    forwardAlign(70);
+    backwardTime(140,200);
+    rotate(R);
+    backwardTime(200, 300);
+    backwardAlign(70,5,200);
+    forwardTime(200, 700);
+    forwardAlign(70);
+    Poy();// green 3
+
+
+
+
+
+
+
+    // forwardTime(200, 250);
+    // forwardAlign(70);
+    // backwardTime(140,200 );
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
     
     
@@ -58,15 +170,77 @@ void Run1(){
 
 void Run2(){
     imu.Start();
-    forwardTime(150,2000,false);
-    
+    //forwardTime(200,400);
+    //forwardTill(140);
+    //forwardAlign(140);
+    //backwardTime(140,200);
+    //rotate(R);
+    //forwardTill(160,true);
+    //forwardAlign(140);
+    //backwardTime(140,200);
+    //rotate(L);
+    //forwardTill(140,true);
+    //forwardAlign(70);
+    //backwardTime(160,200);
+    //rotate(L);
+    //forwardTill(140);
+    //forwardAlign(70);
+    //backwardTime(160,200);
+    //rotate(L);
+    //forwardTill(160,true); backwardTime(160,300); forwardAlignl(70); backwardTime(160,300);
+    //Poy();// 1
+    //backwardTill(160,true); backwardAlign(160); forwardTime(160,300);
+    //rotate(L);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(R);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(R);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(L);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(L);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,600);
+    //rotate(L);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(L);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,100);
+    //Poy();// 2
+    //backwardTill(160,true); backwardAlign(160); forwardTime(160,300);
+    //rotate(R);
+    //forwardTime(160, 900);
+    //rotate(R);
+    //forwardTill(120,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(R);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,100);
+    //Poy();
+    //backwardTill(160,true); backwardAlign(160); forwardTime(160,600);
+    //rotate(R);
+    //forwardTill(120,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(R);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(L);
+    //forwardTill(160,true); forwardAlignl(70); backwardTime(160,100);
+    //forwardTime(160, 500);
+    //Poy();
+    //backwardTime(160, 600);
+    //rotate(R);
+    //forwardTill(120,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(R);
+    //forwardTime(160, 900);
+    //rotate(R);
+    //forwardTime(160, 600);
+    //rotate(L);
+    //forwardTill(120,true); forwardAlignl(70); backwardTime(160,300);
+    //rotate(L);
+    //forwardTill(120,true); forwardAlignl(70); forwardTime(160,500);
+//
  }
 
 
 void Run3() 
 {   
     imu.Start();
-    rotate(90,0);
+   forwardTime(200, 700);
    
 }
 
