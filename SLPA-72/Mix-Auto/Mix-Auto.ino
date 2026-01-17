@@ -132,5 +132,6 @@ void Run3(){
      
 // สำหรับทดลองโค้ดบางส่วน
 void Run4(){
-    Sound::Blue();
+    CanPoy();
+    LiftDown();
 }
