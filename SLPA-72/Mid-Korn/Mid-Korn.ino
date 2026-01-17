@@ -36,10 +36,6 @@ void setup(){
     BasicMenu.buttons[1].callback = Run2; // Run 2
     BasicMenu.buttons[2].callback = Run3; // Run 3
     BasicMenu.buttons[3].callback = Run4; // Run 4
-    BasicMenu.buttons[4].callback = Run1; // Run 5
-    BasicMenu.buttons[5].callback = Run2; // Run 6
-    BasicMenu.buttons[6].callback = Run3; // Run 7
-    BasicMenu.buttons[7].callback = Run4; // Run 8
     
     BasicMenu.buttons.push_back({"Music",MusicJaa});
     Front.__Track = 700;
@@ -60,14 +56,16 @@ void Run1(){
 
 
     forwardTill(140,1,0);
-    forwardTime(200,500,0);
+    forwardTime(200,600,0);
     forwardAlign(Slow,1);
     backwardTime(140,200);
 
     rotate(-90,0);
 
     backwardAlign(Slow,1);
-    forwardTime(200,350,1);
+    forwardTime(200,450,1);
+    forwardAlign(Slow,1);
+    backwardTime(140,200);
 
     rotate(90,0);
     backwardAlign(Slow,1);
@@ -110,11 +108,15 @@ void Run1(){
 
     backwardAlign(Slow,1);
     forwardTime(200,350,1);
+    forwardAlign(Slow,1);
+    backwardTime(140,200);
 
     rotate(-90,0);
 
     backwardAlign(Slow,1);
     forwardTime(200,350,1);
+    forwardAlign(Slow,1);
+    backwardTime(140,200);
 
     rotate(90,0); // ออกจาก Maze
 
@@ -126,9 +128,9 @@ void Run1(){
     backwardAlign(Slow,1);
     forwardTime(200,850,1); // CP1
 
-    backwardTime(200,400,0);
+    backwardTime(200,450,0);
 
-    rotate(-90,0);
+    rotate(-90,1);
 
     backwardTime(200,350,1);
     backwardAlign(Slow,1);
@@ -137,7 +139,7 @@ void Run1(){
     forwardAlign(Slow,1);
     backwardTime(140,200,0);
 
-    rotate(-90,0);
+    rotate(-90,1);
 
     forwardAlign(Slow,1);
 
@@ -166,7 +168,7 @@ void Run1(){
     forwardAlign(Slow,1);
     backwardTime(140,200,0);
 
-    rotate(-90,0);
+    rotate(-90,1);
 
     backwardTime(200,350,1);
     backwardAlign(Slow,1);
@@ -194,18 +196,23 @@ void Run1(){
     backwardTime(140,300,0);
 
     rotate(90,0);
-    forwardTime(200,500,1);
+    forwardTime(200,200,1);
     forwardAlign(Slow,1);
+    forwardTime(200,300,1);
+    forwardAlign(Slow,1);
+    
 
     Poy(); delay(300); AO(); delay(300); //Green 4
     forwardAlign(Slow,1);
 
-    backwardTime(200,550,1);
+    backwardTime(200,250,1);
+    backwardAlign(Slow,1);
+    backwardTime(200,300,1);
 
     rotate(90,1);
     backwardAlign(Slow,1);
 
-    forwardTime(200,700,1); // ขึ้นสะพานขากลับ
+    forwardTime(200,800,1); // ขึ้นสะพานขากลับ
     forwardAlign(Slow,1);
     backwardTime(140,200,0);
     
@@ -239,555 +246,22 @@ void Run4(){
     
 }
 
-void Run8() {
-    
-}
 
 void Run3() {
-
+    imu.Start();
+    beep();
+    backwardAlign(Slow,1);
+    forwardTime(200,1000,1);
 }
 
 void Run2() {
-    
-}
-
-void Run5() {
     imu.Start();
     beep();
-
-
-    forwardTill(140,1,0);
-    forwardTime(200,500,0);
-    forwardAlign(Slow,1);
-    backwardTime(140,200);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,0);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,400,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,600,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,300,0);
-
-    rotate(90,0);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,650,1);
-    forwardAlign(Slow,1);
-
-    // Poy(); delay(300); AO(); delay(300); //Green 1
-    forwardAlign(Slow,1);
-
-    backwardTime(140,200,1);
-
-    rotate(180,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,800,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,650,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,0); // ออกจาก Maze
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,850,1); // CP1
-
-    backwardTime(200,400,0);
-
-    rotate(-90,0);
-
-    backwardTime(200,350,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,550,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    forwardAlign(Slow,1);
-
-    Poy(); delay(300); AO(); delay(300); //Green 2
-    forwardAlign(Slow,1);
-
-    backwardTime(140,200,1);
-
-    rotate(180,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,750,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0); //สะพานขึ้น
-
+    forwardTill(200,1,1);
+    backwardTime(150,450,0);
     rotate(90);
-
     backwardAlign(Slow,1);
-    forwardTime(200,600,1);
-
-    rotate(-90,0);
-
-   backwardAlign(Slow,1);
-    forwardTime(200,200,1);
-
-    forwardTime(100,1800,0);
-
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardTime(200,350,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,700,1);
-
-    forwardAlign(Slow,1);
-
-    Poy(); delay(300); AO(); delay(300); //Green 3
-
-    forwardAlign(Slow,1);
-    backwardTime(200,550,1); // ใกล้ตะเกียบ
-
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,200,1);
-    forwardTime(100,1700,0); //ข้ามตะเกียบกลับ
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,1);
-    forwardTime(200,300,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,300,0);
-
-    rotate(90,0);
-    forwardTime(200,500,1);
-    forwardAlign(Slow,1);
-
-    Poy(); delay(300); AO(); delay(300); //Green 4
-    forwardAlign(Slow,1);
-
-    backwardTime(200,550,1);
-
-    rotate(90,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,700,1); // ขึ้นสะพานขากลับ
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
     
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-
-    forwardTime(200,650,1); // ลงสะพานขากลับ
-
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-
-    forwardTime(200,350,1);
-
-    rotate(90,1);
-
-    forwardTime(200,550,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(90,1);
-
-    forwardTime(140,600,1);
-
-    Sound::RickRoll();
-    AO(); delay(1000);
-}
-
-void Run6() {
-    imu.Start();
-    beep();
-
-
-    forwardTill(140,1,0);
-    forwardTime(200,500,0);
-    forwardAlign(Slow,1);
-    backwardTime(140,200);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,0);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,400,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,600,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,300,0);
-
-    rotate(90,0);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,650,1);
-    forwardAlign(Slow,1);
-
-    backwardTime(140,200,1);
-
-    rotate(180,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,800,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,650,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,0); // ออกจาก Maze
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,850,1); // CP1
-
-    backwardTime(200,400,0);
-
-    rotate(-90,0);
-
-    backwardTime(200,350,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,550,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    forwardAlign(Slow,1);
-
-    backwardTime(140,200,1);
-
-    rotate(180,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,750,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0); //สะพานขึ้น
-
-    rotate(90);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,600,1);
-
-    rotate(-90,0);
-
-   backwardAlign(Slow,1);
-    forwardTime(200,200,1);
-
-    forwardTime(100,1800,0);
-
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardTime(200,350,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,700,1);
-
-    forwardAlign(Slow,1);
-
-    Poy(); delay(300); AO(); delay(300); //Green 3
-
-    forwardAlign(Slow,1);
-    backwardTime(200,550,1); // ใกล้ตะเกียบ
-
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,200,1);
-    forwardTime(100,1700,0); //ข้ามตะเกียบกลับ
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,1);
-    forwardTime(200,300,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,300,0);
-
-    rotate(90,0);
-    forwardTime(200,500,1);
-    forwardAlign(Slow,1);
-
-    Poy(); delay(300); AO(); delay(300); //Green 4
-    forwardAlign(Slow,1);
-
-    backwardTime(200,550,1);
-
-    rotate(90,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,700,1); // ขึ้นสะพานขากลับ
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-    
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-
-    forwardTime(200,650,1); // ลงสะพานขากลับ
-
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-
-    forwardTime(200,350,1);
-
-    rotate(90,1);
-
-    forwardTime(200,550,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(90,1);
-
-    forwardTime(140,600,1);
-
-    Sound::RickRoll();
-    AO(); delay(1000);
-}
-void Run7() {
-    imu.Start();
-    beep();
-
-
-    forwardTill(140,1,0);
-    forwardTime(200,500,0);
-    forwardAlign(Slow,1);
-    backwardTime(140,200);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,0);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,400,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,600,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,300,0);
-
-    rotate(90,0);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,650,1);
-    forwardAlign(Slow,1);
-
-    backwardTime(140,200,1);
-
-    rotate(180,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,800,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,650,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(-90,0);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,0); // ออกจาก Maze
-
-    backwardAlign(Slow,1);
-    forwardTime(200,350,1);
-
-    rotate(90,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,850,1); // CP1
-
-    backwardTime(200,400,0);
-
-    rotate(-90,0);
-
-    backwardTime(200,350,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,550,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    forwardAlign(Slow,1);
-
-    backwardTime(140,200,1);
-
-    rotate(180,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,750,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0); //สะพานขึ้น
-
-    rotate(90);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,600,1);
-
-    rotate(-90,0);
-
-   backwardAlign(Slow,1);
-    forwardTime(200,200,1);
-
-    forwardTime(100,1800,0);
-
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,0);
-
-    backwardTime(200,350,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,700,1);
-
-    forwardAlign(Slow,1);
-
-    backwardTime(200,550,1); // ใกล้ตะเกียบ
-
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-    forwardTime(200,200,1);
-    forwardTime(100,1700,0); //ข้ามตะเกียบกลับ
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(-90,1);
-    forwardTime(200,300,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,300,0);
-
-    rotate(90,0);
-    forwardTime(200,500,1);
-    forwardAlign(Slow,1);
-
-    Poy(); delay(300); AO(); delay(300); //Green 4
-    forwardAlign(Slow,1);
-
-    backwardTime(200,550,1);
-
-    rotate(90,1);
-    backwardAlign(Slow,1);
-
-    forwardTime(200,700,1); // ขึ้นสะพานขากลับ
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-    
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-
-    forwardTime(200,650,1); // ลงสะพานขากลับ
-
-    rotate(-90,1);
-
-    backwardAlign(Slow,1);
-
-    forwardTime(200,350,1);
-
-    rotate(90,1);
-
-    forwardTime(200,550,1);
-    forwardAlign(Slow,1);
-    backwardTime(140,200,0);
-
-    rotate(90,1);
-
-    forwardTime(140,600,1);
-
-    Sound::RickRoll();
-    AO(); delay(1000);
 }
 
 
