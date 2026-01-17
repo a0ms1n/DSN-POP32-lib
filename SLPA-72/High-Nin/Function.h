@@ -4,11 +4,11 @@
 LEDSensor sensors[] ={
     {0,80,15}, // หลังซ้าย
     {1,145,25}, // หน้ากลางซ้าย
-    {2,3230,650}, // หน้าขวา
+    {2,500,80}, // หน้าขวา
     {3,114,10}, // หน้ากลางขวา
-    {4,2300,400}, // หน้าซ้าย
-    {5,1380,200}, // หลังกลางซ้าย
-    {6,2700,510}, // หลังกลางขวา
+    {4,2300,440}, // หน้าซ้าย
+    {5,1380,190}, // หลังกลางซ้าย
+    {6,2700,630}, // หลังกลางขวา
     {7,3100,500}, // หลังขวา
 };
 
@@ -55,7 +55,7 @@ void backwardTill(int32_t base_speed, bool _tillBlack = true, bool _reset = true
     }
 }
 
-void forwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _continuous = false){
+void forwardTime(int32_t base_speed, int32_t time_ms, bool _reset = false,bool _continuous = false){
     drive_motors.StraightDrive(base_speed,&PIDStraight,_reset);
     FlagTimer ft(time_ms);
     ft.set();
@@ -69,7 +69,7 @@ void forwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _c
     }
 }
 
-void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _continuous = false){
+void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = false,bool _continuous = false){
     drive_motors.StraightDrive(-base_speed,&PIDStraight,_reset);
     FlagTimer ft(time_ms);
     ft.set();
@@ -85,7 +85,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.42); // 400 , 0.9
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.6); // 400 , 0.9
     while(drive_motors.Update());
     motors.stop();
 }
