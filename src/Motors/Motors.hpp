@@ -137,6 +137,7 @@ inline void MotorPair<N>::setSpeedRange(const int16_t &min_speed = 0, const int1
 }
 
 void motor255(const int8_t ch, const int16_t pow){
+    
     if(pow>=-255 && pow<=255){
         __motorLastpow = pow*100/255;
         int16_t p = pow;
