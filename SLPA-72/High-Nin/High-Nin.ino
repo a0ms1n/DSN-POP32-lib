@@ -32,8 +32,8 @@ void setup()
     BasicMenu.buttons[2].callback = Run3; // Run 3
     Front.__Track = 750;
     Back.__Track = 750;
-    motors.setSpeedRange(110,340);
-    motors.setRatio({1.0,1.1},{1.0,1.0});
+    motors.setSpeedRange(100,340);
+    motors.setRatio({1.0,1.0},{1.1,1.1});
 }   
 
 void loop()
@@ -45,165 +45,64 @@ void Run1(){
     imu.Start();
     beep();
     // First Turn
-    forwardTill(speed_slow,0,0,0);  
-    forwardTime(speed_slow,200,0);
+    // forwardTill(speed_slow,0,0,0);  
+    // // forwardTime(speed_slow,200);
     
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,330,0,0);
-    rotate(90);
-    backwardAlign(70,1);
+    // forwardTill(speed_slow ,1,1,0);
+    // backwardTime(speed_slow,320,0,0);
+    // rotate(-90);
+    // backwardAlign(80,1);
+    // delay(300);
 
-    // forwardTime(speed_fast,650,0,0);
-    forwardTill(speed_slow + 10 ,1,1,0);
-    backwardTime(speed_slow,360,0,0);
-    rotate(90);
-    backwardAlign(70,1);
+    // forwardTime(speed_fast, 700);
+    // rotate(-90);
 
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,270,0,0);
-    rotate(90 , 0);
-    backwardAlign(70,1);
+    // forwardTill(speed_slow ,1,1,0);
+    // backwardTime(speed_slow,320,0,0);
+    // rotate(-90 , 0);
+    // backwardAlign(80,1);
 
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,300,0,0);
-    rotate(-90 , 0);
-    backwardAlign(70,1);
+    // Check point 1
+    // forwardTill(speed_slow ,1,1,0);
+    // backwardTime(speed_slow,320,0,0);
+    // backwardTill(speed_slow,1,1,0);
+    // forwardTime(speed_slow, 180 , 0 , 0);
+    // rotate(-90 , 0);
+    // backwardAlign(80,1);
 
-    // ไปหา blue
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,350,0,0);
-    rotate(93);
+    // forwardTill(speed_slow ,1,1,0);
+    // backwardTime(speed_slow,320,0,0);
+    // rotate(90);
+    // backwardTime(speed_slow,320,0,0);
 
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,350,0,0);
-    rotate(90);
-    backwardAlign(70,1);
+    // forwardTill(speed_slow ,1,1,0);
+    // backwardTime(speed_slow,320,0,0);
+    // rotate(-90);
+    // backwardAlign(80,1);
 
-    // blue
+    // forwardTime(speed_fast, 400);
+    // rotate(-90);
+    // backwardAlign(80,1);
+
     forwardTill(speed_slow,1,1,0); 
-    // forwardTime(speed_slow, 20 , 0);
     Poy();
-    backwardTime(speed_slow,250,0,0);
-    backwardAlign(70 , 1);
-
-    forwardTime(speed_slow, 70,0,0);
+    backwardAlign(80 , 1);
+    forwardTime(speed_slow, 160 , 0 , 0);
     rotate(90);
-    backwardAlign(70 , 1);
 
-    forwardTill(speed_slow,1,1,0); 
-    backwardTime(speed_slow,340,0,0);
+    forwardAlign(80 , 1);
+    backwardTime(speed_slow,280,0,0);
+    rotate(-90);
+    forwardTime(speed_fast, 600);
+    forwardAlign(80 , 1);
+    backwardTime(speed_slow,280,0,0);
     rotate(90);
-    backwardAlign(70 , 1);
-
-    // ไปหาตะเกียบ
-    forwardTill(speed_slow,1,1,0); 
-    backwardTime(speed_slow,390,0,0);
-    rotate(90);
-    backwardAlign(70 , 1);
-
-    // ตะเกียบ
-    forwardTime(60, 2200 , 0 , 0);
-    // forwardTill(speed_slow,1,1,0); 
-    forwardAlign(70 , 1);
-    backwardTime(60, 2100 , 0 , 0);
-    backwardAlign(70 , 1);
-
-    forwardTime(speed_slow, 140,0,0);
-    rotate(90);
-    backwardAlign(70 , 1);
-
-    forwardTill(speed_slow,1,1,0); 
-    backwardTime(speed_slow,300,0,0);
-    rotate(-90 , 0);
-    backwardAlign(70 , 1);
-
-    forwardTime(speed_slow, 470,0,0);
-    rotate(90);
-    backwardAlign(70 , 1);
-
-    forwardTill(speed_slow,1,1,0); 
-    backwardTime(speed_slow,300,0,0);
-    rotate(90 , 0);
-    backwardAlign(70 , 1);
-
-    // ออก
-    forwardTill(speed_slow,1,1,0); 
-    backwardTime(speed_slow,270,0,0);
-    rotate(-90 , 0);
-    backwardAlign(70 , 1);
-
-    forwardTill(speed_slow,1,1,0); 
-    backwardTime(speed_slow,300,0,0);
-    rotate(-90 , 0);
-    backwardAlign(70 , 1);
-
-    forwardTime(speed_slow , 470 , 0 , 0);
-    rotate(90);
-    backwardAlign(70 , 1);
+    backwardAlign(80 , 1);
 
     // สะพาน
-    forwardTill(speed_slow - 30,1,1,0); 
-    backwardTime(speed_slow,300,0,0);
-    rotate(-90 , 0);
-    backwardAlign(70 , 1);
-
-    // ออกสะพาน
-    forwardTill(speed_slow ,1,1,1);
-    backwardTime(speed_slow,300,0,0);
-    rotate(-90);
-    // backwardAlign(70,1);
-
-    // ไปหาแดง
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,335,0,0);
-    rotate(-90);
-    backwardAlign(70,1);
-
-    // Red
     forwardTill(speed_slow,1,1,0); 
-    // backwardTime(speed_slow,230,0,0);
-    Poy();
-    backwardAlign(70 , 1);
 
-    forwardTime(speed_slow , 220 , 0 , 0);
-    rotate(-90);
-    backwardAlign(70 , 1);
 
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,340,0,0);
-    rotate(90);
-    backwardAlign(70,1);
-
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,300,0,0);
-    rotate(-88);
-    backwardTime(70,300,0,0);
-    backwardAlign(70,1);
-
-    // ไปหา blackhold
-    forwardTill(speed_slow ,1,1,0);
-    backwardTime(speed_slow,330,0,0);
-    rotate(-88);
-
-    forwardAlign(60 , 1);
-    forwardTime(speed_slow,550,0,0); 
-    forwardAlign(60 , 1);
-    // backwardTime(speed_slow,300,0,0);
-    Poy();
-    backwardAlign(70 , 1);
-    backwardTime(speed_slow,700,0,0);
-    forwardAlign(70 , 1);
-    backwardTill(speed_slow , 1 , 1 ,0);
-    forwardTime(speed_slow , 270 , 0 , 0);
-
-    rotate(-90);
-    backwardAlign(70 , 1);
-    forwardTill(speed_slow + 20 ,1,1,0); 
-    backwardTime(speed_slow,360,0,0);
-    // forwardAlign(70 , 1);
-    backwardTime(speed_slow,150,0,0);
-    Poy();
-    Thailand();
     
     
 
@@ -237,8 +136,10 @@ void Run3(){
     // imu.Start();
     // beep();
     // Sound::UmaPyou();
-    Thailand();
+    // Thailand();
     // Music();
+   //  Poy();
+   backwardAlign(80 , 1);
 
     // forwardTill(60 , 1 , 1 , 0);
     // FD2(40 , 40);
