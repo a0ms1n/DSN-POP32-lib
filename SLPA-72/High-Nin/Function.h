@@ -17,8 +17,8 @@ LEDSensorLine<2> Front({
     &sensors[2]
 });
 
-PIDGains newRotateGains = {2.0,2.0,3.5,1.0,0.2}; //3.0,3.0,2.5,1.1,0.2
-PIDGains newStraightGains = {3.5,0.5,0.6,1.0,0.5}; // 3.5,0.5,0.6,1.0,0.5
+PIDGains newRotateGains = {3.1,3.9,1.3,1.8,0}; //3.0,3.0,2.5,1.1,0.2
+// PIDGains newStraightGains = {3.5,0.5,0.6,1.0,0.5}; // 3.5,0.5,0.6,1.0,0.5
 
 LEDSensorLine<2> Back({
     &sensors[5],
@@ -85,7 +85,7 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.5); // 400 , 0.9
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,400,0.3); // 400 , 0.9
     while(drive_motors.Update());
     motors.stop();
 }
