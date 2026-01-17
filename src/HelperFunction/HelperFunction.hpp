@@ -179,11 +179,6 @@ void HelperFunction::PsxTest(){
 #endif
 
 void HelperFunction::ServoTest(){
-    beep();
-    oledf.clear();
-    oledf.text(0,0,1,"A -> Grab");
-    oledf.text(0,20,1,"B -> Arm");
-    oledf.show();
 
     int val;
     while(true){
@@ -191,6 +186,7 @@ void HelperFunction::ServoTest(){
         oledf.clear();
         oledf.text(0,0,1,"Current PIN : %d",val);
         oledf.text(0,10,1,"OK to continue");
+        oledf.show();
         if(SW_OK())break;
     }
     while(SW_OK());
