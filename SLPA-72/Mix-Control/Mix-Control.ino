@@ -8,7 +8,7 @@
 
 void Run();
 
-ServoController Grabber(6,50,0,65); // Pin Servo องศา เริ่มต้นตัวจับ
+ServoController Grabber(6,90,0,180); // Pin Servo องศา เริ่มต้นตัวจับ
 ServoController Lifter(5,10,0,180);
 
 void setup(){

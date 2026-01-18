@@ -75,7 +75,7 @@ void Run2(){
 
   ForwardUntilCross(235,150);
   SkipCross(170,200);
-  TurnRight(170); //เลี้ยวขวาครั้งแรก
+  TurnRight(160); //เลี้ยวขวาครั้งแรก
   Align(120);
  
   ForwardStraightTime(-150,300); //ถอยแล้วปรับให้ตรงเส้นกลาง
@@ -118,12 +118,12 @@ void Run3(){
     TurnRight(170); 
     Align(160);
     
-    ForwardUntilTime(180,170,2200);
+    ForwardUntilTime(200,170,2200);
 
     ForwardUntilCross(160,150);
     SkipCross(120,200);
 
-    ForwardUntilTime(250,170,2500);
+    ForwardUntilTime(200,170,3000);
     ForwardUntilCross(150,120);
     beep();
     
