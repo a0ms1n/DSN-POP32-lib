@@ -3,14 +3,14 @@
 
 LEDSensor sensors[] ={
     {8,3350,670}, // หน้าซ้าย
-    {7,3600,690}, // หน้ากลางซ้าย
-    {2,3420,630}, // หน้ากลางขวา
+    {7,3800,925}, // หน้ากลางซ้าย
+    {2,3050,715}, // หน้ากลางขวา
     {0,3400,1500}, // หน้าขวา
 
-    {5,3820,800}, // หลังซ้าย
-    {3,3200,590}, // หลังกลางซ้าย
-    {1,1600,210}, // หลังกลางขวา
-    {4,3820,910}, // หลังขวา
+    {5,1800,290}, // หลังซ้าย
+    {3,3400,655}, // หลังกลางซ้าย
+    {1,3830,980}, // หลังกลางขวา
+    {4,3400,815}, // หลังขวา
 };
 
 PIDGains newRotateGains = {2.6,3.4,1.3,1.5,0}; // Kp = 2.0;
@@ -87,8 +87,8 @@ void backwardTime(int32_t base_speed, int32_t time_ms, bool _reset = true,bool _
 
 void rotate(int32_t angle,bool reset = true){
     motors.stop();
-    delay(100);
-    drive_motors.RotateDrive(angle,&PIDRotate,reset,350,0.4); // delay rotate
+    delay(10); // delay(100); old
+    drive_motors.RotateDrive(angle,&PIDRotate,reset,300,0.4); // delay rotate
     while(drive_motors.Update());
     motors.stop();
 }
@@ -107,7 +107,7 @@ void forwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
     for(int16_t idx = 1;idx<=repeat;idx++){
         do{
             Front.readLine();
-            if(!Front.cOnline)motors.run(speed+5,speed);
+            if(!Front.cOnline)motors.run(speed+10,speed);
 
             // Black at right -> go right
             else if(Front.errorFromMid() > 0)motors.run(-speed - 20,speed);
@@ -132,7 +132,7 @@ void backwardAlign(int16_t speed,int16_t repeat = 1,int32_t back_delay = 300){
             Back.readLine();
 
             if(!Back.cOnline)
-                motors.run(-speed-5, -speed);
+                motors.run(-speed-10, -speed);
 
             // เส้นอยู่ขวา → หมุนขวา (ตอนถอย)
             else if(Back.errorFromMid() > 0)
