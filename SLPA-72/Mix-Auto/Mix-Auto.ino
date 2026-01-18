@@ -53,7 +53,7 @@ void Run1(){
     }
     beep();
     beep();
-    delay(2000);
+    delay(1200);
     beep();
     CanGrab();
     beep();
@@ -65,7 +65,7 @@ void Run2(){
   ForwardStraightTillWhite(250,400);
   ForwardUntilCross(230,150);
   SkipCross(170,200);
-  TurnLeft(200);  //เลี้ยวซ้ายแรก
+  TurnLeft(170);  //เลี้ยวซ้ายแรก
   Align(150);
 
   ForwardUntilCross(235,150);
@@ -73,9 +73,9 @@ void Run2(){
   TurnLeft(170); //เลี้ยวซ้ายที่ สอง
   Align(150);
 
-  ForwardUntilCross(235,150);
+  ForwardUntilCross(220,150);
   SkipCross(170,200);
-  TurnRight(160); //เลี้ยวขวาครั้งแรก
+  TurnRight(150); //เลี้ยวขวาครั้งแรก
   Align(120);
  
   ForwardStraightTime(-150,300); //ถอยแล้วปรับให้ตรงเส้นกลาง
@@ -89,14 +89,14 @@ void Run2(){
   Align(100);
   ForwardUntilCross(80,95);
 
-  ForwardStraightTime(160,1500); //เดินหน้าด้วยไจโร
-  ForwardStraightTillWhite(170,0,0); // สีเขียวด้วยไจโร
-  ForwardStraightTime(170,700);
+  ForwardStraightTime(180,1500); //เดินหน้าด้วยไจโร
+  ForwardStraightTillWhite(180,0,0); // สีเขียวด้วยไจโร
+  ForwardStraightTime(200,700);
   LineScan(10,1); //หมุนเพื่อหาเส้น กรณีที่หาเส้นไม่เจอ ซึ่งใส่ไว้กันหมาเฉยๆ
 
-  ForwardUntilTime(150,250,1000);
+  ForwardUntilTime(180,250,1000);
   ground_sensor.__Track = 300;
-  ForwardUntilCross(170,150);
+  ForwardUntilCross(180,150);
   ground_sensor.__Track = 400;
   ForwardStraightTime(150,1580); // ****
   rotate(-90); // หมุนขวา ไจโร
@@ -118,10 +118,10 @@ void Run3(){
     TurnRight(170); 
     Align(160);
     
-    ForwardUntilTime(200,170,2200);
+    ForwardUntilTime(220,170,2500);
 
-    ForwardUntilCross(160,150);
-    SkipCross(120,200);
+    ForwardUntilCross(170,150);
+    SkipCross(170,200);
 
     ForwardUntilTime(200,170,3000);
     ForwardUntilCross(150,120);
