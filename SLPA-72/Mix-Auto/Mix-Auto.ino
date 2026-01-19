@@ -17,10 +17,9 @@ void setup(){
     BasicMenu.buttons[1].callback = Run2;
     BasicMenu.buttons[2].callback = Run3;
     BasicMenu.buttons[3].callback = Run4;
-    motors.setSpeedRange(100,255);
+    motors.setSpeedRange(80,255); // ปรับความเร็วช้า - เร็ว
     imu.Start();
     PIDStraight.SetOutputLimits(-210, 210);
-    motors.setSpeedRange(60,255);
     
     //motors.setReverse({1},{1});
     ground_sensor.update_mid();
