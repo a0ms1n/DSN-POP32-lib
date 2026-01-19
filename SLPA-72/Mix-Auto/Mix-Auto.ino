@@ -17,7 +17,7 @@ void setup(){
     BasicMenu.buttons[1].callback = Run2;
     BasicMenu.buttons[2].callback = Run3;
     BasicMenu.buttons[3].callback = Run4;
-    motors.setSpeedRange(80,255); // ปรับความเร็วช้า - เร็ว
+    motors.setSpeedRange(80,255); // ปรับความเร็วช้าสุด - เร็วชุด
     imu.Start();
     PIDStraight.SetOutputLimits(-210, 210);
     
@@ -25,7 +25,7 @@ void setup(){
     ground_sensor.update_mid();
 
     // เปอร์เซ็นจับค่าดำ 0 - 1000
-    ground_sensor.__Track = 500;
+    ground_sensor.__Track = 500; // ปรับเปอร์เซ็นจับเส้นดำ
     BasicMenu.buttons.push_back({
         "Sensor Calibrate",SensorCalibrate
     });
